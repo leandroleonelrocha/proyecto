@@ -1,10 +1,12 @@
 <?php 
 
-Route::get('login', function(){
+Route::get('login', [
 
-	return view('login');
+	'as' => 'auth.login',
+	'uses' => 'LoginController@getLogin'
 
-});
+]);
+
 
 Route::post('postLogin', [
 
@@ -12,3 +14,8 @@ Route::post('postLogin', [
 	'uses' => 'LoginController@postLogin'
 
 ]);
+
+Route::get('getLogout',[
+	'as' => 'auth.getLogout',
+	'uses' => 'LoginController@getLogout'
+ ]);
