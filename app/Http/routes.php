@@ -10,18 +10,22 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-  require_once(__DIR__ . '/Routes/LoginRoute.php');
+require_once(__DIR__ . '/Routes/LoginRoute.php');
+require_once(__DIR__ . '/Routes/UsuarioRoute.php');
+require_once(__DIR__ . '/Routes/AlumnoRoute.php');
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 
-Route::get('prueba', [
-	'uses' => 'PruebaController@test'
-]);
+Route::group(['middleware' => ['auth']],function(){
+	Route::get('prueba',[
+		'uses' => 'PruebaController@test'
+	]);
 
-
-Route::get('template', function(){
-	return view('template');
+	Route::get('template',function(){
+		return view('template');
+	});
 });
