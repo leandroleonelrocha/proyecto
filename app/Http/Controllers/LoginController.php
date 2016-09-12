@@ -20,22 +20,28 @@ class LoginController extends Controller {
 
     public function postLogin(Request $request)
     {
-
         
-       if(!Auth::check())
         
-        {
+        $alumno = ['alumno1', 'alumno2', 'alumno3', 'alumno4', 'alumno5'];
 
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
-            {
+        return view('alumnos.index', compact('alumno'));
+        
 
-                return redirect('template');
-            }
+       //if(!Auth::check())
+        
+        //{
 
-            return redirect()->back()->with('msg_ok', 'El usuario no existe o los datos son incorrectos');
+            //if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+            //{
+
+              //  return redirect('template');
+            //}
+
+          //  return redirect()->back()->with('msg_ok', 'El usuario no existe o los datos son incorrectos');
             //return  redirect()->intended('login')->with('msg', 'no se puede ');
 
-        }
+        //}
+
     }
                 // login local
 

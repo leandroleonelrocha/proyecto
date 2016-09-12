@@ -16,7 +16,7 @@ require_once(__DIR__ . '/Routes/AlumnoRoute.php');
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 
