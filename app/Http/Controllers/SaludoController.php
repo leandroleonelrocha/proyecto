@@ -7,20 +7,22 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use User;
+use Illuminate\Http\Request;
+use App\User;
 
-class PruebaController extends Controller
+
+class SaludoController extends Controller
 {
 
-	public function test()
+
+		public function test2(Request $request)
 	{
-		$data = User::all();
+		$usuario = User::all();
+		dd($usuario);
 
-		dd($data);
+//		$data = $request->input('email');
 
-		$alumno = ['alumno1', 'alumno2', 'alumno3', 'alumno4', 'alumno5'];
-
-		return view('alumnos.index', compact('alumno'));
+//		return view('saludo.index', compact('data'));
 		//return 'index de prueba';
 	}
 

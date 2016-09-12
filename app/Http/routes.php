@@ -21,6 +21,11 @@ Route::get('prueba', [
 	'uses' => 'PruebaController@test'
 ]);
 
+Route::post('saludo', [
+	'as'=>'s',
+	'uses' => 'SaludoController@test2'
+]);
+
 
 Route::get('template', function(){
 	return view('template');
