@@ -25,4 +25,3 @@ Route::get('prueba', [
 Route::get('template', function(){
 	return view('template');
 });
-
