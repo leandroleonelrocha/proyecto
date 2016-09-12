@@ -38,12 +38,12 @@
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
               </div>
               <div class="form-group has-feedback">
-                {!! Form::text('password', null, array('class'=>'form-control', 'placeholder'=>'Password' ))!!}
+                {!! Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password' ))!!}
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
               <div class="row">
                 <div class="col-xs-8">
-                  <div class="checkbox icheck">
+                  <div class="checkbox icheck"> 
                     <label>
                       <input type="checkbox"> Remember Me
                     </label>
@@ -61,8 +61,33 @@
           <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
         </div><!-- /.social-auth-links -->
 
-        <a href="#">I forgot my password</a><br>
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="#">Cambio de contraseña</a><br>
+        <a href="{{ route('usuario.nuevo')}}" class="text-center">Registro</a>
+
+        <div class="row">
+            <div class="col-xs-12">
+                {{-- Errors --}}
+                @if ($errors->count() > 0)
+                    <div class="alert alert-danger">
+                        <strong>Mensaje:</strong><br />
+                        <ul>
+                            @foreach ($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+
+                {{-- Success --}}
+                @if (session()->has('msg_ok'))
+                    <div class="alert alert-success">
+                        <strong>Error!</strong><br />
+                        {{ session('msg_ok') }}
+                    </div>
+                @endif
+            </div>
+        </div>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

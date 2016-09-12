@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Input;
+use App\Entities\User;
+use Auth;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 
 class LoginController extends Controller {
+
 
 
     public function getLogin()
@@ -19,17 +20,20 @@ class LoginController extends Controller {
 
     public function postLogin(Request $request)
     {
-     	dd($request->all());
 
+        
        if(!Auth::check())
         
         {
+
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
             {
-                return redirect('home');
+
+                return redirect('template');
             }
 
-            return  redirect()->intended('home');
+            return redirect()->back()->with('msg_ok', 'El usuario no existe o los datos son incorrectos');
+            //return  redirect()->intended('login')->with('msg', 'no se puede ');
 
         }
     }
@@ -38,7 +42,6 @@ class LoginController extends Controller {
     public function getLogout()
     {
         Auth::logout();
-
         return redirect('login');
     }
 

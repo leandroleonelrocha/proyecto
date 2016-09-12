@@ -9,10 +9,10 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Hash;
 
-class PruebaController extends Controller
+class AlumnoController extends Controller
 {
 
-	public function test()
+	public function index()
 	{
 
 		$alumno = ['alumno1', 'alumno2', 'alumno3', 'alumno4', 'alumno5'];
