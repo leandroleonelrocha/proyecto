@@ -9,15 +9,25 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Hash;
-use App\User;
+use App\Entities\User;
+use App\Http\Repositories\UserRepo;
+
 
 class UsuarioController extends Controller
 {
+	protected $usuarioRepo;
 
+
+	public function __construct(UserRepo $usuarioRepo)
+	{
+		$this->usuarioRepo = $usuarioRepo;
+	}
 	
 
 	public function index()
 	{
+		dd($this->usuarioRepo->all());
+
 		return view('usuarios.index');
 	
 	}
