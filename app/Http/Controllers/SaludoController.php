@@ -20,9 +20,9 @@ class SaludoController extends Controller
 		$usuario = User::all();
 		dd($usuario);
 
-//		$data = $request->input('email');
+		$data = $request->input('email');
 
-//		return view('saludo.index', compact('data'));
+	return view('saludo.index', compact('data'));
 		//return 'index de prueba';
 	}
 

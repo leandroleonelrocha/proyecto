@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: llrocha
- * Date: 18/04/2016
- * Time: 13:46
- */
+
 namespace App\Http\Repositories;
 use App\Entities\User;
 use App\Http\Repositories\BaseRepo;
