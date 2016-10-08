@@ -20,11 +20,7 @@ class LoginController extends Controller {
 
     public function postLogin(Request $request)
     {
-        
-        
-        $alumno = ['alumno1', 'alumno2', 'alumno3', 'alumno4', 'alumno5'];
-
-        return view('alumnos.index', compact('alumno'));
+        return redirect('docentes');
         
 
        //if(!Auth::check())
