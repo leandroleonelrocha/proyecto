@@ -26,6 +26,7 @@ abstract class BaseRepo {
 
     public function all()
     {
+        //slect * from filial;
         return $this->model->all();
     }
 
