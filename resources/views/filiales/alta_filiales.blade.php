@@ -1,8 +1,7 @@
 @extends('template')
 @section('content-header')
     <h1>
-        alta de filiales
-
+        Alta de filiales
     </h1>
 
 @endsection
@@ -32,7 +31,7 @@
 
       	<div class="form-group">
             {!! Form::label('director', 'Director') !!}
-            {!! Form::text('id_director', null ,  array('class'=>'form-control')) !!}
+            {!! Form::select('id_director', $directores->toArray() , null, array('class'=>'form-control')) !!}
         </div>
 
         <div class="form-group">
@@ -40,10 +39,6 @@
             {!! Form::text('mail', null ,  array('class'=>'form-control')) !!}
         </div>
 
-        <div class="form-group">
-            {!! Form::label('activo', 'Activo') !!}
-            {!! Form::text('activo', null ,  array('class'=>'form-control')) !!}
-        </div>
        
     </div><!-- /.box-body -->
 

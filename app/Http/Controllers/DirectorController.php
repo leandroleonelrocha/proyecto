@@ -8,20 +8,17 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
 
 
 
-class FilialesController extends Controller
+class DirectorController extends Controller
 {
-	protected $filialesRepo;
 	protected $directorRepo;
 
-	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo)
+	public function __construct( DirectorRepo $directorRepo)
 	{
 		$this->directorRepo = $directorRepo;
-		$this->filialesRepo = $filialesRepo;
 	}
 
 
@@ -29,18 +26,17 @@ class FilialesController extends Controller
 	{
 	
 
-	$filiales=$this->filialesRepo->all();
+	$directores=$this->directorRepo->all();
 
-	return view('filiales.index',compact('filiales'));
+	return view('director.index',compact('directores'));
 		
 	}
 
 	public function  nuevo()
 	{
 
-	$directores = $this->directorRepo->lists('nombres','id_director');
 
-	return view('filiales.alta_filiales', compact('directores'));
+	return view('director.alta_director');
 		
 	}
 
@@ -48,7 +44,7 @@ class FilialesController extends Controller
 	{
 	
 	//	dd($request->all());
-	$this->filialesRepo->create($request->all());
+	$this->directorRepo->create($request->all());
 
 	}
 
