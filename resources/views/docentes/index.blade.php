@@ -39,7 +39,7 @@
 						@foreach($docentes as $docente)
 							<tr>
 									<td>
-										<input type="hidden" value="{{$docente->id_docente}}">
+										<input type="hidden" value="{{$docente->id}}">
 										{{$docente->apellidos}}
 									</td>
 									<td>{{$docente->nombres}}</td>

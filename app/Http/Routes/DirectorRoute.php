@@ -19,10 +19,20 @@ Route::group(['prefix' => 'director'], function(){
 		'uses' => 'DirectorController@postAdd'
 	]);
 
-		Route::post('postEdit', [
-
-		'as' => 'director.postEdit',
-		'uses' => 'DirectorController@postEdit'
+	Route::get('editar/{id}',[
+	'as'	=> 'director.edit',
+	'uses'	=>	'DirectorController@edit'
 	]);
+
+	Route::post('postEditar',[
+	'as'	=> 'director.postEdit',
+	'uses'	=>	'DirectorController@postEdit'
+	]);
+
+	Route::get('getDelete/{id}',[
+	'as'	=> 'director.getDelete',
+	'uses'	=>	'DirectorController@getDelete'
+	]);
+
 
 });

@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Repositories;
-use App\Entities\Filial;
+use App\Entities\Materia;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
 
-class FilialRepo extends BaseRepo {
+class MateriaRepo extends BaseRepo {
 
     public function getModel()
     {
-        return new Filial();
+        return new Materia();
     }
 
 }

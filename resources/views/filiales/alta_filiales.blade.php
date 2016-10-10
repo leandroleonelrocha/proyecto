@@ -1,50 +1,55 @@
 @extends('template')
-@section('content-header')
-    <h1>
-        Alta de filiales
-    </h1>
-
-@endsection
-
 
 @section('content')
-    @if(isset($model))
-        {!! Form::model($model,['route'=>['filiales.postEdit',$model->id]]) !!}
-    @else
-        {!! Form::open(['route'=>'filiales.postAdd']) !!}
-    @endif
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Nueva Filial</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {!! Form::open(['route'=> 'filiales.postAdd', 'method'=>'post']) !!}
+                            <div class="col-md-6 form-group">
+                                <label>Nombre</label>
+                                {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
+                            </div>
 
-    <div class="box-body">
-        <div class="form-group">
-            {!! Form::label('nombre', 'Nombre') !!}
-            {!! Form::text('nombre', null ,  array('class'=>'form-control')) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('direccion', 'Direccion') !!}
-            {!! Form::text('direccion', null ,  array('class'=>'form-control')) !!}
-        </div>
+                            <div class="col-md-6 form-group">
+                                <label>Direcci&oacuten</label>
+                                {!! Form::text('direccion',null,array('class'=>'form-control')) !!}
+                            </div>
 
-        <div class="form-group">
-            {!! Form::label('localidad', 'Localidad') !!}
-            {!! Form::text('localidad', null ,  array('class'=>'form-control')) !!}
-        </div>
+                            <div class="col-md-6 form-group">
+                                <label>Localidad</label>
+                                {!! Form::text('localidad',null,array('class'=>'form-control')) !!}
+                            </div>
 
-      	<div class="form-group">
-            {!! Form::label('director', 'Director') !!}
-            {!! Form::select('id_director', $directores->toArray() , null, array('class'=>'form-control')) !!}
-        </div>
+                           <div class="col-md-6 form-group">
+                                <label>C&oacute;digo postal</label>
+                                {!! Form::text('codigo_postal',null,array('class'=>'form-control')) !!}
+                            </div>
 
-        <div class="form-group">
-            {!! Form::label('mail', 'Mail') !!}
-            {!! Form::text('mail', null ,  array('class'=>'form-control')) !!}
-        </div>
+                            <div class="col-md-6 form-group">
+                                <label>Director</label>
+                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
+                            </div>
 
-       
-    </div><!-- /.box-body -->
+                            <div class="col-md-6 form-group">
+                                <label>Mail</label>
+                                {!! Form::text('mail',null,array('class'=>'form-control')) !!}
+                            </div>
 
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar filial</button>
-    </div>
-    </div><!-- /.box -->
-    {!! Form::close() !!}
+                            <div class="box-footer col-xs-12">
+                            {!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+                            </div>
+
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div><!-- Fin box-body -->
+            </div> <!-- Fin box -->
+        </div> <!-- Fin col -->
+    </div> <!-- Fin row -->
 @endsection

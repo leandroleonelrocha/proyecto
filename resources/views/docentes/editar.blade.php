@@ -13,7 +13,7 @@
 							{!! Form::open(['route'=> 'editar.postEdit', 'method'=>'post']) !!}
 							<div class="col-md-12 form-group">
 								<label>N&uacute;mero de Docente</label>
-								{!! Form::text(null, $docente->id, array('class'=>'form-control','disabled')) !!}
+								{!! Form::text(null, $docente->id array('class'=>'form-control','disabled')) !!}
 								<input type="hidden" name="id" value="{{$docente->id}}">
 							</div>
 							<div class="col-md-6 form-group">

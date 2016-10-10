@@ -12,7 +12,8 @@ class DirectorRepo extends BaseRepo {
         return new Director();
     }
 
-
-
-
+       public function disable($director){
+    	$director->activo = 0;
+    	return $director->save();
+    }
 }

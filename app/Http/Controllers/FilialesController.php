@@ -38,7 +38,7 @@ class FilialesController extends Controller
 	public function  nuevo()
 	{
 
-	$directores = $this->directorRepo->lists('nombres','id_director');
+	$directores = $this->directorRepo->lists('nombres','id');
 
 	return view('filiales.alta_filiales', compact('directores'));
 		
@@ -47,11 +47,37 @@ class FilialesController extends Controller
 	public function postAdd(Request $request)
 	{
 	
-	//	dd($request->all());
-	$this->filialesRepo->create($request->all());
+
+		$this->filialesRepo->create($request->all());
+		return redirect()->route('filiales.index')->with('msg_ok', 'Filial creada correctamente.');
 
 	}
 
-	public function postEdit()
-	{}
+    public function getDelete($id)
+    {
+	    if( $data=$this->filialesRepo->find($id))
+	    {
+    	    $data->Delete();
+         	return redirect()->back()->with('msg_ok', 'Filial eliminada correctamente.');
+         	}
+        else
+            return redirect()->back()->with('msg_error','La filial no ha podido ser eliminada.');
+    }
+
+    public function edit($id){
+    	$directores = $this->directorRepo->lists('nombres','id');
+    	$filial = $this->filialesRepo->find($id);
+    	return view('filiales.editar',compact('filial','directores'));
+    }
+
+    public function postEdit(Request $request){
+        $data = $request->all();
+        $model = $this->filialesRepo->find($data['id']);
+        if($this->filialesRepo->edit($model,$data))
+            return redirect()->route('filiales.index')->with('msg_ok','La filial ha sido modificada con éxito');
+        else
+            return redirect()->route('filiales.index')->with('msg_error','La filial no ha podido ser modificada.');
+    }
+
+
 }

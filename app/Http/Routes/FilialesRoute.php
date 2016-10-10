@@ -19,10 +19,19 @@ Route::group(['prefix' => 'filiales'], function(){
 		'uses' => 'FilialesController@postAdd'
 	]);
 
-		Route::post('postEdit', [
-
-		'as' => 'filiales.postEdit',
-		'uses' => 'FilialesController@postEdit'
+	Route::get('getDelete/{id}',[
+	'as'	=> 'filiales.getDelete',
+	'uses'	=>	'FilialesController@getDelete'
 	]);
 
+	
+	Route::post('postEditar',[
+	'as'	=> 'filiales.postEdit',
+	'uses'	=>	'filialesController@postEdit'
+	]);
+
+	Route::get('editar/{id}',[
+	'as'	=> 'filiales.edit',
+	'uses'	=>	'FilialesController@edit'
+	]);
 });
