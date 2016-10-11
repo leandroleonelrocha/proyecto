@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Controllers;
-
+use App\Entities\NombreDirector;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;

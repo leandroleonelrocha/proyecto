@@ -1,42 +1,61 @@
-
 @extends('template')
-@section('content-header')
-
-@endsection
 
 @section('content')
+									<!-- Mensaje -->
+	<div class="row">
+	@if (session()->has('msg_ok'))
+	    <div class="col-xs-10 col-md-offset-1 alert alert-success">
+	        <strong>Éxito!</strong><br />
+	        {{ session('msg_ok') }}
+	    </div>
+	@endif
+	@if (session()->has('msg_error'))
+	    <div class="col-xs-10 col-md-offset-1 alert alert-danger">
+	        <strong>Error!</strong><br />
+	        {{ session('msg_error') }}
+	    </div>
+	@endif
+	</div>
+						
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">Listado de Cursos</h3>
+					<div class="box-tools pull-right no-print">
+						<a href="{{route('curso.nuevo')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table dataTable table-bordered table-striped">
+						<thead> <tr>
+						<th>Nro Curso</th>
+						<th>Nombre</th>
+						<th>Duraci&oacuten</th>
+						<th>Descripci&oacuten</th>
+						<th>Taller</th>
+						<th class="no-print"></th>
+						</tr> </thead>
+	    				<tbody>
+						    @foreach($curso as $c)
+							    <tr role="row" class="odd">
 
-	<h1>Listado de cursos</h1>
-		<div class="box-tools pull-right no-print">
-			<a href="{{route('curso.nuevo')}}" class="btn btn-success text-white"> Agregar nuevo</a>
-		</div>
+							        <td class="sorting_1">{{ $c->id }}</td>
+						        	<input type="hidden" value="{{$c->id_curso}}">
+							        <td>{{ $c->nombre }}</td>
+							        <td>{{ $c->duracion }}</td>
+						            <td>{{ $c->descripcion }}</td>
+						           	<td>{{ $c->taller}}</td>
 
- 	<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-		 	<thead>
-	    		<tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 181px;">N&uacute;mero </th>
-		        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">Nombre</th>
-		        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 197px;">Duraci&oacuten</th>
-		        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 197px;">Descripci&oacuten</th>
-		        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 160px;">Taller</th>     
-        	</thead>
-    <tbody>
-	    @foreach($curso as $c)
-		    <tr role="row" class="odd">
-
-		        <td class="sorting_1">{{ $c->id }}</td>
-	        	<input type="hidden" value="{{$c->id_curso}}">
-		        <td>{{ $c->nombre }}</td>
-		        <td>{{ $c->duracion }}</td>
-	            <td>{{ $c->descripcion }}</td>
-	           	<td>{{ $c->taller}}</td>
-
-	  			<td>
-           		<a href="{{route('curso.edit',$c->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>		
-	  			<a href="{{route('curso.getDelete', $c->id) }}" title="Eliminar"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
-				
-		    </tr>
-	    @endforeach
-   	</tbody>
-    </table>
-
+						  			<td>
+					           		<a href="{{route('curso.edit',$c->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>		
+						  			<a href="{{route('curso.getDelete', $c->id) }}" title="Eliminar"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+							    </tr>
+						    @endforeach
+					   	</tbody>
+				    </table>
+        		</div><!-- Fin box-body -->
+			</div> <!-- Fin box -->
+		</div> <!-- Fin col -->
+	</div> <!-- Fin row -->
 @endsection
