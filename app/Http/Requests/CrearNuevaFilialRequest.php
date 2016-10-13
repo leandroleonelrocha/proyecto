@@ -31,7 +31,7 @@ class CrearNuevaFilialRequest extends Request
     {
         return [
 
-            'nombre' => 'required',
+            'nombre' => 'required|unique:filial,nombre',
            	'director_id' => 'required',
            	'mail' => 'required'
 
@@ -42,6 +42,7 @@ class CrearNuevaFilialRequest extends Request
     {
         return [
             'nombre.required' => 'Escriba un Nombre',
+            'nombre.unique' => 'El nombre de la filial ya está en uso',
             'director_id.required' => 'Selecciona un director',  
             'mail.required' => 'Escriba un email'
         ];

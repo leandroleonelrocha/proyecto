@@ -26,7 +26,7 @@
             <li class="header">MAIN NAVIGATION</li>
              <li>
               <a href="#">
-                <i class="fa fa-user"></i> <span>Personas</span>
+                <i class="fa  fa-child"></i> <span>Personas</span>
               </a>
              </li>
              <li>
@@ -43,7 +43,7 @@
 
               <li>
               <a href="#">
-                <i class="fa fa-user"></i> <span>Recibos</span>
+                <i class="fa fa-pencil-square-o"></i> <span>Recibos</span>
               </a>
              </li>
               <li>
@@ -57,7 +57,7 @@
               </a>
              </li>
              <li>
-              <a href="#">
+              <a href="{{route('materia.index') }}">
                 <i class="fa fa-user"></i> <span>Materias</span>
               </a>
              </li>
@@ -69,7 +69,7 @@
 
              <li>
               <a href="#">
-                <i class="fa fa-user"></i> <span>Exámenes</span>
+                <i class="fa fa-file-text-o"></i> <span>Exámenes</span>
               </a>
              </li>
 
@@ -87,7 +87,7 @@
 
              <li>
               <a href="#">
-                <i class="fa fa-user"></i> <span>Estadísticas</span>
+                <i class="fa fa-bar-chart-o"></i> <span>Estadísticas</span>
               </a>
              </li>
 
@@ -103,7 +103,7 @@
 
             <li>
               <a href="#">
-                <i class="fa fa-user"></i> <span>Contactos</span>
+                <i class="fa fa-contao"></i> <span>Contactos</span>
               </a>
              </li>
            
