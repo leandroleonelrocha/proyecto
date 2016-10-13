@@ -32,25 +32,24 @@
 						<th>Nombre</th>
 						<th>Direcci&oacuten</th>
 						<th>Localidad</th>
-						<th>Director</th>
 						<th>CP</th>
+						<th>Director</th>
 						<th>Mail</th>
-						<th>Activo</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
 						    @foreach($filiales as $f)
+						    {{ dd($f->NombreDirector)}}
 							    <tr role="row" class="odd">
 							        <td class="sorting_1">{{ $f->nombre }}</td>
 							        <td>{{ $f->direccion }}</td>
 							        <td>{{ $f->localidad }}</td>
 					                <td>{{ $f->codigo_postal }}</td>
-						            <td>{{ $f->director_id}}</td>
+						            <td>{{ $f->NombreDirector}}</td>
 							        <td>{{ $f->mail}}</td>
-						           	<td>{{ $f->activo}}</td>
 						           	<td>
 					           		<a href="{{route('filiales.edit',$f->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
-						           	<a href="{{route('filiales.getDelete', $f->id) }}" title="Eliminar"><i class="btn btn-danger glyphicon glyphicon-trash"></i> </a></td>
+				           	   		<a href="{{route('filiales.getDelete',$f->id)}}" title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar la filial?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
 							    </tr>
 						    @endforeach
 					   	</tbody>

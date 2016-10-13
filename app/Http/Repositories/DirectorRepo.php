@@ -12,7 +12,16 @@ class DirectorRepo extends BaseRepo {
         return new Director();
     }
 
-       public function disable($director){
+    public function allEneable(){
+
+        return Director::where('activo', 1)->get();
+    }
+
+    public function check($tipo,$nro){
+    	return Director::where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
+    }
+
+   public function disable($director){
     	$director->activo = 0;
     	return $director->save();
     }

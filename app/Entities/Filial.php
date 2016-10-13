@@ -10,6 +10,6 @@ class Filial extends Entity {
 
         // Relaciones
     public function NombreDirector(){
-        return $this->belongsTo(NombreDirector::getClass());
+        return $this->belongsTo(Director::getClass());
     }
 }

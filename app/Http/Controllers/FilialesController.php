@@ -29,18 +29,18 @@ class FilialesController extends Controller
 	{
 	
 
-	$filiales=$this->filialesRepo->all();
+		$filiales=$this->filialesRepo->allEneable();
 
-	return view('filiales.index',compact('filiales'));
+		return view('filiales.index',compact('filiales'));
 		
 	}
 
 	public function  nuevo()
 	{
 
-	$directores = $this->directorRepo->lists('nombres','id');
+		$directores = $this->directorRepo->lists('nombres','id');
 
-	return view('filiales.alta_filiales', compact('directores'));
+		return view('filiales.alta_filiales', compact('directores'));
 		
 	}
 
@@ -55,13 +55,12 @@ class FilialesController extends Controller
 
     public function getDelete($id)
     {
-	    if( $data=$this->filialesRepo->find($id))
-	    {
-    	    $data->Delete();
-         	return redirect()->back()->with('msg_ok', 'Filial eliminada correctamente.');
-         	}
+
+        if($this->filialesRepo->disable($this->filialesRepo->find($id)))
+            return redirect()->back()->with('msg_ok', 'Filial eliminada correctamente.');
         else
-            return redirect()->back()->with('msg_error','La filial no ha podido ser eliminada.');
+             return redirect()->back()->with('msg_error','La filial no ha podido ser eliminada.');
+
     }
 
     public function edit($id){

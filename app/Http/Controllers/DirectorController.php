@@ -28,7 +28,7 @@ class DirectorController extends Controller
 	public function index()
 	{
 	
-		$directores=$this->directorRepo->all();
+		$directores=$this->directorRepo->allEneable();
 
 		return view('director.index',compact('directores'));	
 	}
@@ -44,7 +44,6 @@ class DirectorController extends Controller
 	public function postAdd(Request $request)
 	{
 	
-	//	dd($request->all());
 		$this->directorRepo->create($request->all());
 		return redirect()->route('director.index')->with('msg_ok', 'Director creado correctamente');
 
@@ -52,12 +51,9 @@ class DirectorController extends Controller
 
     public function getDelete($id)
     {
-	    if( $data=$this->directorRepo->find($id))
-	    {
-    	    $data->Delete();
+       	if($this->directorRepo->disable($this->directorRepo->find($id)))
          	return redirect()->back()->with('msg_ok', 'Director eliminado correctamente');
-         	}
-        else
+    	else
             return redirect()->back()->with('msg_error','El director no ha podido ser eliminado.');
     }
 

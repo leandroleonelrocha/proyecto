@@ -19,7 +19,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>Tipo de documento</label>
-     				      		{!! Form::select('id_tipo_documento',$tipos->toArray(),null,array('class' => 'form-control')) !!}
+     				      		{!! Form::select('tipo_documento_id',$tipos->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">

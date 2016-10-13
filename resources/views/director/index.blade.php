@@ -29,22 +29,21 @@
 				<div class="box-body">
 					<table class="table dataTable table-bordered table-striped">
 						<thead> <tr>
+		
 						<th>Nro Documento</th>
 						<th>Apellido</th>
 						<th>Nombres</th>
-						<th>Activo</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
 						    @foreach($directores as $d)
 							    <tr role="row" class="odd">
-							        <td class="sorting_1">{{ $d->nro_documento}}</td>
+							      	<td>{{ $d->nro_documento}}</td>
 							        <td>{{ $d->apellidos }}</td>
 							        <td>{{ $d->nombres }}</td>
-						           	<td>{{ $d->activo}}</td>
 						           	<td>
 									<a href="{{route('director.edit',$d->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-						           	<a href="{{route('director.getDelete', $d->id) }}" title="Eliminar"><i class="btn btn-danger glyphicon glyphicon-trash"></i> </a></td>
+						           	<a href="{{route('director.getDelete',$d->id)}}" title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el director?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
 							    </tr>
 						    @endforeach
 					   	</tbody>

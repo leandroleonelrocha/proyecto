@@ -3,16 +3,18 @@ namespace App\Http\Controllers;
 use App\Entities\Docente;
 use App\Entities\TipoDocumento;
 use App\Http\Repositories\DocenteRepo;
+use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 class DocenteController extends Controller {
     protected $docenteRepo;
-    public function __construct(DocenteRepo $docenteRepo, TipoDocumento $tipoDocumentoRepo)
+    public function __construct(DocenteRepo $docenteRepo, TipoDocumento $tipoDocumentoRepo,FilialRepo$filialesRepo) 
     {
         $this->docenteRepo = $docenteRepo;
         $this->tipoDocumentoRepo = $tipoDocumentoRepo;
+        $this->filialesRepo = $filialesRepo;
     }
     public function index(){
         $docentes = $this->docenteRepo->allEneable();
@@ -20,7 +22,8 @@ class DocenteController extends Controller {
     }
     public function add(){
         $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        return view('docentes.nuevo',compact('tipos'));
+        $filiales = $this->filialesRepo->lists('nombre','id');
+        return view('docentes.nuevo',compact('tipos','filiales'));
     }
     public function postAdd(Request $request){
         $data = $request->all();

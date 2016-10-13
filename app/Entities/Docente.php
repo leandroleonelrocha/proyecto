@@ -11,7 +11,7 @@ class Docente extends Entity
      *
      * @var array
      */
-    protected $fillable = ['id','tipo_documento_id','nro_documento','apellidos','nombres','descripcion','disponibilidad_manana','disponibilidad_tarde','disponibilidad_noche','activo'];
+    protected $fillable = ['id','tipo_documento_id','nro_documento','apellidos','nombres','descripcion','disponibilidad_manana','disponibilidad_tarde','disponibilidad_noche','filial_id','activo'];
 
     // Relaciones
     public function TipoDocumento(){
