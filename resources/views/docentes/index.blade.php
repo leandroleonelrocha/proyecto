@@ -10,7 +10,7 @@
 				<div class="box-header">
 					<h3 class="box-title">Listado de Docentes</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('nuevo.add')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('docentes.add')}}" class="btn btn-success text-white"> Agregar nuevo</a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -33,8 +33,8 @@
 									<td>{{$docente->TipoDocumento->tipo_documento}}</td>
 									<td>{{$docente->nro_documento}}</td>
 									<td>
-									<a href="{{route('editar.edit',$docente->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-									<a href="{{route('delete',$docente->id)}}" title="Borrar" onclick="return confirm('¿Está seguro que desea eliminar al docente?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+									<a href="{{route('docentes.edit',$docente->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
+									<a href="{{route('docentes.delete',$docente->id)}}" title="Borrar" onclick="return confirm('¿Está seguro que desea eliminar al docente?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
 							</tr>
 						@endforeach
 						</tbody>

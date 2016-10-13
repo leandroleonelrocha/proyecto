@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('content')
-									<!-- Mensaje -->
+
 						
 	<div class="row">
 		<div class="col-xs-12">

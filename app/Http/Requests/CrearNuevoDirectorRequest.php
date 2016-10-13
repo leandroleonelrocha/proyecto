@@ -24,7 +24,7 @@ class CrearNuevoDirectorRequest extends Request
     {
         return [
 
-            'tipo_documento_id' => 'required',
+          //  'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
             'apellidos' => 'required',
             'nombres' => 'required',

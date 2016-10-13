@@ -33,6 +33,4 @@ Route::group(['prefix' => 'director'], function(){
 	'as'	=> 'director.getDelete',
 	'uses'	=>	'DirectorController@getDelete'
 	]);
-
-
 });

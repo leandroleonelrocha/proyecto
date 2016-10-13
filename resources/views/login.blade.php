@@ -32,13 +32,13 @@
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
         
-            {!! Form::open(['route'=>'auth.postLogin', 'method' => 'post']) !!}
+            {!! Form::open(['route'=>'auth.postLogin','method' => 'post']) !!}
               <div class="form-group has-feedback">
-                {!! Form::text('email', null, array('class'=>'form-control', 'placeholder'=>'Email' ))!!}
+                {!! Form::text('usuario', null, array('id'=>'email', 'class'=>'form-control', 'placeholder'=>'Email' ))!!}
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
               </div>
               <div class="form-group has-feedback">
-                {!! Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password' ))!!}
+                {!! Form::password('password', array('id'=>'password', 'class'=>'form-control', 'placeholder'=>'Password' ))!!}
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
               <div class="row">
@@ -50,7 +50,7 @@
                   </div>
                 </div><!-- /.col -->
                 <div class="col-xs-4">
-                  <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                  <button id="Send" type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                 </div><!-- /.col -->
               </div>
             {!! Form::close() !!}
@@ -62,29 +62,15 @@
 
         <div class="row">
             <div class="col-xs-12">
-                {{-- Errors --}}
-                @if ($errors->count() > 0)
+                <!-- Mensaje -->
+                @if (session()->has('msg_error'))
                     <div class="alert alert-danger">
-                        <strong>Mensaje:</strong><br />
-                        <ul>
-                            @foreach ($errors->all() as $e)
-                                <li>{{ $e }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-
-                {{-- Success --}}
-                @if (session()->has('msg_ok'))
-                    <div class="alert alert-success">
                         <strong>Error!</strong><br />
-                        {{ session('msg_ok') }}
+                        {{ session('msg_error') }}
                     </div>
                 @endif
             </div>
         </div>
-
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 
@@ -103,5 +89,6 @@
         });
       });
     </script>
+    <!-- <script src="{{asset('WebService/interaccion.js')}}"></script> -->
   </body>
 </html>

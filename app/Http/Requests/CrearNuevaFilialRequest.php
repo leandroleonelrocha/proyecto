@@ -31,10 +31,12 @@ class CrearNuevaFilialRequest extends Request
     {
         return [
 
+
             'nombre' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'codigo_postal' => 'required',
+            'nombre' => 'required|unique:filial,nombre',
            	'director_id' => 'required',
            	'mail' => 'required'
 
@@ -45,6 +47,7 @@ class CrearNuevaFilialRequest extends Request
     {
         return [
             'nombre.required' => 'Escriba un Nombre',
+
             'direccion.required' => 'Escriba una dirección',
             'localidad.required' => 'Escriba una localidad',
             'codigo_postal.required' => 'Escriba el código postal',
