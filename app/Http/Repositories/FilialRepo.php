@@ -12,7 +12,13 @@ class FilialRepo extends BaseRepo {
         return new Filial();
     }
 
+    public function allEneable(){
 
-
-
+        return Filial::where('activo', 1)->get();
+    }
+  
+    public function disable($filial){
+        $filial->activo = 0;
+        return $filial->save();
+    }
 }

@@ -1,15 +1,13 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Entities\Docente;
 use App\Entities\TipoDocumento;
 use App\Http\Repositories\DocenteRepo;
+use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-
 class DocenteController extends Controller {
 
 	protected $docenteRepo;
@@ -62,6 +60,7 @@ class DocenteController extends Controller {
         else
             return redirect()->back();
     }
+
     // Borrado lógico del Docente
     public function delete($id){
         if ($this->user['rol_id'] == 4) {
@@ -86,9 +85,20 @@ class DocenteController extends Controller {
     }
 
     //Modificación del Docente
+    public function edit($id){
+        if ($this->user['rol_id'] == 4) {
+            $docente = $this->docenteRepo->find($id);
+            $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+            return view('docentes.editar',compact('docente','tipos'));
+        }
+        else
+            return redirect()->back();
+    }
+
     public function postEdit(Request $request){
         if ($this->user['rol_id'] == 4) {
             $data = $request->all();
+            $data['filial_id'] = $this->user['entidad_id'];
             $model = $this->docenteRepo->find($data['id']); // Busco al docente
             if($this->docenteRepo->edit($model,$data)) // Modificación de los datos
                 return redirect()->route('docentes.index')->with('msg_ok','El docente ha sido modificado con éxito');

@@ -25,10 +25,72 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
              <li>
-              <a href="{{route('alumnos.index') }}">
-                <i class="fa fa-user"></i> <span>Alumnos</span>
+              <a href="#">
+                <i class="fa  fa-child"></i> <span>Personas</span>
               </a>
-            </li>
+             </li>
+             <li>
+              <a href="#">
+                <i class="fa fa-list-alt"></i> <span>Pre-informes</span>
+              </a>
+             </li>
+
+              <li>
+              <a href="#">
+                <i class="fa fa-user"></i> <span>Matrículas</span>
+              </a>
+             </li>
+
+              <li>
+              <a href="#">
+                <i class="fa fa-pencil-square-o"></i> <span>Recibos</span>
+              </a>
+             </li>
+              <li>
+              <a href="{{route('curso.index') }}">
+                <i class="fa fa-user"></i> <span>Cursos</span>
+              </a>
+             </li>
+              <li>
+              <a href="{{route('carrera.index')}}">
+                <i class="fa fa-user"></i> <span>Carreras</span>
+              </a>
+             </li>
+             <li>
+              <a href="{{route('materia.index') }}">
+                <i class="fa fa-user"></i> <span>Materias</span>
+              </a>
+             </li>
+             <li>
+              <a href="#">
+                <i class="fa  fa-users"></i> <span>Grupos</span>
+              </a>
+             </li>
+
+             <li>
+              <a href="#">
+                <i class="fa fa-file-text-o"></i> <span>Exámenes</span>
+              </a>
+             </li>
+
+             <li>
+              <a href="#">
+                <i class="fa fa-user"></i> <span>Asesores</span>
+              </a>
+             </li>
+
+             <li>
+              <a href="{{ route('docentes.index')}}">
+                <i class="fa fa-user"></i> <span>Docentes</span>
+              </a>
+             </li>
+
+             <li>
+              <a href="#">
+                <i class="fa fa-bar-chart-o"></i> <span>Estadísticas</span>
+              </a>
+             </li>
+
             <li class="active treeview">
                <a href="{{route('alumnos.index') }}">
                 <i class="fa fa-user"></i> <span>Alumnos</span> <i class="fa fa-angle-left pull-right"></i>
@@ -38,6 +100,12 @@
                 <li> <a href="{{route('alumnos.index') }}"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
               </ul>
             </li>
+
+            <li>
+              <a href="#">
+                <i class="fa fa-contao"></i> <span>Contactos</span>
+              </a>
+             </li>
            
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

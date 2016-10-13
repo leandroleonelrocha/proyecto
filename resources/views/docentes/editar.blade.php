@@ -11,11 +11,6 @@
 					<div class="row">
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'docentes.postEdit', 'method'=>'post']) !!}
-							<div class="col-md-12 form-group">
-								<label>N&uacute;mero de Docente</label>
-								{!! Form::text(null, $docente->id, array('class'=>'form-control','disabled')) !!}
-								<input type="hidden" name="id" value="{{$docente->id}}">
-							</div>
 							<div class="col-md-6 form-group">
 								<label>Tipo de Documento</label>
 								{!! Form::select('tipo_documento_id',$tipos->toArray(),$docente->TipoDocumento->id,array('class' => 'form-control')) !!}
@@ -36,6 +31,8 @@
 								<label>Descripci&oacute;n</label>
 								{!! Form::textarea('descripcion', $docente->descripcion, array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
+
+					
 							<div class="col-md-6 form-group">
 								<label>Disponibilidad</label>
 								<div class="col-xs-12">
