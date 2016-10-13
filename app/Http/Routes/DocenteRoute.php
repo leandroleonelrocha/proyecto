@@ -1,31 +1,33 @@
 <?php 
 
-Route::get('docentes', [
-	'as'	=>	'docentes.index',
-	'uses'	=>	'DocenteController@index'
-]);
+Route::group(['prefix' => 'docentes'], function(){
+	Route::get('/', [
+		'as'	=>	'docentes.index',
+		'uses'	=>	'DocenteController@index'
+	]);
 
-Route::get('nuevo',[
-	'as'	=>	'nuevo.add',
-	'uses'	=>	'DocenteController@add'
-]);
+	Route::get('nuevo',[
+		'as'	=>	'docentes.add',
+		'uses'	=>	'DocenteController@add'
+	]);
 
-Route::post('postNuevo',[
-	'as'	=>	'nuevo.postAdd',
-	'uses'	=>	'DocenteController@postAdd'
-]);
+	Route::post('postNuevo',[
+		'as'	=>	'docentes.postAdd',
+		'uses'	=>	'DocenteController@postAdd'
+	]);
 
-Route::get('delete/{id}',[
-	'as'	=> 'delete',
-	'uses'	=>	'DocenteController@delete'
-]);
+	Route::get('delete/{id}',[
+		'as'	=> 'docentes.delete',
+		'uses'	=>	'DocenteController@delete'
+	]);
 
-Route::get('editar/{id}',[
-	'as'	=> 'editar.edit',
-	'uses'	=>	'DocenteController@edit'
-]);
+	Route::get('editar/{id}',[
+		'as'	=> 'docentes.edit',
+		'uses'	=>	'DocenteController@edit'
+	]);
 
-Route::post('postEditar',[
-	'as'	=> 'editar.postEdit',
-	'uses'	=>	'DocenteController@postEdit'
-]);
+	Route::post('postEditar',[
+		'as'	=> 'docentes.postEdit',
+		'uses'	=>	'DocenteController@postEdit'
+	]);
+});

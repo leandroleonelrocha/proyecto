@@ -16,14 +16,14 @@
 	    </div>
 	@endif
 	</div>
-									<!-- Lista de Docentes -->
+									<!-- Lista de Personas -->
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Docentes</h3>
+					<h3 class="box-title">Listado de Personas</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('docentes.add')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('preinformes.add')}}" class="btn btn-success text-white"> Persona Nueva</a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -31,23 +31,19 @@
 						<thead> <tr>
 						<th>Apellido</th>
 						<th>Nombre</th>
-						<th>Tipo de Documento</th>
-						<th>Documento</th>
+						<th>Tipo de documento</th>
+						<th>N&uacute;mero de documento</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
-						@foreach($docentes as $docente)
+						@foreach($personas as $persona)
 							<tr>
-									<td>
-										<input type="hidden" value="{{$docente->id_docente}}">
-										{{$docente->apellidos}}
-									</td>
-									<td>{{$docente->nombres}}</td>
-									<td>{{$docente->TipoDocumento->tipo_documento}}</td>
-									<td>{{$docente->nro_documento}}</td>
-									<td>
-									<a href="{{route('docentes.edit',$docente->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-									<a href="{{route('docentes.delete',$docente->id)}}" title="Borrar" onclick="return confirm('¿Está seguro que desea eliminar al docente?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+								<a href="{{route('preinformes.add',$persona->id)}}">
+									<td>{{$persona->apellidos}}</td>
+									<td>{{$persona->nombres}}</td>
+									<td>{{$persona->tipo_documento}}</td>
+									<td>{{$persona->nro_documento}}</td>
+								</a>
 							</tr>
 						@endforeach
 						</tbody>

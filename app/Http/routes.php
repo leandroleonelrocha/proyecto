@@ -15,6 +15,7 @@ require_once(__DIR__ . '/Routes/UsuarioRoute.php');
 require_once(__DIR__ . '/Routes/AlumnoRoute.php');
 require_once(__DIR__ . '/Routes/DocenteRoute.php');
 require_once(__DIR__ . '/Routes/FilialesRoute.php');
+require_once(__DIR__ . '/Routes/PreinformesRoute.php');
 
 Route::get('/', function () {
     return view('login');
