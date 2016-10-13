@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 2 | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+     <meta name="csrf-token" content="{{{ Session::token() }}}">
+     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
    
     @include('templates.template_css')
    
@@ -50,6 +51,7 @@
     </div><!-- ./wrapper -->
 
     @include('templates.template_js')
+    @yield('js')
 
   </body>
 </html>

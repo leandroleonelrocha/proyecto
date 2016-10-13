@@ -14,10 +14,18 @@ class AlumnoController extends Controller
 
 	public function index()
 	{
+		
+	    $ch = curl_init();  
+		curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta");  
+		curl_setopt($ch, CURLOPT_HEADER, false);  
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+		$data = json_decode(curl_exec($ch),true);  
+		curl_close($ch);
 
+		
 		$alumno = ['alumno1', 'alumno2', 'alumno3', 'alumno4', 'alumno5'];
 
-		return view('alumnos.index', compact('alumno'));
+		return view('alumnos.index', compact('alumno', 'data'));
 		//return 'index de prueba';
 	}
 

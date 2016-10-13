@@ -30,6 +30,7 @@ class FilialesController extends Controller
 
 	$filiales=$this->filialesRepo->all();
 
+
 	return view('filiales.index',compact('filiales'));
 		
 	}

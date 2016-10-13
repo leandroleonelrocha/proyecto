@@ -9,47 +9,43 @@
 
 
 @section('content')
-    @if(isset($model))
-        {!! Form::model($model,['route'=>['filiales.postEdit',$model->id]]) !!}
-    @else
-        {!! Form::open(['route'=>'filiales.postAdd']) !!}
-    @endif
+   
+   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+     <p>Contraseña: <input type="text" name="contrasena" id="contrasena"/></p>
 
-    <div class="box-body">
-        <div class="form-group">
-            {!! Form::label('nombre', 'Nombre') !!}
-            {!! Form::text('nombre', null ,  array('class'=>'form-control')) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::label('direccion', 'Direccion') !!}
-            {!! Form::text('direccion', null ,  array('class'=>'form-control')) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('localidad', 'Localidad') !!}
-            {!! Form::text('localidad', null ,  array('class'=>'form-control')) !!}
-        </div>
-
-      	<div class="form-group">
-            {!! Form::label('director', 'Director') !!}
-            {!! Form::text('id_director', null ,  array('class'=>'form-control')) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('mail', 'Mail') !!}
-            {!! Form::text('mail', null ,  array('class'=>'form-control')) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::label('activo', 'Activo') !!}
-            {!! Form::text('activo', null ,  array('class'=>'form-control')) !!}
-        </div>
-       
-    </div><!-- /.box-body -->
-
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar filial</button>
-    </div>
-    </div><!-- /.box -->
-    {!! Form::close() !!}
+     <p>Rol: <input type="text" name="rol_id" id="rol_id" /></p>
+     <p>Entidad: <input type="text" name="entidad_id" id="entidad_id" /></p>
+     <p>Habilitado: <input type="text" name="habilitado" id="habilitado"/></p>
+     
+     <p><input type="button" id="Button1" value="enviar"/></p>
+    
 @endsection
+
+@section('js')
+
+<script type="text/javascript">
+    $(document).ready(function(){
+       $("#Button1").click(function() {
+            alert('asd');
+            var token = $("input[name*='_token']").val();
+            alert(token);
+            $.ajax({
+                type: "POST",
+                url: 'http://laravelprueba.esy.es/laravel/public/cuenta',
+                data:{ password: "1234", rol_id: "1", entidad_id: "2", habilitado: "1" },
+                headers:{
+                    "X-CSRF-TOKEN": token,
+                    
+                },
+                 success: function(Response){
+                   console.log(Response);
+                  
+                }
+
+            });        
+        });
+   });
+</script>
+
+@endsection
+
