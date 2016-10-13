@@ -2,20 +2,6 @@
 
 @section('content')
 									<!-- Mensaje -->
-	<div class="row">
-	@if (session()->has('msg_ok'))
-	    <div class="col-xs-10 col-md-offset-1 alert alert-success">
-	        <strong>Éxito!</strong><br />
-	        {{ session('msg_ok') }}
-	    </div>
-	@endif
-	@if (session()->has('msg_error'))
-	    <div class="col-xs-10 col-md-offset-1 alert alert-danger">
-	        <strong>Error!</strong><br />
-	        {{ session('msg_error') }}
-	    </div>
-	@endif
-	</div>
 						
 	<div class="row">
 		<div class="col-xs-12">

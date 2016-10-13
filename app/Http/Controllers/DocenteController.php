@@ -5,6 +5,7 @@ use App\Entities\TipoDocumento;
 use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
+use App\Http\Requests\CrearNuevoDocenteRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class DocenteController extends Controller {
         $filiales = $this->filialesRepo->lists('nombre','id');
         return view('docentes.nuevo',compact('tipos','filiales'));
     }
-    public function postAdd(Request $request){
+    public function postAdd(CrearNuevoDocenteRequest $request){
         $data = $request->all();
         if ( $docente = $this->docenteRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
                 return redirect()->route('docentes.index')->with('msg_ok','El docente ha sido agregado con éxito');
