@@ -12,4 +12,11 @@ class Director extends Entity {
         return $this->belongsTo(TipoDocumento::getClass());
     }
 
+
+    //Funcion obtiene le nombre completo
+    public function getFullNameAttribute()
+    {
+        return  $this->apellidos . ', ' . $this->nombres ;
+    }
+
 }

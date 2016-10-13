@@ -9,7 +9,7 @@ class Filial extends Entity {
     protected $fillable   = ['nombre', 'direccion', 'localidad', 'director_id','codigo_postal', 'mail'];
 
         // Relaciones
-    public function NombreDirector(){
+    public function Director(){
         return $this->belongsTo(Director::getClass());
     }
 }

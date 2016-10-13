@@ -34,7 +34,7 @@
         <!-- Main content -->
 
         <section class="content">
-
+            @include('partials.mensajes')
             @yield('content')
         </section><!-- /.content -->
 
