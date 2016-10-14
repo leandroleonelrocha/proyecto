@@ -1,14 +1,7 @@
 @extends('template')
-@section('content-header')
-    <h1>
-        alta de filiales
-
-    </h1>
-
-@endsection
-
 
 @section('content')
+<<<<<<< HEAD
    
    <input type="hidden" name="_token" value="{{ csrf_token() }}">
      <p>Contraseña: <input type="text" name="contrasena" id="contrasena"/></p>
@@ -49,3 +42,57 @@
 
 @endsection
 
+=======
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Nueva Filial</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {!! Form::open(['route'=> 'filiales.postAdd', 'method'=>'post']) !!}
+                            <div class="col-md-6 form-group">
+                                <label>Nombre</label>
+                                {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Direcci&oacuten</label>
+                                {!! Form::text('direccion',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Localidad</label>
+                                {!! Form::text('localidad',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                           <div class="col-md-6 form-group">
+                                <label>C&oacute;digo postal</label>
+                                {!! Form::text('codigo_postal',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Director</label>
+                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Mail</label>
+                                {!! Form::text('mail',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="box-footer col-xs-12">
+                            {!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+                            </div>
+
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div><!-- Fin box-body -->
+            </div> <!-- Fin box -->
+        </div> <!-- Fin col -->
+    </div> <!-- Fin row -->
+@endsection
+>>>>>>> a555ab58d02da73177d5a69ca4bd933a4c9f8c60

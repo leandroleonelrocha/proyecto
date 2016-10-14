@@ -13,7 +13,7 @@
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-
+      
       @include('templates.template_nav')
       <!-- Left side column. contains the logo and sidebar -->
       @include('templates.template_sidebar')
@@ -35,7 +35,7 @@
         <!-- Main content -->
 
         <section class="content">
-
+            @include('partials.mensajes')
             @yield('content')
         </section><!-- /.content -->
 
