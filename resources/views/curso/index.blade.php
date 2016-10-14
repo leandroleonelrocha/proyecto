@@ -7,19 +7,20 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Cursos</h3>
+					<h3 class="box-title">@lang('curso.listadodecursos')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('curso.nuevo')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('curso.nuevo')}}" class="btn btn-success text-white"> 
+						@lang('curso.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
-					<table class="table dataTable table-bordered table-striped">
+					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Nro Curso</th>
-						<th>Nombre</th>
-						<th>Duraci&oacuten</th>
-						<th>Descripci&oacuten</th>
-						<th>Taller</th>
+						<th>@lang('curso.numero')</th>
+						<th>@lang('curso.nombre')</th>
+						<th>@lang('curso.duracion')</th>
+						<th>@lang('curso.descripcion')</th>
+						<th>@lang('curso.taller')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>

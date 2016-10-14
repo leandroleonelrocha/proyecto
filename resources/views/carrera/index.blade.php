@@ -7,18 +7,18 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Carreras</h3>
+					<h3 class="box-title">@lang('carrera.listadocarrera')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('carrera.nuevo')}}" class="btn btn-success text-white"> Agregar nueva</a>
+						<a href="{{route('carrera.nuevo')}}" class="btn btn-success text-white"> @lang('carrera.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
-					<table class="table dataTable table-bordered table-striped">
+					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Nro Carrera</th>
-						<th>Nombre</th>
-						<th>Duraci&oacuten</th>
-						<th>Descripci&oacuten</th>
+						<th>@lang('carrera.numero')</th>
+						<th>@lang('carrera.nombre')</th>
+						<th>@lang('carrera.duracion')</th>
+						<th>@lang('carrera.descripcion')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>

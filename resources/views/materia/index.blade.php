@@ -1,24 +1,24 @@
 @extends('template')
 
 @section('content')
-	
+
 						
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Materias</h3>
+					<h3 class="box-title">@lang('materia.listadodemateria')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('materia.nuevo')}}" class="btn btn-success text-white"> Agregar nueva</a>
+						<a href="{{route('materia.nuevo')}}" class="btn btn-success text-white"> @lang('materia.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
-					<table class="table dataTable table-bordered table-striped">
+					<table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Nro Materia</th>
-						<th>Carrera</th>
-						<th>Nombre</th>
-						<th>Descripci&oacuten</th>
+						<th>@lang('materia.numero')</th>
+						<th>@lang('materia.carrera')</th>
+						<th>@lang('materia.nombre')</th>
+						<th>@lang('materia.descripcion')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>

@@ -6,7 +6,8 @@
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
-        <!-- Header Navbar: style can be found in header.less -->
+
+
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -21,28 +22,42 @@
                   
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">You have 4 messages</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                      <li><!-- start message -->
-                        <a href="#">
+                     
+                      <li>
+                        <a href="{{ url('lang', ['es']) }}">
+                          @lang('header.espanol')
                           <div class="pull-left">
-                            <img src="{{asset('dist/img/user2-160x160.jpg')}} " class="img-circle" alt="User Image">
+                            <img src=" {{asset('dist/img/español_128.png')}}" class="img-circle" alt="User Image">
                           </div>
                           <h4>
-                            Support Team
-                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                            AdminLTE Design Team
+                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
                           </h4>
                           <p>Why not buy a new awesome theme?</p>
                         </a>
-                      </li><!-- end message -->
+                      </li>
+                      <li>
+                        <a href="{{ url('lang', ['en']) }}">
+                        @lang('header.ingles')
+                          <div class="pull-left">
+                            <img src="{{asset('dist/img/english_128.png')}}" class="img-circle" alt="User Image">
+                          </div>
+                          <h4>
+                            Developers
+                            <small><i class="fa fa-clock-o"></i> Today</small>
+                          </h4>
+                          <p>Why not buy a new awesome theme?</p>
+                        </a>
+                      </li>
                     
-                  
                     </ul>
                   </li>
-               
+                  <li class="footer"><a href="#">See All Messages</a></li>
                 </ul>
+                
               </li>
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">

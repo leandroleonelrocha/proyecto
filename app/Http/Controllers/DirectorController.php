@@ -9,6 +9,7 @@ use App\Entities\TipoDocumento;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearNuevoDirectorRequest;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 
@@ -41,7 +42,7 @@ class DirectorController extends Controller
 		
 	}
 
-	public function postAdd(Request $request)
+	public function postAdd(CrearNuevoDirectorRequest $request)
 	{
 	
 		$this->directorRepo->create($request->all());

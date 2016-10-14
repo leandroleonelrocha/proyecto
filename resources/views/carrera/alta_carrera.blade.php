@@ -5,28 +5,28 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Nueva Carrera</h3>
+                    <h3 class="box-title">@lang('carrera.nuevacarrera')</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12">
                             {!! Form::open(['route'=> 'carrera.postAdd', 'method'=>'post']) !!}
                             <div class="col-md-6 form-group">
-                                <label>N&uacute;mero de carrera</label>
+                                <label>@lang('carrera.numero')</label>
                                 {!! Form::text('id',null,array('class'=>'form-control')) !!}
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Nombre</label>
+                                <label>@lang('carrera.nombre')</label>
                                 {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>Duraci&oacuten</label>
+                                <label>@lang('carrera.duracion')</label>
                                 {!! Form::text('duracion',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>Descripci&oacuten</label>
+                                <label>@lang('carrera.descripcion')</label>
                                 {!! Form::textarea('descripcion',null,array('class'=>'form-control','size'=>'30x3')) !!}
                             </div>
 

@@ -20,3 +20,4 @@
 <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
 
 <link rel="stylesheet" href="{{asset('css/fontello.css') }}">
+<link rel="stylesheet" href="{{asset('plugins/datatables/dataTables.bootstrap.css')}}">

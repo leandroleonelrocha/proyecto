@@ -5,31 +5,31 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Editar Materia</h3>
+					<h3 class="box-title">@lang('materia.editarmateria')</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'materia.postEdit', 'method'=>'post']) !!}
 							<div class="col-md-12 form-group">
-								<label>N&uacute;mero</label>
+								<label>@lang('materia.numero')</label>
 								{!! Form::text(null, $materia->id, array('class'=>'form-control','disabled')) !!}
 								<input type="hidden" name="id" value="{{$materia->id}}">
 							</div>
 
 							<div class="col-md-6 form-group">
-								<label>Carrera</label>
+								<label>@lang('materia.carrera')</label>
   								{!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
-								<label>Nombre</label>
+								<label>@lang('materia.nombre')</label>
 								{!! Form::text('nombre', $materia->nombre, array('class'=>'form-control')) !!}
 							</div>
 
 
 							<div class="col-md-6 form-group">
-								<label>Descripci&oacuten</label>
+								<label>@lang('descripcion')</label>
 					     		{!! Form::textarea('descripcion',$materia->descripcion,array('class'=>'form-control','size'=>'30x3')) !!}
 							</div>
 				

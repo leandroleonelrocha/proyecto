@@ -5,31 +5,31 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Nuevo Curso</h3>
+                    <h3 class="box-title">@lang('curso.nuevocurso')</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12">
                             {!! Form::open(['route'=> 'curso.postAdd', 'method'=>'post']) !!}
                             <div class="col-md-6 form-group">
-                                <label>Nro de curso</label>
+                                <label>@lang('curso.numero')</label>
                                   {!! Form::text('id',null,array('class'=>'form-control')) !!}
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Nombre</label>
+                                <label>@lang('curso.nombre')</label>
                                 {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Duraci&oacuten</label>
+                                <label>@lang('curso.duracion')</label>
                                 {!! Form::text('duracion',null,array('class'=>'form-control')) !!}
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Descripci&oacuten</label>
+                                <label>@lang('curso.descripcion')</label>
                                 {!! Form::textarea('descripcion',null,array('class'=>'form-control','size'=>'30x3')) !!}
                             </div>
 
                            <div class="col-md-6 form-group">
-                                <label>Taller</label>
+                                <label>@lang('curso.taller')</label>
                                 {!! Form::text('taller',null,array('class'=>'form-control')) !!}
                             </div>
 
