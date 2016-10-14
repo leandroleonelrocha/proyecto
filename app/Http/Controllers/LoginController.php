@@ -57,7 +57,8 @@ class LoginController extends Controller {
     // login local
     public function getLogout()
     {
-        Auth::logout();
+        // Auth::logout();
+        session()->flush(); // Elimina todos los datos de la session
         return redirect('login');
     }
 }

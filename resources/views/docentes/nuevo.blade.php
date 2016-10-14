@@ -31,11 +31,6 @@
 								<label>Descripci&oacute;n</label>
 								{!! Form::textarea('descripcion',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
-
-							<div class="col-md-6 form-group">
-								<label>filial</label>
-						         {!! Form::select('filial_id', $filiales->toArray() , null, array('class'=>'form-control')) !!}
-							</div>
 							<div class="col-md-6 form-group">
 								<label>Disponibilidad</label>
 								<div class="col-xs-12">

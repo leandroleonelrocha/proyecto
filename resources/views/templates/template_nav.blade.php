@@ -232,21 +232,22 @@
               </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="{{route('auth.getLogout')}}">Salir</a>
+                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu"> -->
                   <!-- User image -->
-                  <li class="user-header">
+                  <!-- <li class="user-header">
                     <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                     <p>
                       Alexander Pierce - Web Developer
                       <small>Member since Nov. 2012</small>
                     </p>
-                  </li>
+                  </li> -->
                   <!-- Menu Body -->
-                  <li class="user-body">
+                  <!-- <li class="user-body">
                     <div class="col-xs-4 text-center">
                       <a href="#">Followers</a>
                     </div>
@@ -256,9 +257,9 @@
                     <div class="col-xs-4 text-center">
                       <a href="#">Friends</a>
                     </div>
-                  </li>
+                  </li> -->
                   <!-- Menu Footer-->
-                  <li class="user-footer">
+                  <!-- <li class="user-footer">
                     <div class="pull-left">
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
@@ -266,7 +267,7 @@
                       <a href="#" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
-                </ul>
+                </ul> -->
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>

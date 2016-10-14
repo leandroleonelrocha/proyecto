@@ -21,7 +21,7 @@ class DocenteController extends Controller {
 
     // Página principal de Docentes
     public function index(){
-        if ($this->user['rol_id'] == 4) {
+        if ($this->user['rol_id'] == 4 && session('usuario')) {
         	$docentes = $this->docenteRepo->allEneable(); // Obtención de todos los docentes acrivos
             return view('docentes.index',compact('docentes'));
         }
@@ -85,16 +85,6 @@ class DocenteController extends Controller {
     }
 
     //Modificación del Docente
-    public function edit($id){
-        if ($this->user['rol_id'] == 4) {
-            $docente = $this->docenteRepo->find($id);
-            $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-            return view('docentes.editar',compact('docente','tipos'));
-        }
-        else
-            return redirect()->back();
-    }
-
     public function postEdit(Request $request){
         if ($this->user['rol_id'] == 4) {
             $data = $request->all();
