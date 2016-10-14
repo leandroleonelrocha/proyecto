@@ -80,7 +80,7 @@
 
                             <div class="col-md-6 form-group">
                                 <label>Mail</label>
-                                {!! Form::text('mail',null,array('class'=>'form-control')) !!}
+                                {!! Form::email('mail',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="box-footer col-xs-12">

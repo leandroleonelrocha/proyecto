@@ -5,6 +5,7 @@ use App\Entities\TipoDocumento;
 use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
+use App\Http\Requests\CrearNuevoDocenteRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -39,6 +40,9 @@ class DocenteController extends Controller {
             return redirect()->back();
     }
 
+ 
+
+
     // Alta Docente
     public function postAdd(Request $request){
         if ($this->user['rol_id'] == 4) {
@@ -56,6 +60,7 @@ class DocenteController extends Controller {
                else
                 return redirect()->route('docentes.index')->with('msg_error','No se ha podido agregar al docente, intente nuevamente.');
             }
+
         }
         else
             return redirect()->back();
@@ -84,16 +89,6 @@ class DocenteController extends Controller {
             return redirect()->back();
     }
 
-    //Modificación del Docente
-    public function edit($id){
-        if ($this->user['rol_id'] == 4) {
-            $docente = $this->docenteRepo->find($id);
-            $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-            return view('docentes.editar',compact('docente','tipos'));
-        }
-        else
-            return redirect()->back();
-    }
 
     public function postEdit(Request $request){
         if ($this->user['rol_id'] == 4) {

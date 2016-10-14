@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearNuevaCarreraRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
@@ -34,7 +35,7 @@ class CarreraController extends Controller
 		return view('carrera.alta_carrera');
 	}
 
-	public function postAdd(Request $request)
+	public function postAdd(CrearNuevaCarreraRequest $request)
 	{
 	
 		$this->carreraRepo->create($request->all());

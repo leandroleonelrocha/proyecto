@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearNuevaMateriaRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
@@ -42,7 +43,7 @@ class MateriaController extends Controller
 		
 	}
 
-	public function postAdd(Request $request)
+	public function postAdd(CrearNuevaMateriaRequest $request)
 	{
 	
 		//dd($request->all());

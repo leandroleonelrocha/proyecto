@@ -48,7 +48,17 @@ class FilialesController extends Controller
 	
 
 		$this->filialesRepo->create($request->all());
+		$filial=$this->filialesRepo->all()->last();
+
+	  	$ch = curl_init();  
+        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail}/{$filial->id}/4");  
+        curl_setopt($ch, CURLOPT_HEADER, false);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = json_decode(curl_exec($ch),true);
+        curl_close($ch);
+    
 		return redirect()->route('filiales.index')->with('msg_ok', 'Filial creada correctamente.');
+
 
 	}
 

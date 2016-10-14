@@ -33,10 +33,6 @@
 							</div>
 
 							<div class="col-md-6 form-group">
-								<label>filial</label>
-						         {!! Form::select('filial_id', $filiales->toArray() , null, array('class'=>'form-control')) !!}
-							</div>
-							<div class="col-md-6 form-group">
 								<label>Disponibilidad</label>
 								<div class="col-xs-12">
 									{!! Form::checkbox('disponibilidad_manana', '1') !!} Ma&ntilde;ana
