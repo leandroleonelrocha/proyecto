@@ -21,4 +21,8 @@ class Preinforme extends Entity
     public function Asesor(){
         return $this->belongsTo(Asesor::getClass());
     }
+
+    public function PersonaInteres(){
+        return $this->belongsTo(PersonaInteres::getClass());
+    }
 }

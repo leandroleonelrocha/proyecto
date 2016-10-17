@@ -8,4 +8,8 @@ class Carrera extends Entity {
 
     protected $fillable   = ['id', 'nombre','duracion', 'descripcion'];
 
+    public function PersonaInteres(){
+        return $this->belongsTo(PersonaInteres::getClass());
+    }
+
 }

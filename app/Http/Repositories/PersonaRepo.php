@@ -11,4 +11,9 @@ class PersonaRepo extends BaseRepo {
     {
         return new Persona();
     }
+
+    public function getPersonasFilial(){
+    	$filial = session('usuario')['entidad_id'];
+        return Persona::where('filial_id', $filial)->get();
+    }
 }

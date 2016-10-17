@@ -12,6 +12,7 @@
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'docentes.postEdit', 'method'=>'post']) !!}
 							<div class="col-md-6 form-group">
+								{!! Form::hidden('docente', $docente->id, array('class'=>'form-control')) !!}
 								<label>Tipo de Documento</label>
 								{!! Form::select('tipo_documento_id',$tipos->toArray(),$docente->TipoDocumento->id,array('class' => 'form-control')) !!}
 							</div>

@@ -8,5 +8,7 @@ class Curso extends Entity {
 
     protected $fillable   = ['id', 'nombre','duracion', 'descripcion','taller'];
 
-
+	public function PersonaInteres(){
+        return $this->belongsTo(PersonaInteres::getClass());
+    }
 }

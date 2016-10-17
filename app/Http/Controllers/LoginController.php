@@ -25,19 +25,16 @@ class LoginController extends Controller {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
-
-        if ($data) {
-          foreach ($data as $d) {
-            session(['usuario' => $d]);
-            if($d['rol_id'] == 1)  // Rol de Administrador
-              return redirect()->route('filiales.index');
-            elseif ($d['rol_id'] == 2) // Rol de Dueño
-              return redirect()->route('dueño.index');
-            elseif ($d['rol_id'] == 3) // Rol de Director
-              return redirect()->route('filiales.index');
-            elseif ($d['rol_id'] == 4) // Rol de Filial
-              return redirect()->route('docentes.index');
-          }
+        if ($data){
+          session(['usuario' => $data]);
+          if($data['rol_id'] == 1)  // Rol de Administrador
+            return redirect()->route('filiales.index');
+          elseif ($data['rol_id'] == 2) // Rol de Dueño
+            return redirect()->route('dueño.index');
+          elseif ($data['rol_id'] == 3) // Rol de Director
+            return redirect()->route('filiales.index');
+          elseif ($data['rol_id'] == 4) // Rol de Filial
+            return redirect()->route('docentes.index');
         }
         else
           return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');

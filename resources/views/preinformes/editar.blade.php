@@ -10,52 +10,57 @@
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
-							{!! Form::open(['route'=> 'preinformes.postAdd', 'method'=>'post']) !!}
-				            <div class="col-xs-12">
-				            	<h4 class="box-title text-center">Datos Personales</h4>
-				            </div>
-				            <div class="col-md-4 form-group">
-				            	{!! Form::hidden('persona',$persona->id,array('class'=>'form-control')) !!}
-				            	<label>Nombre</label>
-								<span class="form-control">{{$persona->apellidos}} {{$persona->nombres}}</span>
-							</div>
-							<div class="col-md-4 form-group">
-				            	<label>N&uacute;mero de Documento</label>
-								<span class="form-control">{{$persona->nro_documento}}</span>
-							</div>
-							<div class="col-md-4 form-group">
-				            	<label>Fecha de Nacimiento</label>
-								<span class="form-control">{{$persona->fecha_nacimiento}}</span>
-							</div>
+							{!! Form::open(['route'=> 'preinformes.postEdit', 'method'=>'post']) !!}
 			              	<div class="col-xs-12">
 			                	<h4 class="box-title text-center">Datos del Preinforme</h4>
 			              	</div>
 			              	<div class="col-md-12 form-group">
+			              		{!! Form::hidden('preinforme', $preinforme->id, array('class'=>'form-control')) !!}
 								<label>Asesor</label>
-								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor',$asesores->toArray(),$preinforme->Asesor->id,array('class' => 'form-control')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>Descripci&oacute;n</label>
-								{!! Form::textarea('descripcion_preinforme',null,array('class'=>'form-control','size'=>'30x4')) !!}
+								{!! Form::textarea('descripcion_preinforme',$preinforme->descripcion,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Medio</label>
-								{!! Form::textarea('medio',null,array('class'=>'form-control','size'=>'30x4')) !!}
+								{!! Form::textarea('medio',$preinforme->medio,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-md-12 form-group">
 								<label>¿C&oacute;mo nos encontr&oacute;?</label>
-								{!! Form::textarea('como_encontro',null,array('class'=>'form-control','size'=>'30x4')) !!}
+								{!! Form::textarea('como_encontro',$preinforme->como_encontro,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-xs-12">
 			                	<h4 class="box-title text-center">Intereses</h4>
 			              	</div>
 			              	<div class="col-md-5 form-group">
 								<label>Carreras</label>
-								{!! Form::select('carrera',$carreras->toArray(),null, array('id'=>'carreras', 'class' => 'form-control', 'multiple')) !!}
+								<select name="carrera[]" id="carreras" class='form-control' multiple>
+									<?php foreach ($carreras as $carrera) { ?>
+										<option value="{{$carrera->id}}"
+										<?php foreach ($intereses as $interes){
+											if( $interes->carrera_id == $carrera->id )
+												echo 'selected';
+										}?> >
+											{{$carrera->nombre}}
+										</option>
+									<?php } ?>
+								</select>
 							</div>
 							<div class="col-md-5 form-group">
 								<label>Cursos</label>
-								{!! Form::select('curso',$cursos->toArray(),null,array('id'=>'cursos', 'class' => 'form-control', 'multiple')) !!}
+								<select name="curso[]" id="cursos" class='form-control' multiple>
+									<?php foreach ($cursos as $curso) { ?>
+										<option value="{{$curso->id}}"
+										<?php foreach ($intereses as $interes){
+											if( $interes->curso_id == $curso->id )
+												echo 'selected';
+										}?>>
+											{{$curso->nombre}}
+										</option>
+									<?php } ?>
+								</select>
 							</div>
 							<div class="col-md-2 form-group">
 								<label>Ninguna</label>
@@ -63,10 +68,10 @@
 							</div>
 							<div class="col-md-12 form-group">
 								<label>Otros</label>
-								{!! Form::textarea('descripcion_interes',null,array('id'=>'otros', 'class' => 'form-control','disabled','size'=>'30x4')) !!}
+								<textarea disabled name="descripcion_interes" id="otros" class="form-control" cols="30" rows="4">@foreach ($intereses as $interes){{$interes->descripcion}}@endforeach</textarea>
 							</div>
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+								{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
 				          	</div>
 							{!! Form::close() !!}
 						</div>

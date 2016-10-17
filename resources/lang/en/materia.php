@@ -3,7 +3,7 @@
 return [
 
 
-     'numero' => 'Nro matter',
+    'numero' => 'Nro matter',
     'carrera' => 'Career',
     'nombre' => 'Name',
     'descripcion' => 'Description',

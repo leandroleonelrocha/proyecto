@@ -11,10 +11,8 @@ class LenguajeController extends Controller
 
 	public function cambiar(Request $request)
 	{
-
 		App::setLocale($request->get('locale'));
 		//Lang::setlocale($request->get('locale'));
 		return redirect()->back();
 	}
-
 }
