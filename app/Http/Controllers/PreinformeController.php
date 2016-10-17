@@ -282,7 +282,7 @@ class PreinformeController extends Controller {
 
                 $modelP = $this->preinformeRepo->find($data['preinforme']); // Busco el preinforme
                 // Modificación de los datos del preinforme
-                // $this->docenteRepo->edit($modelP,$preinforme); 
+                $this->docenteRepo->edit($modelP,$preinforme); 
                 // Intereces
                 $modelI = $this->personaInteresRepo->findPreinforme($data['preinforme']);
                 foreach ($modelI as $mI) { $mI->delete(); }
