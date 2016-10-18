@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevaFilialRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
-
+use Mail;
 
 
 class FilialesController extends Controller
@@ -53,6 +53,18 @@ class FilialesController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
+
+        // Datos del mail
+        $user = $request->mail;
+        $datosMail = array(	'filial' 	=> $request->nombre, 
+        					'user' 		=> $user, 
+        					'password' 	=> $data);
+
+        // Envío del mail
+        Mail::send('mailing.cuenta',$datosMail,function($msj) use($user){
+        	$msj->subject('GeCo -- Nueva Cuenta');
+        	$msj->to($user);
+        });
     
 		return redirect()->route('filiales.index')->with('msg_ok', 'Filial creada correctamente.');
 	}
