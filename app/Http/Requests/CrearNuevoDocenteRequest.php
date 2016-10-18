@@ -24,7 +24,6 @@ class CrearNuevoDocenteRequest extends Request
     {
         return [
 
-            'id' => 'required',
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
             'apellidos' => 'required',
@@ -38,9 +37,8 @@ class CrearNuevoDocenteRequest extends Request
     public function messages()
     {
         return [
-            'id.required' => 'Escriba un número de docente',
             'tipo_documento_id.required' => 'Escriba un tipo de documento',
-            'nro_documento.required' => 'Escriba el numero de documento',  
+            'nro_documento.required' => 'Escriba el número de documento',  
             'apellidos.required' => 'Escriba el nombre',
             'nombres.required' => 'Escriba el apellido',
             'descripcion.required' => 'Escriba la descripcion',  
