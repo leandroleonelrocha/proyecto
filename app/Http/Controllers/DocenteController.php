@@ -52,7 +52,7 @@ class DocenteController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$data = $request->all(); // Obtengo todos los datos del formulario
-                $data['filial_id'] = $this->user['entidad_id'];
+                $data['filial_id'] = session('usuario')['entidad_id'];
                 
                 // Corroboro que el cliente exista, si exite lo activa
                 if ( $docente = $this->docenteRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
@@ -110,8 +110,8 @@ class DocenteController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $data = $request->all();
-                $data['filial_id'] = $this->user['entidad_id'];
-                $model = $this->docenteRepo->find($data['id']); // Busco al docente
+                $data['filial_id'] = session('usuario')['entidad_id'];
+                $model = $this->docenteRepo->find($data['docente']); // Busco al docente
                 if($this->docenteRepo->edit($model,$data)) // Modificación de los datos
                     return redirect()->route('docentes.index')->with('msg_ok','El docente ha sido modificado con éxito');
                 else

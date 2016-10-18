@@ -43,10 +43,7 @@ class FilialesController extends Controller
 		
 	}
 
-	public function postAdd(CrearNuevaFilialRequest $request)
-	{
-	
-
+	public function postAdd(CrearNuevaFilialRequest $request){
 		$this->filialesRepo->create($request->all());
 		$filial=$this->filialesRepo->all()->last();
 
@@ -58,18 +55,13 @@ class FilialesController extends Controller
         curl_close($ch);
     
 		return redirect()->route('filiales.index')->with('msg_ok', 'Filial creada correctamente.');
-
-
 	}
 
-    public function getDelete($id)
-    {
-
+    public function getDelete($id){
         if($this->filialesRepo->disable($this->filialesRepo->find($id)))
             return redirect()->back()->with('msg_ok', 'Filial eliminada correctamente.');
         else
              return redirect()->back()->with('msg_error','La filial no ha podido ser eliminada.');
-
     }
 
     public function edit($id){
@@ -86,6 +78,4 @@ class FilialesController extends Controller
         else
             return redirect()->route('filiales.index')->with('msg_error','La filial no ha podido ser modificada.');
     }
-
-
 }

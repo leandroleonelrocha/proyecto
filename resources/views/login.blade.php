@@ -89,6 +89,5 @@
         });
       });
     </script>
-    <!-- <script src="{{asset('WebService/interaccion.js')}}"></script> -->
   </body>
 </html>

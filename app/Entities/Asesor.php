@@ -14,6 +14,11 @@ class Asesor extends Entity
      */
     protected $fillable = ['id_asesor','id_tipo_documento','nro_documento','apellidos','nombres','direccion','localidad','activo'];
 
+    public function getFullNameAttribute()
+    {
+        return  $this->apellidos . ', ' . $this->nombres ;
+    }
+
     // Relaciones
     public function Preinforme(){
         return $this->hasMany(Preinforme::getClass());

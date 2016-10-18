@@ -11,4 +11,9 @@ class PreinformeRepo extends BaseRepo {
     {
         return new Preinforme();
     }
+
+    public function allFilial(){
+        $filial = session('usuario')['entidad_id'];
+        return Preinforme::where('filial_id', $filial)->get();
+    }
 }

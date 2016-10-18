@@ -9,7 +9,8 @@ class DocenteRepo extends BaseRepo {
         return new Docente();
     }
     public function allEneable(){
-        return Docente::where('activo', 1)->get();
+        $filial = session('usuario')['entidad_id'];
+        return Docente::where('activo', 1)->where('filial_id', $filial)->get();
     }
     public function check($tipo,$nro){
         return Docente::where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);

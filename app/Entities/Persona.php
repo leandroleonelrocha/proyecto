@@ -18,11 +18,23 @@ class Persona extends Entity
     }
 
     // Relaciones
+    public function TipoDocumento(){
+        return $this->belongsTo(TipoDocumento::getClass());
+    }
+
     public function Preinforme(){
         return $this->hasMany(Preinforme::getClass());
     }
 
-    public function TipoDocumento(){
-        return $this->belongsTo(TipoDocumento::getClass());
+    public function PersonaMail(){
+        return $this->hasMany(PersonaMail::getClass());
+    }
+
+    public function PersonaTelefono(){
+        return $this->hasMany(PersonaTelefono::getClass());
+    }
+
+    public function PersonaInteres(){
+        return $this->hasMany(PersonaInteres::getClass());
     }
 }

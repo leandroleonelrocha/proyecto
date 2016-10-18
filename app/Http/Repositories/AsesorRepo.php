@@ -11,4 +11,9 @@ class AsesorRepo extends BaseRepo {
     {
         return new Asesor();
     }
+
+    public function allAsesorFilial(){
+        $filial = session('usuario')['entidad_id'];
+        return Asesor::where('activo', 1)->where('filial_id', $filial)->get();
+    }
 }

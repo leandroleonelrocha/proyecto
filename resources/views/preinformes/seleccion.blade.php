@@ -23,31 +23,36 @@
 				<div class="box-header">
 					<h3 class="box-title">Listado de Personas</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('preinformes.add')}}" class="btn btn-success text-white"> Persona Nueva</a>
+						<a href="{{route('preinformes.addPersona')}}" class="btn btn-success text-white"> Agregar nueva Persona</a>
 					</div>
 				</div>
 				<div class="box-body">
-					<table class="table dataTable table-bordered table-striped">
-						<thead> <tr>
-						<th>Apellido</th>
-						<th>Nombre</th>
-						<th>Tipo de documento</th>
-						<th>N&uacute;mero de documento</th>
-						<th class="no-print"></th>
-						</tr> </thead>
-						<tbody>
-						@foreach($personas as $persona)
-							<tr>
-								<a href="{{route('preinformes.add',$persona->id)}}">
-									<td>{{$persona->apellidos}}</td>
-									<td>{{$persona->nombres}}</td>
-									<td>{{$persona->tipo_documento}}</td>
-									<td>{{$persona->nro_documento}}</td>
-								</a>
-							</tr>
-						@endforeach
-						</tbody>
-					</table>
+					<div class="col-xs-12">
+						<div class="col-xs-9">
+			            	<h4 class="box-title">
+			            		Personas Existentes
+			            		<div><small>Seleccione una persona o cree un preinforme con una persona nueva</small></div>
+			            	</h4>
+			            </div>
+						<table id="example1" class="table table-bordered table-striped">
+							<thead><tr>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>N&uacute;mero de Documento</th>
+							<th class="no-print"></th>
+							</tr></thead>
+							<tbody>
+								@foreach($personas as $persona)
+										<tr>
+											<td>{{$persona->nombres}}</td>
+											<td>{{$persona->apellidos}}</td>
+											<td>{{$persona->nro_documento}}</td>
+											<td class="text-center"><a href="{{route('preinformes.add',$persona->id)}}" class="btn btn-success text-white">Seleccionar</a></td>
+										</tr>
+								@endforeach
+							</tbody>
+						</table>	
+					</div>
         		</div><!-- Fin box-body -->
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->

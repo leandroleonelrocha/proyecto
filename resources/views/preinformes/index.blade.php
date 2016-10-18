@@ -23,17 +23,26 @@
 				<div class="box-header">
 					<h3 class="box-title">Listado de Preinformes</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('preinformes.add')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('preinformes.seleccion')}}" class="btn btn-success text-white"> Agregar nuevo</a>
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
+						<th>N&uacute;mero de Preinforme</th>
+						<th>Asesor</th>
+						<th>Persona</th>
+						<th>Medio</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
 						@foreach($preinformes as $preinforme)
 							<tr>
+								<td>{{$preinforme->id}}</td>
+								<td>{{$preinforme->Asesor->nombres}} {{$preinforme->Asesor->apellidos}}</td>
+								<td>{{$preinforme->Persona->nombres}} {{$preinforme->Persona->apellidos}}</td>
+								<td>{{$preinforme->medio}}</td>
+								<td><a href="{{route('preinformes.edit',$preinforme->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a></td>
 							</tr>
 						@endforeach
 						</tbody>
