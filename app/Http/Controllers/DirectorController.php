@@ -46,6 +46,14 @@ class DirectorController extends Controller
 	{
 	
 		$this->directorRepo->create($request->all());
+		$director=$this->directorRepo->all()->last();
+	  	$ch = curl_init();  
+        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->nombres}/{$director->id}/3");  
+        curl_setopt($ch, CURLOPT_HEADER, false);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = json_decode(curl_exec($ch),true);
+        curl_close($ch);
+
 		return redirect()->route('director.index')->with('msg_ok', 'Director creado correctamente');
 
 	}

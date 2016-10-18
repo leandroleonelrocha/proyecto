@@ -29,7 +29,6 @@ class CrearNuevoDocenteRequest extends Request
             'apellidos' => 'required',
             'nombres' => 'required',
             'descripcion' => 'required',
-            'filial_id' => 'required',
 
         ];
     }
@@ -41,8 +40,7 @@ class CrearNuevoDocenteRequest extends Request
             'nro_documento.required' => 'Escriba el número de documento',  
             'apellidos.required' => 'Escriba el nombre',
             'nombres.required' => 'Escriba el apellido',
-            'descripcion.required' => 'Escriba la descripcion',  
-            'filial_id.required' => 'Seleccione la filial',    
+            'descripcion.required' => 'Escriba la descripcion',     
         ];
     }
 
