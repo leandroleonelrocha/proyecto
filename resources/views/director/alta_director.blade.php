@@ -29,13 +29,13 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>Tel&eacutefono</label>
-                                {!! Form::text('',null,array('class'=>'form-control')) !!}
+                                <label>Tel&eacute;fono</label>
+                                {!! Form::text('telefono',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label>Mail</label>
-                                {!! Form::text('',null,array('class'=>'form-control')) !!}
+                                {!! Form::text('mail',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="box-footer col-xs-12">

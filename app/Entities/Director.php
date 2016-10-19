@@ -20,4 +20,12 @@ class Director extends Entity {
         return  $this->apellidos . ', ' . $this->nombres ;
     }
 
+   public function DirectorMail(){
+        return $this->hasMany(DirectorMail::getClass());
+    }
+
+   public function DirectorTelefono(){
+        return $this->hasMany(DirectorTelefono::getClass());
+    }
+
 }

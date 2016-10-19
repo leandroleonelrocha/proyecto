@@ -1,5 +1,6 @@
 @extends('template')
 
+
 @section('content')
 
   
@@ -32,6 +33,11 @@
                            <div class="col-md-6 form-group">
                                 <label>C&oacute;digo postal</label>
                                 {!! Form::text('codigo_postal',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Tel&eacute;fono</label>
+                                {!! Form::text('telefono',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">

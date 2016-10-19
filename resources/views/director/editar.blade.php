@@ -35,6 +35,11 @@
 								<label>Nombres</label>
 								{!! Form::text('nombres', $director->nombres, array('class'=>'form-control')) !!}
 							</div>
+
+							<div class="col-md-6 form-group">
+								<label>Telefono</label>
+								{!! Form::text('telefono', $director->telefono, array('class'=>'form-control')) !!}
+							</div>
 							<div class="box-footer col-xs-12">
 							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
 				          	</div>
