@@ -12,12 +12,12 @@
                         <div class="col-xs-12">
                             {!! Form::open(['route'=> 'materia.postAdd', 'method'=>'post']) !!}
                             <div class="col-md-6 form-group">
-                                <label>@lang('materia.carrera')</label>
-                              {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control')) !!}
+                                <label>@lang('materia.numero')</label>
+                                {!! Form::text('id',null,array('class'=>'form-control')) !!}
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>@lang('materia.carrera')</label>
-                                {!! Form::text('id',null,array('class'=>'form-control')) !!}
+                                {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control')) !!}
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>@lang('materia.nombre')</label>

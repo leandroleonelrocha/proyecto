@@ -36,7 +36,7 @@ class CrearNuevoDirectorRequest extends Request
     {
         return [
            // 'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'Escriba un numero documento',
+            'nro_documento.required' => 'Escriba un número documento',
             'nombres.required' => 'Escriba el nombre',
             'apellidos.required' => 'Escriba el apellido', 
         ];

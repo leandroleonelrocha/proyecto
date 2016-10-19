@@ -48,7 +48,7 @@ class DocenteController extends Controller {
     }
 
     // Alta Docente
-    public function postAdd(Request $request){
+    public function postAdd(CrearNuevoDocenteRequest $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$data = $request->all(); // Obtengo todos los datos del formulario

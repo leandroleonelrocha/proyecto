@@ -11,4 +11,9 @@ class Filial extends Entity {
     public function Director(){
         return $this->belongsTo(Director::getClass());
     }
+
+   public function FilialTelefono(){
+        return $this->hasMany(FilialTelefono::getClass());
+    }
+
 }

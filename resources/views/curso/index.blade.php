@@ -36,7 +36,7 @@
 
 						  			<td>
 					           		<a href="{{route('curso.edit',$c->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>		
-						  			<a href="{{route('curso.getDelete', $c->id) }}" title="Eliminar"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+									</td>
 							    </tr>
 						    @endforeach
 					   	</tbody>

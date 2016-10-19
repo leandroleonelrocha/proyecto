@@ -7,7 +7,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Materias</h3>
+					<h3 class="box-title">Listado de filiales</h3>
 					<div class="box-tools pull-right no-print">
 						<a href="{{route('filiales.nuevo')}}" class="btn btn-success text-white"> Agregar nueva</a>
 					</div>

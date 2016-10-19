@@ -3,29 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>GeCo -- Nueva Cuenta</title>
-	<!-- <style>
-		.mailContainer {
-		    background-color: #1e961e;
-		    margin: 0 auto;
-		    padding: 2%;
-		    width: 80%;
-		}
-
-		.verde{ color: #1e961e; }
-
-		.box {
-		    background-color: #fff;
-		    border-radius: 5px;
-		    margin: 2% auto;
-		    padding: 2%;
-		    width: 80%;
-		}
-
-		.title {
-		    font-size: 25px;
-		    text-align: center;
-		}
-	</style> -->
 </head>
 <body>
 	<div class="mailContainer">

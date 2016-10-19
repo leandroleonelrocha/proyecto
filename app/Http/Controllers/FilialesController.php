@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Controllers;
 use App\Entities\NombreDirector;
+use App\Entities\FilialTelefono;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevaFilialRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
+use App\Http\Repositories\FilialTelefonoRepo;
 use Mail;
 
 
@@ -19,10 +21,11 @@ class FilialesController extends Controller
 	protected $filialesRepo;
 	protected $directorRepo;
 
-	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo)
+	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo )
 	{
 		$this->directorRepo = $directorRepo;
 		$this->filialesRepo = $filialesRepo;
+        $this->filialTelefonoRepo = $filialTelefonoRepo;
 	}
 
 
@@ -47,6 +50,9 @@ class FilialesController extends Controller
 		$this->filialesRepo->create($request->all());
 		$filial=$this->filialesRepo->all()->last();
 
+        $telefono['filial_id']=$filial->id;
+        $telefono['telefono']=$request->telefono;
+        $this->filialTelefonoRepo->create($telefono);
 	  	$ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail}/{$filial->id}/4");  
         curl_setopt($ch, CURLOPT_HEADER, false);  

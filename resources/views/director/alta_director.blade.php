@@ -28,6 +28,16 @@
                                 {!! Form::text('nombres',null,array('class'=>'form-control')) !!}
                             </div>
 
+                            <div class="col-md-6 form-group">
+                                <label>Tel&eacute;fono</label>
+                                {!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Mail</label>
+                                {!! Form::text('mail',null,array('class'=>'form-control')) !!}
+                            </div>
+
                             <div class="box-footer col-xs-12">
                             {!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
                             </div>

@@ -32,7 +32,6 @@
 						            <td>{{ $ca->descripcion }}</td>
 						           	<td>
 					      			<a href="{{route('carrera.edit',$ca->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
-						           	<a href="{{route('carrera.getDelete', $ca->id) }}" title="Eliminar"><i class="btn btn-danger glyphicon glyphicon-trash"></i> </a></td>
 									</td>
 							    </tr>
 						    @endforeach

@@ -1,6 +1,5 @@
 @extends('template')
-
-@section('content') 
+@section('content')
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -32,6 +31,11 @@
                             </div>
 
                             <div class="col-md-6 form-group">
+                                <label>Tel&eacute;fono</label>
+                                {!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
                                 <label>Director</label>
                                 {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
                             </div>
@@ -53,3 +57,4 @@
         </div> <!-- Fin col -->
     </div> <!-- Fin row -->
 @endsection
+

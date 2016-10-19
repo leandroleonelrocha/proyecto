@@ -32,7 +32,7 @@ class LoginController extends Controller {
           elseif ($data['rol_id'] == 2) // Rol de Dueño
             return redirect()->route('dueño.index');
           elseif ($data['rol_id'] == 3) // Rol de Director
-            return redirect()->route('filiales.index');
+            return redirect()->route('filiales.index'); //Pagina de estadisticas
           elseif ($data['rol_id'] == 4) // Rol de Filial
             return redirect()->route('docentes.index');
         }

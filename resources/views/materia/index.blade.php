@@ -30,7 +30,6 @@
 						            <td>{{ $m->descripcion }}</td>
 						           	<td>
 					           		<a href="{{route('materia.edit',$m->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
-						           	<a href="{{route('materia.getDelete', $m->id) }}" title="Eliminar"><i class="btn btn-danger glyphicon glyphicon-trash"></i> </a></td>
 									</td>
 							    </tr>
 						    @endforeach
