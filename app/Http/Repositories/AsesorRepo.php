@@ -12,6 +12,21 @@ class AsesorRepo extends BaseRepo {
         return new Asesor();
     }
 
+    public function allEneable(){
+
+        return Asesor::where('activo', 1)->get();
+    }
+
+    public function check($tipo,$nro){
+        return Asesor::where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
+    }
+
+    public function disable($asesor){
+        $asesor->activo = 0;
+        return $asesor->save();
+    }
+
+
     public function allAsesorFilial(){
         $filial = session('usuario')['entidad_id'];
         return Asesor::where('activo', 1)->where('filial_id', $filial)->get();

@@ -5,7 +5,7 @@ use App\Entities\PersonaTelefono;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
 
-class PersonaRepo extends BaseRepo {
+class PersonaTelefonoRepo extends BaseRepo {
 
     public function getModel()
     {

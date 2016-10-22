@@ -11,5 +11,4 @@ class CarreraRepo extends BaseRepo {
     {
         return new Carrera();
     }
-
 }

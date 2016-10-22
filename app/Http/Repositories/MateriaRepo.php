@@ -11,5 +11,4 @@ class MateriaRepo extends BaseRepo {
     {
         return new Materia();
     }
-
 }

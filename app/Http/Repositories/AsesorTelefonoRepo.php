@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Repositories;
-use App\Entities\Curso;
+use App\Entities\AsesorTelefono;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
 
-class CursoRepo extends BaseRepo {
+class AsesorTelefonoRepo extends BaseRepo {
 
     public function getModel()
     {
-        return new Curso();
+        return new AsesorTelefono();
     }
 }

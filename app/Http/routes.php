@@ -21,6 +21,8 @@ require_once(__DIR__ . '/Routes/DirectorRoute.php');
 require_once(__DIR__ . '/Routes/CursoRoute.php');
 require_once(__DIR__ . '/Routes/CarreraRoute.php');
 require_once(__DIR__ . '/Routes/MateriaRoute.php');
+require_once(__DIR__ . '/Routes/AsesorRoute.php');
+require_once(__DIR__ . '/Routes/PersonaRoute.php');
 
 Route::get('/', function () {
     return view('login');
