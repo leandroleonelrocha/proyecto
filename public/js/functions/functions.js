@@ -1,14 +1,15 @@
 $(document).ready(function(){
+	/* ------------------------- Preinformes ------------------------- */
 	// Se Corrobora que no se haya seleccionado ninguna Carrera o Curso
 	function seleccionoCarreraCurso(){
 		var seleccionCarrera, seleccionCurso;
-		$('#carreras').each(function(){ // Se recorre todo el select
+		$('#carreras').each(function(){ // Se recorre todo el select de Carreras
 			if ( $(this).val() != null )
 				seleccionCarrera = true;
 			else 
 				seleccionCarrera = false;
 		});
-		$('#cursos').each(function(){
+		$('#cursos').each(function(){ // Se recorre todo el select de Cursos
 			if ( $(this).val() != null ) 
 				seleccionCurso = true;
 			else 
@@ -34,5 +35,12 @@ $(document).ready(function(){
 		}
 		else
 			$('#otros').attr('disabled',true);
+    });
+
+   /* ------------------------- Matrículas ------------------------- */
+   // Duplicar los campos de Pagos -- Plan de Pagos ~~ Alta Matrículas
+   $('#mas').click(function(){
+   		// Clonación - Búsqueda de cada campo - Reseteo del value
+    	$( '.pagos:last' ).clone().appendTo( '#planDePagos' ).find(".pago-item").val("");
     });
 });

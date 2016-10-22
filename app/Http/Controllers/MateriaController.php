@@ -25,11 +25,11 @@ class MateriaController extends Controller
 		$this->carreraRepo = $carreraRepo;
 	}
 
-	public function index(){
+	public function lista(){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 				$materia=$this->materiaRepo->all();
-				return view('materia.index',compact('materia'));
+				return view('rol_filial.materias.lista',compact('materia'));
 			}
 		    else
 		        return redirect()->back();
@@ -38,11 +38,11 @@ class MateriaController extends Controller
 		    return redirect('login');
 	}
 
-	public function  nuevo(){
+	public function nuevo(){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 				$carreras = $this->carreraRepo->lists('nombre','id');
-				return view('materia.alta_materia', compact('carreras'));
+				return view('rol_filial.materias.nuevo', compact('carreras'));
 			}
 		    else
 		        return redirect()->back();
@@ -51,12 +51,12 @@ class MateriaController extends Controller
 		    return redirect('login');
 	}
 
-	public function postAdd(CrearNuevaMateriaRequest $request){
+	public function nuevo_post(CrearNuevaMateriaRequest $request){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 				//dd($request->all());
 				$this->materiaRepo->create($request->all());
-		     	return redirect()->route('materia.index')->with('msg_ok', 'Materia creada correctamente');
+		     	return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
 			}
 		    else
 		        return redirect()->back();
@@ -65,7 +65,38 @@ class MateriaController extends Controller
 		    return redirect('login');
 	}
 
-    public function getDelete($id){
+ 	public function editar($id){
+ 		if (null !== session('usuario')){
+			if (session('usuario')['rol_id'] == 4){
+				$carreras = $this->carreraRepo->lists('nombre','id');
+		    	$materia = $this->materiaRepo->find($id);
+		    	return view('rol_filial.materias.editar',compact('materia','carreras'));
+			}
+		    else
+		        return redirect()->back();
+		    }
+		else
+		    return redirect('login');
+    }
+
+    public function editar_post(Request $request){
+    	if (null !== session('usuario')){
+			if (session('usuario')['rol_id'] == 4){
+		        $data = $request->all();
+		        $model = $this->materiaRepo->find($data['id']);
+		        if($this->materiaRepo->edit($model,$data))
+		            return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');
+		        else
+		            return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');
+			}
+		    else
+		        return redirect()->back();
+		    }
+		else
+		    return redirect('login');
+    }
+
+    public function borrar($id){
     	if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 			    if( $data=$this->materiaRepo->find($id))
@@ -82,36 +113,4 @@ class MateriaController extends Controller
 		else
 		    return redirect('login');
     }
-
- 	public function edit($id){
- 		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$carreras = $this->carreraRepo->lists('nombre','id');
-		    	$materia = $this->materiaRepo->find($id);
-		    	return view('materia.editar',compact('materia','carreras'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
-    }
-
-    public function postEdit(Request $request){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-		        $data = $request->all();
-		        $model = $this->materiaRepo->find($data['id']);
-		        if($this->materiaRepo->edit($model,$data))
-		            return redirect()->route('materia.index')->with('msg_ok','La materia ha sido modificada con éxito');
-		        else
-		            return redirect()->route('materia.index')->with('msg_error','La materia no ha podido ser modificada.');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
-    }
-
 }

@@ -20,11 +20,11 @@ class DocenteController extends Controller {
 	}
 
     // Página principal de Docentes
-   public function index(){
+   public function lista(){
     if (null !== session('usuario')){
         if (session('usuario')['rol_id'] == 4){
             $docentes = $this->docenteRepo->allEneable(); // Obtención de todos los docentes acrivos
-            return view('docentes.index',compact('docentes'));
+            return view('rol_filial.docentes.lista',compact('docentes'));
         }
         else
             return redirect()->back();
@@ -34,11 +34,11 @@ class DocenteController extends Controller {
 }
 
     // Página de Nuevo
-    public function add(){
+    public function nuevo(){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-            	return view('docentes.nuevo',compact('tipos'));
+            	return view('rol_filial.docentes.nuevo',compact('tipos'));
             }
             else
                 return redirect()->back();
@@ -48,7 +48,7 @@ class DocenteController extends Controller {
     }
 
     // Alta Docente
-    public function postAdd(CrearNuevoDocenteRequest $request){
+    public function nuevo_post(CrearNuevoDocenteRequest $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$data = $request->all(); // Obtengo todos los datos del formulario
@@ -56,16 +56,15 @@ class DocenteController extends Controller {
                 
                 // Corroboro que el cliente exista, si exite lo activa
                 if ( $docente = $this->docenteRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
-                        return redirect()->route('docentes.index')->with('msg_ok','El docente ha sido agregado con éxito');
+                        return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido agregado con éxito');
                 }
                 else{
                     // Si no existe lo crea
                    if($this->docenteRepo->create($data))
-            	       return redirect()->route('docentes.index')->with('msg_ok','El docente ha sido agregado con éxito');
+            	       return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido agregado con éxito');
                    else
-                    return redirect()->route('docentes.index')->with('msg_error','No se ha podido agregar al docente, intente nuevamente.');
+                    return redirect()->route('filial.docentes')->with('msg_error','No se ha podido agregar al docente, intente nuevamente.');
                 }
-
             }
             else
                 return redirect()->back();  
@@ -75,13 +74,13 @@ class DocenteController extends Controller {
     }
 
     // Borrado lógico del Docente
-    public function delete($id){
+    public function borrar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 if($this->docenteRepo->disable($this->docenteRepo->find($id)))
-                    return redirect()->route('docentes.index')->with('msg_ok','Docente eliminado correctamente');
+                    return redirect()->route('filial.docentes')->with('msg_ok','Docente eliminado correctamente');
                 else
-                    return redirect()->route('docentes.index')->with('msg_error',' El docente no ha podido ser eliminado.');
+                    return redirect()->route('filial.docentes')->with('msg_error',' El docente no ha podido ser eliminado.');
             }
             else
                 return redirect()->back();   
@@ -91,12 +90,12 @@ class DocenteController extends Controller {
     }
 
     // Página de Editar
-    public function edit($id){
+    public function editar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$docente = $this->docenteRepo->find($id); // Obtengo al docente
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-            	return view('docentes.editar',compact('docente','tipos'));
+            	return view('rol_filial.docentes.editar',compact('docente','tipos'));
             }
             else
                 return redirect()->back();
@@ -106,16 +105,16 @@ class DocenteController extends Controller {
     }
 
     //Modificación del Docente
-    public function postEdit(Request $request){
+    public function editar_post(Request $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $data = $request->all();
                 $data['filial_id'] = session('usuario')['entidad_id'];
                 $model = $this->docenteRepo->find($data['docente']); // Busco al docente
                 if($this->docenteRepo->edit($model,$data)) // Modificación de los datos
-                    return redirect()->route('docentes.index')->with('msg_ok','El docente ha sido modificado con éxito');
+                    return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido modificado con éxito');
                 else
-                    return redirect()->route('docentes.index')->with('msg_error',' El docente no ha podido ser modificado.');
+                    return redirect()->route('filial.docentes')->with('msg_error',' El docente no ha podido ser modificado.');
             }
             else
                 return redirect()->back();

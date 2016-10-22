@@ -7,7 +7,6 @@
           <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
 
-
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -19,13 +18,11 @@
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-language"></i>
-                  
                 </a>
                 <ul class="dropdown-menu">
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                     
                       <li>
                         <a href="{{ url('lang', ['es']) }}">
                           @lang('header.espanol')

@@ -3,35 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Entities\PersonaTelefono;
-use App\Entities\PersonaInteres;
 use App\Entities\TipoDocumento;
 use App\Entities\PersonaMail;
-use App\Entities\Preinforme;
+use App\Entities\Matricula;
 use App\Entities\Persona;
 use App\Entities\Carrera;
 use App\Entities\Asesor;
 use App\Entities\Curso;
+use App\Entities\Pago;
 use App\Http\Repositories\PersonaTelefonoRepo;
-use App\Http\Repositories\PersonaInteresRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Repositories\PersonaMailRepo;
-use App\Http\Repositories\PreinformeRepo;
+use App\Http\Repositories\MatriculaRepo;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
 use App\Http\Repositories\CursoRepo;
+use App\Http\Repositories\PagoRepo;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
-class PreinformeController extends Controller {
+class MatriculaController extends Controller {
 
-	protected $preinformeRepo;
+	protected $matriculaRepo;
 
-	public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo)
+	public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo)
 	{
-		$this->preinformeRepo       = $preinformeRepo;
+		$this->matriculaRepo        = $matriculaRepo;
 		$this->personaRepo          = $personaRepo;
         $this->asesorRepo           = $asesorRepo;
         $this->tipoDocumentoRepo    = $tipoDocumentoRepo;
@@ -39,15 +39,15 @@ class PreinformeController extends Controller {
         $this->personaTelefonoRepo  = $personaTelefonoRepo;
         $this->carreraRepo          = $carreraRepo;
         $this->cursoRepo            = $cursoRepo;
-        $this->personaInteresRepo   = $personaInteresRepo;
+        $this->pagoRepo             = $pagoRepo;
 	}
 
-    // Página principal de Preinformes
-    public function index(){
+    // Página principal de Matrículas
+    public function lista(){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
-            	$preinformes = $this->preinformeRepo->allFilial();
-                return view('preinformes.index',compact('preinformes'));
+            	$matriculas = $this->matriculaRepo->allEneable();
+                return view('rol_filial.matricula.lista',compact('matriculas'));
             }
             else
                 return redirect()->back();
@@ -61,7 +61,7 @@ class PreinformeController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $personas = $this->personaRepo->getPersonasFilial();
-                return view('preinformes.seleccion',compact('personas'));
+                return view('rol_filial.matricula.seleccion',compact('personas'));
             }
             else
                 return redirect()->back();
@@ -71,14 +71,14 @@ class PreinformeController extends Controller {
     }
 
     // Página de Nuevo -- Persona Existente
-    public function add($id){
+    public function nuevo($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $persona    = $this->personaRepo->find($id);
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
                 $carreras   = $this->carreraRepo->all()->lists('nombre','id');
                 $cursos     = $this->cursoRepo->all()->lists('nombre','id');
-                return view('preinformes.nuevo',compact('persona','asesores','carreras','cursos'));
+                return view('rol_filial.matricula.nuevo',compact('persona','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
@@ -88,14 +88,14 @@ class PreinformeController extends Controller {
     }
 
     // Página de Nuevo -- Persona Nueva
-    public function addNuevaPersona(){
+    public function nuevaPersona(){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-                $carreras   = $this->carreraRepo->all()->lists('nombre','id');
-                $cursos     = $this->cursoRepo->all()->lists('nombre','id');
-                return view('preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos'));
+                $carreras   = $this->carreraRepo->all();
+                $cursos     = $this->cursoRepo->all();
+                return view('rol_filial.matricula.nuevoPersona',compact('tipos','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
@@ -105,67 +105,67 @@ class PreinformeController extends Controller {
     }
 
     // Alta de Preinforme y Persona Existente
-    public function postAdd(Request $request){
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
-                // Datos Preinforme
-                $preinforme['persona_id']       =   $request->persona;
-                $preinforme['asesor_id']        =   $request->asesor;
-                $preinforme['descripcion']      =   $request->descripcion_preinforme;
-                $preinforme['medio']            =   $request->medio;
-                $preinforme['como_encontro']    =   $request->como_encontro;
-                $preinforme['filial_id']        =   session('usuario')['entidad_id'];
-                if($this->preinformeRepo->create($preinforme)){
-                    // Intereces
-                    $preinforme                 =   $this->preinformeRepo->all()->last();
-                    $interes['preinforme_id']   =   $preinforme['id'];
-                    $interes['persona_id']      =   $request->persona;
-                    $interes['descripcion']     =   $request->descripcion_interes;
+    public function nuevo_post(Request $request){
+        // if (null !== session('usuario')){
+        //     if (session('usuario')['rol_id'] == 4){
+        //         // Datos Preinforme
+        //         $preinforme['persona_id']       =   $request->persona;
+        //         $preinforme['asesor_id']        =   $request->asesor;
+        //         $preinforme['descripcion']      =   $request->descripcion_preinforme;
+        //         $preinforme['medio']            =   $request->medio;
+        //         $preinforme['como_encontro']    =   $request->como_encontro;
+        //         $preinforme['filial_id']        =   session('usuario')['entidad_id'];
+        //         if($this->preinformeRepo->create($preinforme)){
+        //             // Intereces
+        //             $preinforme                 =   $this->preinformeRepo->all()->last();
+        //             $interes['preinforme_id']   =   $preinforme['id'];
+        //             $interes['persona_id']      =   $request->persona;
+        //             $interes['descripcion']     =   $request->descripcion_interes;
 
-                    if ($interes['descripcion'] !== null){
-                            $this->personaInteresRepo->create($interes);
-                            $interes['descripcion']     =   null;
-                        }
+        //             if ($interes['descripcion'] !== null){
+        //                     $this->personaInteresRepo->create($interes);
+        //                     $interes['descripcion']     =   null;
+        //                 }
 
-                    if (null !== $request->carrera){ //Si se selecciona una carrera
-                        if (count($request->carrera)>1) {
-                            foreach ($request->carrera as $carrera) {
-                                $interes['carrera_id'] = $carrera;
-                                $this->personaInteresRepo->create($interes);
-                            }
-                        }
-                        else{
-                            $interes['carrera_id'] = $request->carrera;
-                            $this->personaInteresRepo->create($interes);
-                        }
-                        $interes['carrera_id']   =   null;
-                    }
-                    if (null !== $request->curso){ //Si se selecciona un curso
-                        if (count($request->curso)>1) {
-                            foreach ($request->curso as $curso) {
-                                $interes['curso_id'] = $curso;
-                                $this->personaInteresRepo->create($interes);
-                            }
-                        }
-                        else{
-                            $interes['curso_id'] = $request->curso;
-                            $this->personaInteresRepo->create($interes);
-                        }
-                        $interes['curso_id'] = null;
-                    }
+        //             if (null !== $request->carrera){ //Si se selecciona una carrera
+        //                 if (count($request->carrera)>1) {
+        //                     foreach ($request->carrera as $carrera) {
+        //                         $interes['carrera_id'] = $carrera;
+        //                         $this->personaInteresRepo->create($interes);
+        //                     }
+        //                 }
+        //                 else{
+        //                     $interes['carrera_id'] = $request->carrera;
+        //                     $this->personaInteresRepo->create($interes);
+        //                 }
+        //                 $interes['carrera_id']   =   null;
+        //             }
+        //             if (null !== $request->curso){ //Si se selecciona un curso
+        //                 if (count($request->curso)>1) {
+        //                     foreach ($request->curso as $curso) {
+        //                         $interes['curso_id'] = $curso;
+        //                         $this->personaInteresRepo->create($interes);
+        //                     }
+        //                 }
+        //                 else{
+        //                     $interes['curso_id'] = $request->curso;
+        //                     $this->personaInteresRepo->create($interes);
+        //                 }
+        //                 $interes['curso_id'] = null;
+        //             }
 
-                    return redirect()->route('preinformes.index');
-                }
-            }
-            else
-                return redirect()->back();
-            }
-        else
-            return redirect('login');
+        //             return redirect()->route('preinformes.index');
+        //         }
+        //     }
+        //     else
+        //         return redirect()->back();
+        //     }
+        // else
+        //     return redirect('login');
     }
 
     // Alta de Preinforme y Persona Nueva
-    public function postAddPersona(Request $request){
+    public function nuevaPersona_post(Request $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 // Datos Persona
@@ -197,51 +197,31 @@ class PreinformeController extends Controller {
                     $telefono['persona_id']         =   $persona['id'];
                     $telefono['telefono']           =   $request->telefono;
                     $this->personaTelefonoRepo->create($telefono);
-                    // Datos Preinforme
-                    $preinforme['persona_id']       =   $persona['id'];
-                    $preinforme['asesor_id']        =   $request->asesor;
-                    $preinforme['descripcion']      =   $request->descripcion_preinforme;
-                    $preinforme['medio']            =   $request->medio;
-                    $preinforme['como_encontro']    =   $request->como_encontro;
-                    $preinforme['filial_id']        =   session('usuario')['entidad_id'];
-                    if($this->preinformeRepo->create($preinforme)){
-                        // Intereces
-                        $preinforme                 =   $this->preinformeRepo->all()->last();
-                        $interes['preinforme_id']   =   $preinforme['id'];
-                        $interes['persona_id']      =   $persona['id'];
-                        $interes['descripcion']     =   $request->descripcion_interes;
+                    // Datos Matrícula
+                    $matricula['persona_id']       =   $persona['id'];
+                    //Determinar si se seleccionó un Curso o Carrera
+                    $data = explode(';',$request->carreras_cursos);
+                    if ($data[0] == 'carrera')
+                        $matricula['carrera_id']    =   $data[1];
+                    elseif ($data[0] == 'curso')
+                        $matricula['curso_id']      =   $data[1];
 
-                        if ($request->carrera == null && $request->curso == null){
-                            $this->personaInteresRepo->create($interes);
-                            $interes['descripcion']     =   null;
+                    $matricula['filial_id']         =   session('usuario')['entidad_id'];
+                    $matricula['asesor_id']         =   $request->asesor;
+                    if($this->matriculaRepo->create($matricula)){
+                        // Pagos
+                        $matricula                  =   $this->matriculaRepo->all()->last();
+                        $pago['matricula_id']       =   $matricula['id'];
+                        for ($i=0; $i < count($request->nro_pago); $i++){
+                            $pago['nro_pago']       =   $request->nro_pago[$i];
+                            $pago['descripcion']    =   $request->descripcion[$i];
+                            $pago['vencimiento']    =   $request->vencimiento[$i];
+                            $pago['monto_original'] =   $request->monto_original[$i];
+                            $pago['recargo']        =   $request->recargo[$i];
+                            $pago['filial_id']      =   session('usuario')['entidad_id'];
+                            $this->pagoRepo->create($pago);
                         }
-
-                        if (null !== $request->carrera){ //Si se selecciona una carrera
-                            if (count($request->carrera)>1) {
-                                foreach ($request->carrera as $carrera) {
-                                    $interes['carrera_id'] = $carrera;
-                                    $this->personaInteresRepo->create($interes);
-                                }
-                            }
-                            else{
-                                $interes['carrera_id'] = $request->carrera;
-                                $this->personaInteresRepo->create($interes);
-                            }
-                            $interes['carrera_id']      =   null;
-                        }
-                        if (null !== $request->curso){ //Si se selecciona un curso
-                            if (count($request->curso)>1) {
-                                foreach ($request->curso as $curso) {
-                                    $interes['curso_id'] = $curso;
-                                    $this->personaInteresRepo->create($interes);
-                                }
-                            }
-                            else{
-                                $interes['curso_id'] = $request->curso;
-                                $this->personaInteresRepo->create($interes);
-                            }
-                        }
-                        return redirect()->route('preinformes.index');
+                        return redirect()->route('filial.matriculas');
                     }
                 }
             }
@@ -252,15 +232,15 @@ class PreinformeController extends Controller {
             return redirect('login');
     }
 
-    public function edit($id){
+    public function editar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
-                $preinforme = $this->preinformeRepo->find($id);
-                $intereses  = $this->personaInteresRepo->findPreinforme($preinforme->id);
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-                $carreras   = $this->carreraRepo->all();
-                $cursos     = $this->cursoRepo->all();
-                return view('preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos'));
+                // $matirucla  = $this->matriculaRepo->find($id);
+                // $intereses  = $this->personaInteresRepo->findPreinforme($preinforme->id);
+                // $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                // $carreras   = $this->carreraRepo->all();
+                // $cursos     = $this->cursoRepo->all();
+                // return view('rol_filial.matriculas.editar',compact('preinforme','intereses','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
@@ -269,46 +249,62 @@ class PreinformeController extends Controller {
             return redirect('login');
     }
 
-    public function postEdit(Request $request){
+    public function editar_post(Request $request){
+        // if (null !== session('usuario')){
+        //     if (session('usuario')['rol_id'] == 4){
+        //         $data                           = $request->all();
+        //         $data['filial_id']              = session('usuario')['entidad_id'];
+        //         // Datos del Preinforme
+        //         $preinforme['asesor_id']        = $data['asesor'];
+        //         $preinforme['descripcion']      = $data['descripcion_preinforme'];
+        //         $preinforme['medio']            = $data['medio'];
+        //         $preinforme['como_encontro']    = $data['como_encontro'];
+
+        //         $modelP = $this->preinformeRepo->find($data['preinforme']); // Busco el preinforme
+        //         // Modificación de los datos del preinforme
+        //         $this->docenteRepo->edit($modelP,$preinforme); 
+        //         // Intereces
+        //         $modelI = $this->personaInteresRepo->findPreinforme($data['preinforme']);
+        //         foreach ($modelI as $mI) { $mI->delete(); }
+        //         $interes['preinforme_id']   =   $data['preinforme'];
+        //         $interes['persona_id']      =   $modelP->persona_id;
+        //         if ( isset($data['ninguna']) ){
+        //             $interes['descripcion']     =   $data['descripcion_interes'];
+        //             $this->personaInteresRepo->create($interes);
+        //         }
+        //         else{
+        //             for ($i=0; $i < count($data['curso']); $i++) {
+        //                 $interes['curso_id'] = $data['curso'][0];
+        //                 $this->personaInteresRepo->create($interes);
+        //             }
+        //             $interes['curso_id']     =   null;
+        //             for ($i=0; $i < count($data['carrera']); $i++) {
+        //                 $interes['carrera_id'] = $data['carrera'][0];
+        //                 $this->personaInteresRepo->create($interes);
+        //             }
+        //             $interes['carrera_id']     =   null;
+        //         }
+        //         return redirect()->route('preinformes.index');
+        //     }
+        //     else
+        //         return redirect()->back();
+        //     }
+        // else
+        //     return redirect('login');
+    }
+
+    // Borrado lógico de la Matrícula
+    public function borrar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
-                $data                           = $request->all();
-                $data['filial_id']              = session('usuario')['entidad_id'];
-                // Datos del Preinforme
-                $preinforme['asesor_id']        = $data['asesor'];
-                $preinforme['descripcion']      = $data['descripcion_preinforme'];
-                $preinforme['medio']            = $data['medio'];
-                $preinforme['como_encontro']    = $data['como_encontro'];
-
-                $modelP = $this->preinformeRepo->find($data['preinforme']); // Busco el preinforme
-                // Modificación de los datos del preinforme
-                $this->docenteRepo->edit($modelP,$preinforme); 
-                // Intereces
-                $modelI = $this->personaInteresRepo->findPreinforme($data['preinforme']);
-                foreach ($modelI as $mI) { $mI->delete(); }
-                $interes['preinforme_id']   =   $data['preinforme'];
-                $interes['persona_id']      =   $modelP->persona_id;
-                if ( isset($data['ninguna']) ){
-                    $interes['descripcion']     =   $data['descripcion_interes'];
-                    $this->personaInteresRepo->create($interes);
-                }
-                else{
-                    for ($i=0; $i < count($data['curso']); $i++) {
-                        $interes['curso_id'] = $data['curso'][0];
-                        $this->personaInteresRepo->create($interes);
-                    }
-                    $interes['curso_id']     =   null;
-                    for ($i=0; $i < count($data['carrera']); $i++) {
-                        $interes['carrera_id'] = $data['carrera'][0];
-                        $this->personaInteresRepo->create($interes);
-                    }
-                    $interes['carrera_id']     =   null;
-                }
-                return redirect()->route('preinformes.index');
+                if($this->matriculaRepo->disable($this->matriculaRepo->find($id)))
+                    return redirect()->route('filial.matriculas')->with('msg_ok','Matrícula eliminado correctamente');
+                else
+                    return redirect()->route('filial.matriculas')->with('msg_error',' La Matrícula no ha podido ser eliminado.');
             }
             else
-                return redirect()->back();
-            }
+                return redirect()->back();   
+        }
         else
             return redirect('login');
     }
