@@ -7,7 +7,8 @@ class Filial extends Entity {
   //  protected $primaryKey= 'id_filial';
 
     protected $fillable   = ['nombre', 'direccion', 'localidad', 'director_id','codigo_postal', 'mail'];
-        // Relaciones
+    
+    // Relaciones
     public function Director(){
         return $this->belongsTo(Director::getClass());
     }

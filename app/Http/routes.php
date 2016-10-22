@@ -11,13 +11,12 @@
 |
 */
 require_once(__DIR__ . '/Routes/LoginRoute.php');
-require_once(__DIR__ . '/Routes/DuenoRoute.php');
-require_once(__DIR__ . '/Routes/FilialRoute.php');
-require_once(__DIR__ . '/Routes/DirectorRoute.php');
+require_once(__DIR__ . '/Routes/rol_dueno_rutas/DuenoRoute.php');
+require_once(__DIR__ . '/Routes/rol_filial_rutas/FilialRoute.php');
+require_once(__DIR__ . '/Routes/rol_director_rutas/DirectorRoute.php');
 require_once(__DIR__ . '/Routes/LenguajeRoute.php');
 
-require_once(__DIR__ . '/Routes/UsuarioRoute.php'); // Esto? 
-require_once(__DIR__ . '/Routes/AlumnoRoute.php'); 	// Esto?
+require_once(__DIR__ . '/Routes/UsuarioRoute.php'); // Esto?
 
 Route::get('/', function () {
     return view('login');
