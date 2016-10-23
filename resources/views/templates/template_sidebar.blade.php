@@ -159,20 +159,6 @@
                     <i class="fa fa-contao"></i> <span>@lang('menu.contacto')</span>
                   </a>
                 </li>
-            <!-- <li class="active treeview">
-               <a href="{{route('alumnos.index') }}">
-                <i class="fa fa-user"></i> <span>Alumnos</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{route('alumnos.index')}}"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li> <a href="{{route('alumnos.index') }}"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-              </ul>
-            </li> -->
-           
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->

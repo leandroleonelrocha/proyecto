@@ -2,8 +2,8 @@
 
 Route::group(['prefix' => 'director'], function(){
 
-	Route::get('/',[
-		'as' => 'director.index',
+	Route::get('inicio',[
+		'as' => 'director.inicio',
 		'uses' => 'DirectorController@index'
 	 ]);
 
