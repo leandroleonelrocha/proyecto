@@ -21,3 +21,6 @@
 
 <link rel="stylesheet" href="{{asset('css/fontello.css') }}">
 <link rel="stylesheet" href="{{asset('plugins/datatables/dataTables.bootstrap.css')}}">
+
+<!-- Our Style -->
+<link rel="stylesheet" href="{{asset('css/style.css')}}">

@@ -27,7 +27,6 @@ class CrearNuevaMateriaRequest extends Request
             'id' => 'required',
             'carrera_id'=>'required',
             'nombre' => 'required',
-            'descripcion' => 'required',
 
         ];
     }
@@ -38,7 +37,6 @@ class CrearNuevaMateriaRequest extends Request
             'id.required' => 'Escriba un número de materia',
             'carrera_id' => 'Seleccione una materia',
             'nombre.required' => 'Escriba un nombre',
-            'descripcion.required' => 'Escriba la descripción',  
         ];
     }
 

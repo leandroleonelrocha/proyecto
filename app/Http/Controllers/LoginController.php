@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller {
 
-
-
     public function getLogin()
     {
         return view('login');
@@ -27,14 +25,12 @@ class LoginController extends Controller {
         curl_close($ch);
         if ($data){
           session(['usuario' => $data]);
-          if($data['rol_id'] == 1)  // Rol de Administrador
-            return redirect()->route('filiales.index');
-          elseif ($data['rol_id'] == 2) // Rol de Dueño
-            return redirect()->route('dueño.index');
+          if($data['rol_id'] == 2) // Rol de Dueño
+            return redirect()->route('dueño.inicio');
           elseif ($data['rol_id'] == 3) // Rol de Director
-            return redirect()->route('filiales.index'); //Pagina de estadisticas
+            return redirect()->route('director.index'); //Pagina de estadisticas
           elseif ($data['rol_id'] == 4) // Rol de Filial
-            return redirect()->route('docentes.index');
+            return redirect()->route('filial.inicio');
         }
         else
           return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');

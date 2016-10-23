@@ -21,6 +21,8 @@
 						<th>Fecha de nac</th>
 						<th>domicilio</th>
 						<th>Localidad</th>
+						<th>Tel&eacute;fono</th>
+						<th>E-mail</th>
 						<th>Estado civil</th>
 						<th>Nivel de estudios</th>
 						<th class="no-print"></th>
@@ -34,6 +36,12 @@
 									<td>{{$p->fecha_nacimiento}}</td>
 									<td>{{$p->domicilio}}</td>
 									<td>{{$p->localidad}}</td>
+							     	@foreach($a->PersonaTelefono as $telefono)
+						            		{{$telefono->telefono}}
+					            	@endforeach
+				            	   	@foreach($a->PersonaMail as $mail)
+						            		{{$mail->mail}}
+					            	@endforeach
 									<td>{{$p->estado_civil}}</td>
 									<td>{{$p->nivel_estudios}}</td>
 

@@ -24,11 +24,11 @@ class CarreraController extends Controller
 	}
 
 
-	public function index(){
+	public function lista(){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 				$carrera=$this->carreraRepo->all();
-				return view('carrera.index',compact('carrera'));
+				return view('rol_filial.carreras.lista',compact('carrera'));
 			}
 		    else
 		        return redirect()->back();
@@ -40,7 +40,7 @@ class CarreraController extends Controller
 	public function  nuevo(){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
-				return view('carrera.alta_carrera');
+				return view('rol_filial.carreras.nuevo');
 			}
 		    else
 		        return redirect()->back();
@@ -49,7 +49,7 @@ class CarreraController extends Controller
 		    return redirect('login');
 	}
 
-	public function postAdd(CrearNuevaCarreraRequest $request){
+	public function nuevo_post(CrearNuevaCarreraRequest $request){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 			}
@@ -59,10 +59,40 @@ class CarreraController extends Controller
 		else
 		    return redirect('login');
 		$this->carreraRepo->create($request->all());
-     	return redirect()->route('carrera.index')->with('msg_ok', 'Carrera creada correctamente');
+     	return redirect()->route('filial.carreras')->with('msg_ok', 'Carrera creada correctamente');
 	}
 
-    public function getDelete($id){
+  	public function editar($id){
+  		if (null !== session('usuario')){
+			if (session('usuario')['rol_id'] == 4){
+		    	$carrera = $this->carreraRepo->find($id);
+		    	return view('rol_filial.carreras.editar',compact('carrera'));
+			}
+		    else
+		        return redirect()->back();
+		    }
+		else
+		    return redirect('login');
+    }
+
+    public function editar_post(Request $request){
+    	if (null !== session('usuario')){
+			if (session('usuario')['rol_id'] == 4){
+		        $data = $request->all();
+		        $model = $this->carreraRepo->find($data['id']);
+		        if($this->carreraRepo->edit($model,$data))
+		            return redirect()->route('filial.carreras')->with('msg_ok','La carrera ha sido modificada con éxito');
+		        else
+		            return redirect()->route('filial.carreras')->with('msg_error','La carrera no ha podido ser modificada.');
+			}
+		    else
+		        return redirect()->back();
+		    }
+		else
+		    return redirect('login');
+    }
+
+    public function borrar($id){
     	if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 			    if( $data=$this->carreraRepo->find($id))
@@ -72,36 +102,6 @@ class CarreraController extends Controller
 		         	}
 		        else
 		            return redirect()->back()->with('msg_error','La carrera no ha podido ser eliminada.');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
-    }
-
-  	public function edit($id){
-  		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-		    	$carrera = $this->carreraRepo->find($id);
-		    	return view('carrera.editar',compact('carrera'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
-    }
-
-    public function postEdit(Request $request){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-		        $data = $request->all();
-		        $model = $this->carreraRepo->find($data['id']);
-		        if($this->carreraRepo->edit($model,$data))
-		            return redirect()->route('carrera.index')->with('msg_ok','La carrera ha sido modificada con éxito');
-		        else
-		            return redirect()->route('carrera.index')->with('msg_error','La carrera no ha podido ser modificada.');
 			}
 		    else
 		        return redirect()->back();

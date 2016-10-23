@@ -24,88 +24,142 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-             <li>
-              <a href="#">
-                <i class="fa  fa-child"></i> <span>@lang('menu.persona')</span>
-              </a>
-             </li>
-             <li>
-              <a href="#">
-                <i class="fa fa-list-alt"></i> <span>@lang('menu.preinforme')</span>
-              </a>
-             </li>
+            <?php
+              switch (session('usuario')['rol_id']) {
+                case 2: 
+            ?>
+                <li class="treeview">
+                  <a href="{{route('dueño.directores')}}">
+                    <i class="fa fa-child"></i> <span>@lang('menu.directores')</span><i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li class="active"><a href="{{route('dueño.directores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                    <li> <a href="{{route('dueño.directores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                  </ul>
+                </li>
 
-              <li>
-              <a href="#">
-                <i class="fa fa-user"></i> <span>@lang('menu.matricula')</span>
-              </a>
-             </li>
+                <li class="treeview">
+                  <a href="{{route('dueño.filiales')}}">
+                    <i class="fa fa-child"></i> <span>@lang('menu.filiales')</span><i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li class="active"><a href="{{route('dueño.filiales')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                    <li> <a href="{{route('dueño.filiales_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                  </ul>
+                </li>
 
-              <li>
-              <a href="#">
-                <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.recibo')</span>
-              </a>
-             </li>
-              <li>
-              <a href="{{route('curso.index') }}">
-                <i class="fa fa-user"></i> <span>@lang('menu.curso')</span>
-              </a>
-             </li>
-              <li>
-              <a href="{{route('carrera.index')}}">
-                <i class="fa fa-user"></i> <span>@lang('menu.carrera')</span>
-              </a>
-             </li>
-             <li>
-              <a href="{{route('materia.index') }}">
-                <i class="fa fa-user"></i> <span>@lang('menu.materia')</span>
-              </a>
-             </li>
-             <li>
-              <a href="#">
-                <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span>
-              </a>
-             </li>
+                <li>
+                  <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                </li>
+            <?php
+                break;
+                case 3:
+                break;
+                case 4:
+            ?>
+                <li>
+                <a href="#"> <i class="fa fa-child"></i> <span>@lang('menu.persona')</span> </a>
+                </li>
 
-             <li>
-              <a href="#">
-                <i class="fa fa-file-text-o"></i> <span>@lang('menu.examen')</span>
-              </a>
-             </li>
+                <li class="treeview">
+                    <a href="{{route('filial.preinformes')}}">
+                      <i class="fa fa-list-alt"></i> <span>@lang('menu.preinforme')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.preinformes')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.preinformes_seleccion') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    </ul>
+                  </li>
 
-             <li>
-              <a href="#">
-                <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span>
-              </a>
-             </li>
+                  <li class="treeview">
+                    <a href="{{route('filial.matriculas')}}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.matricula')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.matriculas')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.matriculas_seleccion') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+                    </ul>
+                  </li>
 
-             <li>
-              <a href="{{ route('docentes.index')}}">
-                <i class="fa fa-user"></i> <span>@lang('menu.docente')</span>
-              </a>
-             </li>
+                  <li>
+                  <a href="#">
+                    <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.recibo')</span>
+                  </a>
+                  </li>
 
-             <li>
-              <a href="#">
-                <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span>
-              </a>
-             </li>
+                  <li class="treeview">
+                    <a href="{{route('filial.cursos') }}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.curso')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.cursos')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.cursos_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    </ul>
+                  </li>
 
-            <li class="active treeview">
-               <a href="{{route('alumnos.index') }}">
-                <i class="fa fa-user"></i> <span>Alumnos</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{route('alumnos.index')}}"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li> <a href="{{route('alumnos.index') }}"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-              </ul>
-            </li>
+                  <li class="treeview">
+                    <a href="{{route('filial.carreras')}}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.carrera')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.carreras')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.carreras_nuevo') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+                    </ul>
+                  </li>
 
-            <li>
-              <a href="#">
-                <i class="fa fa-contao"></i> <span>@lang('menu.contacto')</span>
-              </a>
-             </li>
+                  <li class="treeview">
+                    <a href="{{route('filial.materias')}}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.materia')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.materias')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.materias_nuevo') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+                    </ul>
+                  </li>
+
+                  <li>
+                  <a href="#">
+                    <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span>
+                  </a>
+                  </li>
+
+                  <li>
+                  <a href="#">
+                    <i class="fa fa-file-text-o"></i> <span>@lang('menu.examen')</span>
+                  </a>
+                  </li>
+
+                  <li>
+                  <a href="#">
+                    <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span>
+                  </a>
+                  </li>
+
+                  <li class="treeview">
+                    <a href="{{route('filial.docentes')}}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.docente')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.docentes')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.docentes_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    </ul>
+                  </li>
+
+                  <li>
+                  <a href="#">
+                    <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span>
+                  </a>
+                  </li>
+            <?php
+                break;
+              }
+            ?>
+                <li>
+                  <a href="#">
+                    <i class="fa fa-contao"></i> <span>@lang('menu.contacto')</span>
+                  </a>
+                </li>
+    
            
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

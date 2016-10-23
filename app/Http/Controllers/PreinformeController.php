@@ -43,11 +43,11 @@ class PreinformeController extends Controller {
 	}
 
     // Página principal de Preinformes
-    public function index(){
+    public function lista(){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$preinformes = $this->preinformeRepo->allFilial();
-                return view('preinformes.index',compact('preinformes'));
+                return view('rol_filial.preinformes.lista',compact('preinformes'));
             }
             else
                 return redirect()->back();
@@ -61,7 +61,7 @@ class PreinformeController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $personas = $this->personaRepo->getPersonasFilial();
-                return view('preinformes.seleccion',compact('personas'));
+                return view('rol_filial.preinformes.seleccion',compact('personas'));
             }
             else
                 return redirect()->back();
@@ -71,14 +71,14 @@ class PreinformeController extends Controller {
     }
 
     // Página de Nuevo -- Persona Existente
-    public function add($id){
+    public function nuevo($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $persona    = $this->personaRepo->find($id);
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
                 $carreras   = $this->carreraRepo->all()->lists('nombre','id');
                 $cursos     = $this->cursoRepo->all()->lists('nombre','id');
-                return view('preinformes.nuevo',compact('persona','asesores','carreras','cursos'));
+                return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
@@ -88,14 +88,14 @@ class PreinformeController extends Controller {
     }
 
     // Página de Nuevo -- Persona Nueva
-    public function addNuevaPersona(){
+    public function nuevaPersona(){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
                 $carreras   = $this->carreraRepo->all()->lists('nombre','id');
                 $cursos     = $this->cursoRepo->all()->lists('nombre','id');
-                return view('preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos'));
+                return view('rol_filial.preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
@@ -105,10 +105,11 @@ class PreinformeController extends Controller {
     }
 
     // Alta de Preinforme y Persona Existente
-    public function postAdd(Request $request){
+    public function nuevo_post(Request $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 // Datos Preinforme
+                $data                           = $request->all();
                 $preinforme['persona_id']       =   $request->persona;
                 $preinforme['asesor_id']        =   $request->asesor;
                 $preinforme['descripcion']      =   $request->descripcion_preinforme;
@@ -122,39 +123,23 @@ class PreinformeController extends Controller {
                     $interes['persona_id']      =   $request->persona;
                     $interes['descripcion']     =   $request->descripcion_interes;
 
-                    if ($interes['descripcion'] !== null){
-                            $this->personaInteresRepo->create($interes);
-                            $interes['descripcion']     =   null;
-                        }
-
-                    if (null !== $request->carrera){ //Si se selecciona una carrera
-                        if (count($request->carrera)>1) {
-                            foreach ($request->carrera as $carrera) {
-                                $interes['carrera_id'] = $carrera;
-                                $this->personaInteresRepo->create($interes);
-                            }
-                        }
-                        else{
-                            $interes['carrera_id'] = $request->carrera;
-                            $this->personaInteresRepo->create($interes);
-                        }
-                        $interes['carrera_id']   =   null;
+                    if ( isset($data['ninguna']) ){
+                        $interes['descripcion']     =   $data['descripcion_interes'];
+                        $this->personaInteresRepo->create($interes);
                     }
-                    if (null !== $request->curso){ //Si se selecciona un curso
-                        if (count($request->curso)>1) {
-                            foreach ($request->curso as $curso) {
-                                $interes['curso_id'] = $curso;
-                                $this->personaInteresRepo->create($interes);
-                            }
-                        }
-                        else{
-                            $interes['curso_id'] = $request->curso;
+                    else{
+                        for ($i=0; $i < count($data['curso']); $i++) {
+                            $interes['curso_id'] = $data['curso'][0];
                             $this->personaInteresRepo->create($interes);
                         }
-                        $interes['curso_id'] = null;
+                        $interes['curso_id']     =   null;
+                        for ($i=0; $i < count($data['carrera']); $i++) {
+                            $interes['carrera_id'] = $data['carrera'][0];
+                            $this->personaInteresRepo->create($interes);
+                        }
+                        $interes['carrera_id']     =   null;
                     }
-
-                    return redirect()->route('preinformes.index');
+                    return redirect()->route('filial.preinformes');
                 }
             }
             else
@@ -165,9 +150,10 @@ class PreinformeController extends Controller {
     }
 
     // Alta de Preinforme y Persona Nueva
-    public function postAddPersona(Request $request){
+    public function nuevaPersona_post(Request $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
+                $data                               = $request->all();
                 // Datos Persona
                 $persona['tipo_documento_id']       =   $request->tipo_documento;
                 $persona['nro_documento']           =   $request->nro_documento;
@@ -209,39 +195,24 @@ class PreinformeController extends Controller {
                         $preinforme                 =   $this->preinformeRepo->all()->last();
                         $interes['preinforme_id']   =   $preinforme['id'];
                         $interes['persona_id']      =   $persona['id'];
-                        $interes['descripcion']     =   $request->descripcion_interes;
-
-                        if ($request->carrera == null && $request->curso == null){
+                        $interes['descripcion']     =   $request->descripcion_interes; 
+                        if ( isset($data['ninguna']) ){
+                            $interes['descripcion']     =   $data['descripcion_interes'];
                             $this->personaInteresRepo->create($interes);
-                            $interes['descripcion']     =   null;
                         }
-
-                        if (null !== $request->carrera){ //Si se selecciona una carrera
-                            if (count($request->carrera)>1) {
-                                foreach ($request->carrera as $carrera) {
-                                    $interes['carrera_id'] = $carrera;
-                                    $this->personaInteresRepo->create($interes);
-                                }
-                            }
-                            else{
-                                $interes['carrera_id'] = $request->carrera;
+                        else{
+                            for ($i=0; $i < count($data['curso']); $i++) {
+                                $interes['curso_id'] = $data['curso'][0];
                                 $this->personaInteresRepo->create($interes);
                             }
-                            $interes['carrera_id']      =   null;
-                        }
-                        if (null !== $request->curso){ //Si se selecciona un curso
-                            if (count($request->curso)>1) {
-                                foreach ($request->curso as $curso) {
-                                    $interes['curso_id'] = $curso;
-                                    $this->personaInteresRepo->create($interes);
-                                }
-                            }
-                            else{
-                                $interes['curso_id'] = $request->curso;
+                            $interes['curso_id']     =   null;
+                            for ($i=0; $i < count($data['carrera']); $i++) {
+                                $interes['carrera_id'] = $data['carrera'][0];
                                 $this->personaInteresRepo->create($interes);
                             }
+                            $interes['carrera_id']     =   null;
                         }
-                        return redirect()->route('preinformes.index');
+                        return redirect()->route('filial.preinformes');
                     }
                 }
             }
@@ -252,7 +223,7 @@ class PreinformeController extends Controller {
             return redirect('login');
     }
 
-    public function edit($id){
+    public function editar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $preinforme = $this->preinformeRepo->find($id);
@@ -260,7 +231,7 @@ class PreinformeController extends Controller {
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
                 $carreras   = $this->carreraRepo->all();
                 $cursos     = $this->cursoRepo->all();
-                return view('preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos'));
+                return view('rol_filial.preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
@@ -269,7 +240,7 @@ class PreinformeController extends Controller {
             return redirect('login');
     }
 
-    public function postEdit(Request $request){
+    public function editar_post(Request $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $data                           = $request->all();
@@ -282,7 +253,7 @@ class PreinformeController extends Controller {
 
                 $modelP = $this->preinformeRepo->find($data['preinforme']); // Busco el preinforme
                 // Modificación de los datos del preinforme
-                $this->docenteRepo->edit($modelP,$preinforme); 
+                $this->preinformeRepo->edit($modelP,$preinforme); 
                 // Intereces
                 $modelI = $this->personaInteresRepo->findPreinforme($data['preinforme']);
                 foreach ($modelI as $mI) { $mI->delete(); }
@@ -304,7 +275,7 @@ class PreinformeController extends Controller {
                     }
                     $interes['carrera_id']     =   null;
                 }
-                return redirect()->route('preinformes.index');
+                return redirect()->route('filial.preinformes');
             }
             else
                 return redirect()->back();

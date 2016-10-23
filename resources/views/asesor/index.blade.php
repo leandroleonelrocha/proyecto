@@ -21,6 +21,9 @@
 						<th>Nombres</th>
 						<th>Direcci&oacuten</th>
 						<th>Localidad</th>
+						<th>Tel&eacute;fono</th>
+						<th>Mail</th>
+			
 			
 			
 						<th class="no-print"></th>
@@ -34,6 +37,16 @@
 							        <td>{{ $a->nombres }}</td>
 						          	<td>{{ $a->direccion }}</td>
 						            <td>{{ $a->localidad }}</td>
+						            	            <td>
+					            	@foreach($a->AsesorTelefono as $telefono)
+						            		{{$telefono->telefono}}
+					            	@endforeach
+						            </td>
+						            <td>
+						            	@foreach($a->AsesorMail as $mail)
+						            		{{$mail->mail}}
+						            	@endforeach
+						            </td>
 					
 
 						           	<td>

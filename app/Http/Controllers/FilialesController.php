@@ -21,32 +21,27 @@ class FilialesController extends Controller
 	protected $filialesRepo;
 	protected $directorRepo;
 
-	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo )
-	{
+	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo ){
 		$this->directorRepo = $directorRepo;
 		$this->filialesRepo = $filialesRepo;
         $this->filialTelefonoRepo = $filialTelefonoRepo;
 	}
 
+    public function index(){
+        return view('rol_filial.index');  
+    }
 
-	public function index()
-	{
-	
+	public function lista(){
 		$filiales=$this->filialesRepo->allEneable();
-		return view('filiales.index',compact('filiales'));
-
+		return view('rol_dueno.filiales.lista',compact('filiales'));
 	}
 
-	public function  nuevo()
-	{
-
+	public function  nuevo(){
 		$directores = $this->directorRepo->lists('nombres','id');
-
-		return view('filiales.alta_filiales', compact('directores'));
-		
+		return view('rol_dueno.filiales.nuevo', compact('directores'));
 	}
 
-	public function postAdd(CrearNuevaFilialRequest $request){
+	public function nuevo_post(CrearNuevaFilialRequest $request){
 		$this->filialesRepo->create($request->all());
 		$filial=$this->filialesRepo->all()->last();
 
@@ -72,28 +67,28 @@ class FilialesController extends Controller
         	$msj->to($user);
         });
     
-		return redirect()->route('filiales.index')->with('msg_ok', 'Filial creada correctamente.');
+		return redirect()->route('dueño.filiales')->with('msg_ok', 'Filial creada correctamente.');
 	}
 
-    public function getDelete($id){
+    public function borrar($id){
         if($this->filialesRepo->disable($this->filialesRepo->find($id)))
             return redirect()->back()->with('msg_ok', 'Filial eliminada correctamente.');
         else
              return redirect()->back()->with('msg_error','La filial no ha podido ser eliminada.');
     }
 
-    public function edit($id){
+    public function editar($id){
     	$directores = $this->directorRepo->lists('nombres','id');
     	$filial = $this->filialesRepo->find($id);
-    	return view('filiales.editar',compact('filial','directores'));
+    	return view('rol_dueno.filiales.editar',compact('filial','directores'));
     }
 
-    public function postEdit(Request $request){
+    public function editar_post(Request $request){
         $data = $request->all();
         $model = $this->filialesRepo->find($data['id']);
         if($this->filialesRepo->edit($model,$data))
-            return redirect()->route('filiales.index')->with('msg_ok','La filial ha sido modificada con éxito');
+            return redirect()->route('dueño.filiales')->with('msg_ok','La filial ha sido modificada con éxito');
         else
-            return redirect()->route('filiales.index')->with('msg_error','La filial no ha podido ser modificada.');
+            return redirect()->route('dueño.filiales')->with('msg_error','La filial no ha podido ser modificada.');
     }
 }

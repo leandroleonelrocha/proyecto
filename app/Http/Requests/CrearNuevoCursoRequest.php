@@ -24,10 +24,9 @@ class CrearNuevoCursoRequest extends Request
     {
         return [
 
-             'id' => 'required',
+            'id' => 'required',
             'nombre' => 'required',
             'duracion' => 'required',
-            'descripcion' => 'required',
             'taller' => 'required',
 
         ];
@@ -39,7 +38,6 @@ class CrearNuevoCursoRequest extends Request
             'id.required' => 'Escriba un número de curso',
             'nombre.required' => 'Escriba un nombre',
             'duracion.required' => 'Escriba la duración',
-            'descripcion.required' => 'Escriba la descripción',
             'taller.required' => 'Escriba el taller',  
         ];
     }
