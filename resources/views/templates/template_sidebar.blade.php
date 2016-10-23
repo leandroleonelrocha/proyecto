@@ -118,7 +118,7 @@
                   </li>
 
                   <li>
-                  <a href="#">
+                  <a href="{{ route('grupos.index')}}">
                     <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span>
                   </a>
                   </li>

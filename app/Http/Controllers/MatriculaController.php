@@ -98,7 +98,7 @@ class MatriculaController extends Controller {
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
                 $carreras   = $this->carreraRepo->all();
                 $cursos     = $this->cursoRepo->all();
-                $grupos     = $this->grupoRepo->allEnable()->lists('id');
+                $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
                 return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos'));
             }
             else
@@ -213,8 +213,14 @@ class MatriculaController extends Controller {
                     $matricula['filial_id']         =   session('usuario')['entidad_id'];
                     $matricula['asesor_id']         =   $request->asesor;
                     if($this->matriculaRepo->create($matricula)){
-                        // Pagos
                         $matricula                  =   $this->matriculaRepo->all()->last();
+                        // Grupos
+                        $grupo['matricula_id']      =   $matricula['id'];
+                        for ($i=0; $i < count($request->grupo); $i++){
+                            $grupo['grupo_id']       =   $request->grupo[$i];
+                            $this->grupoRepo->create($pago);
+                        }
+                        // Pagos
                         $pago['matricula_id']       =   $matricula['id'];
                         for ($i=0; $i < count($request->nro_pago); $i++){
                             $pago['nro_pago']       =   $request->nro_pago[$i];

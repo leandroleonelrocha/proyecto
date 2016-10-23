@@ -104,7 +104,7 @@
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>Carreras y Cursos</label>
-								<select name="carreras_cursos" class="form-control">
+								<select name="carreras_cursos" id="carreras_cursos" class="form-control">
 									<optgroup label="Carreras">
 										@foreach($carreras as $carrera)
 											<option value="carrera;{{$carrera->id}}">{{$carrera->nombre}}</option>
