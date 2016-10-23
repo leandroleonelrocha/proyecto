@@ -15,7 +15,7 @@ require_once(__DIR__ . '/Routes/rol_dueno_rutas/DuenoRoute.php');
 require_once(__DIR__ . '/Routes/rol_filial_rutas/FilialRoute.php');
 require_once(__DIR__ . '/Routes/rol_director_rutas/DirectorRoute.php');
 require_once(__DIR__ . '/Routes/LenguajeRoute.php');
-require_once(__DIR__ . '/Routes/GrupoRoute.php');
+
 
 require_once(__DIR__ . '/Routes/UsuarioRoute.php'); // Esto?
 

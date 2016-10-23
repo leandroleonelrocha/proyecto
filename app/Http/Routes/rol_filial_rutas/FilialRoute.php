@@ -30,6 +30,8 @@ Route::group(['prefix' => 'filial'], function(){
 	require_once('MateriasRoute.php');
 
 	// Rutas Operaciones ---------- Grupos
+	require_once('GrupoRoute.php');
+
 	// require_once('GruposRoute.php');
 
 	// Rutas Operaciones ---------- Exámenes

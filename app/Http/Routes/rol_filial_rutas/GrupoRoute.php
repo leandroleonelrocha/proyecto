@@ -42,4 +42,10 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@clases'
 	]);
 
+
+	Route::post('process', [
+
+		'as' => 'grupos.process',
+		'uses' => 'GrupoController@process'
+	]);
 });
