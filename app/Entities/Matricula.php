@@ -25,4 +25,8 @@ class Matricula extends Entity
     public function Pago(){
         return $this->belongsTo(Pago::getClass());
     }
+
+    public function Grupo(){
+        return $this->belongsToMany(Grupo::getClass());
+    }
 }

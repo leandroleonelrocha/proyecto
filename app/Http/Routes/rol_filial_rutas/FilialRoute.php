@@ -17,6 +17,9 @@ Route::group(['prefix' => 'filial'], function(){
 	// Rutas Operaciones ---------- Matrículas
 	require_once('MatriculasRoute.php');
 
+	// Rutas Operaciones ---------- Pago
+	require_once('PagoRoute.php');
+
 	// Rutas Operaciones ---------- Recibos
 	// require_once('Route.php');
 

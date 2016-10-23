@@ -117,6 +117,10 @@
 									</optgroup>
 								</select>
 							</div>
+							<div class="col-md-12 form-group">
+								<label>Grupos</label>
+								{!! Form::select('grupo[]',$grupos->toArray(),null,array('id'=>'grupos', 'class' => 'form-control', 'multiple')) !!}
+							</div>
 										<!-- ---------- Plan de Pagos ---------- -->
 							<div class="col-xs-12">
 			                	<h4 class="box-title text-center">Plan de Pagos</h4>

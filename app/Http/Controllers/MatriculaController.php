@@ -9,6 +9,7 @@ use App\Entities\Matricula;
 use App\Entities\Persona;
 use App\Entities\Carrera;
 use App\Entities\Asesor;
+use App\Entities\Grupo;
 use App\Entities\Curso;
 use App\Entities\Pago;
 use App\Http\Repositories\PersonaTelefonoRepo;
@@ -19,6 +20,7 @@ use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
+use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PagoRepo;
 use Auth;
@@ -29,7 +31,7 @@ class MatriculaController extends Controller {
 
 	protected $matriculaRepo;
 
-	public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo)
+	public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo)
 	{
 		$this->matriculaRepo        = $matriculaRepo;
 		$this->personaRepo          = $personaRepo;
@@ -40,6 +42,7 @@ class MatriculaController extends Controller {
         $this->carreraRepo          = $carreraRepo;
         $this->cursoRepo            = $cursoRepo;
         $this->pagoRepo             = $pagoRepo;
+        $this->grupoRepo            = $grupoRepo;
 	}
 
     // Página principal de Matrículas
@@ -47,7 +50,7 @@ class MatriculaController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$matriculas = $this->matriculaRepo->allEneable();
-                return view('rol_filial.matricula.lista',compact('matriculas'));
+                return view('rol_filial.matriculas.lista',compact('matriculas'));
             }
             else
                 return redirect()->back();
@@ -61,7 +64,7 @@ class MatriculaController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $personas = $this->personaRepo->getPersonasFilial();
-                return view('rol_filial.matricula.seleccion',compact('personas'));
+                return view('rol_filial.matriculas.seleccion',compact('personas'));
             }
             else
                 return redirect()->back();
@@ -78,7 +81,7 @@ class MatriculaController extends Controller {
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
                 $carreras   = $this->carreraRepo->all()->lists('nombre','id');
                 $cursos     = $this->cursoRepo->all()->lists('nombre','id');
-                return view('rol_filial.matricula.nuevo',compact('persona','asesores','carreras','cursos'));
+                return view('rol_filial.matriculas.nuevo',compact('persona','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
@@ -95,7 +98,8 @@ class MatriculaController extends Controller {
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
                 $carreras   = $this->carreraRepo->all();
                 $cursos     = $this->cursoRepo->all();
-                return view('rol_filial.matricula.nuevoPersona',compact('tipos','asesores','carreras','cursos'));
+                $grupos     = $this->grupoRepo->allEnable()->lists('id');
+                return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos'));
             }
             else
                 return redirect()->back();
@@ -235,12 +239,12 @@ class MatriculaController extends Controller {
     public function editar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
-                // $matirucla  = $this->matriculaRepo->find($id);
-                // $intereses  = $this->personaInteresRepo->findPreinforme($preinforme->id);
-                // $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-                // $carreras   = $this->carreraRepo->all();
-                // $cursos     = $this->cursoRepo->all();
-                // return view('rol_filial.matriculas.editar',compact('preinforme','intereses','asesores','carreras','cursos'));
+                $matricula  = $this->matriculaRepo->find($id);
+                $pagos      = $this->pagoRepo->allFilial($id);
+                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                $carreras   = $this->carreraRepo->all();
+                $cursos     = $this->cursoRepo->all();
+                return view('rol_filial.matriculass.editar',compact('matricula','pagos','asesores','carreras','cursos'));
             }
             else
                 return redirect()->back();
