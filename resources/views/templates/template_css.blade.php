@@ -24,3 +24,7 @@
 
 <!-- Our Style -->
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+<!-- Full calendar -->
+<link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.print.css')}}" media="print">

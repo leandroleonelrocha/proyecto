@@ -15,6 +15,7 @@ require_once(__DIR__ . '/Routes/DuenoRoute.php');
 require_once(__DIR__ . '/Routes/FilialRoute.php');
 require_once(__DIR__ . '/Routes/DirectorRoute.php');
 require_once(__DIR__ . '/Routes/LenguajeRoute.php');
+require_once(__DIR__ . '/Routes/GrupoRoute.php');
 
 require_once(__DIR__ . '/Routes/UsuarioRoute.php'); // Esto? 
 require_once(__DIR__ . '/Routes/AlumnoRoute.php'); 	// Esto?
