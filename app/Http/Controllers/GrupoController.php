@@ -44,6 +44,7 @@ class GrupoController extends Controller
 	public function nuevo()
 	{
 		$cursos = $this->cursoRepo->lists('nombre', 'id');
+
 		$carreras = $this->carreraRepo->lists('nombre','id');
 		$materias =  $this->materiaRepo->lists('nombre','id');
 		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
@@ -69,7 +70,9 @@ class GrupoController extends Controller
 
 	public function clases()
 	{
-		return view('rol_filial.grupos.clases');
+		$grupos = $this->grupoRepo->lists('descripcion', 'id');
+		
+		return view('rol_filial.grupos.clases', compact('grupos'));
 	}
 
 
@@ -89,7 +92,7 @@ class GrupoController extends Controller
 			$data = $request->all();
 			$this->claseRepo->create($data);
 		
-			echo json_encode(array('status'=>'success','eventid'=>$lastid));
+			echo json_encode(array('status'=>'success'));
 		}
 
 		if($type == 'changetitle')
@@ -129,7 +132,9 @@ class GrupoController extends Controller
 
 
 			$events = array();
-			$query = Clase::all();
+			$query = $this->claseRepo->all();
+	
+
 			foreach ($query as $fetch) {
 			  // Do work here
 				$e = array();

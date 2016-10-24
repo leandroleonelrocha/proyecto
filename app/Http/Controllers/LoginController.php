@@ -23,6 +23,10 @@ class LoginController extends Controller {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
+        
+      
+        //$data = array('id'=>'4', 'usuario'=>'rochaleandroleonel@gmail.com', 'password'=>'$2y$10$Nrp/TswB.eH9ucUQfiBAB.09FyjQLyylbfwaNNDkpe4m0ncRRePDm 1', 'rol_id'=>'4', 'entidad_id' => '1' , 'habilitado' => '1');
+
         if ($data){
           session(['usuario' => $data]);
           if($data['rol_id'] == 2) // Rol de Dueño
