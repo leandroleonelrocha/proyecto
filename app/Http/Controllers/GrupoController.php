@@ -9,7 +9,8 @@ use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\MateriaRepo;
 use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
-use App\Entities\Calendar;
+use App\Http\Repositories\ClaseRepo;
+use App\Entities\Clase;
 
 
 class GrupoController extends Controller
@@ -19,14 +20,16 @@ class GrupoController extends Controller
 	protected $materiaRepo;
 	protected $docenteRepo;
 	protected $grupoRepo;
+	protected $claseRepo;
 
-	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo )
+	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo )
 	{
 		$this->cursoRepo = $cursoRepo;
 		$this->carreraRepo = $carreraRepo;
 		$this->materiaRepo = $materiaRepo;
 		$this->docenteRepo = $docenteRepo;
 		$this->grupoRepo = $grupoRepo;
+		$this->claseRepo = $claseRepo;
 		
 	}	
 
@@ -35,7 +38,7 @@ class GrupoController extends Controller
 	{
 		$grupos = $this->grupoRepo->allEneable();
 	
-		return view('grupos.index', compact('grupos'));
+		return view('rol_filial.grupos.index', compact('grupos'));
 	}
 
 	public function nuevo()
@@ -43,9 +46,10 @@ class GrupoController extends Controller
 		$cursos = $this->cursoRepo->lists('nombre', 'id');
 		$carreras = $this->carreraRepo->lists('nombre','id');
 		$materias =  $this->materiaRepo->lists('nombre','id');
-		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
+		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
+
 	
-		return view('grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
+		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
 	}
 
 	public function postAdd(Request $request)
@@ -59,14 +63,21 @@ class GrupoController extends Controller
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->create($data);
-		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+		return redirect()->route('rol_filial.grupos.index')->with('msg_ok', 'Grupo creado correctamente');
 
 	}
 
 	public function clases()
 	{
-		return view('grupos.clases');
+		return view('rol_filial.grupos.clases');
 	}
+
+
+	public function clase_matricula()
+	{
+		return view('rol_filial.grupos.clase_matricula');
+	}
+
 
 	public function process(Request $request)
 	{
@@ -75,22 +86,17 @@ class GrupoController extends Controller
 
 		if($type == 'new')
 		{
-			$startdate = $_POST['startdate'].'+'.$_POST['zone'];
-			$title = $_POST['title'];
-			$insert = mysqli_query($con,"INSERT INTO calendar(`title`, `startdate`, `enddate`, `allDay`) VALUES('$title','$startdate','$startdate','false')");
-			$lastid = mysqli_insert_id($con);
+			$data = $request->all();
+			$this->claseRepo->create($data);
+		
 			echo json_encode(array('status'=>'success','eventid'=>$lastid));
 		}
 
 		if($type == 'changetitle')
 		{
-			$eventid = $_POST['eventid'];
-			$title = $_POST['title'];
-			$update = mysqli_query($con,"UPDATE calendar SET title='$title' where id='$eventid'");
-			if($update)
-				echo json_encode(array('status'=>'success'));
-			else
-				echo json_encode(array('status'=>'failed'));
+			$eventid = $request->get('eventid');
+			return redirect()->route('rol_filial.grupos.clase_matricula');
+		
 		}
 
 		if($type == 'resetdate')
@@ -108,9 +114,10 @@ class GrupoController extends Controller
 
 		if($type == 'remove')
 		{
-			$eventid = $_POST['eventid'];
-			
-			$delete = mysqli_query($con,"DELETE FROM calendar where id='$eventid'");
+			$clase_id = $request->get('eventid');
+
+
+			$delete = $this->claseRepo->find($clase_id)->delete();
 			if($delete)
 				echo json_encode(array('status'=>'success'));
 			else
@@ -122,17 +129,16 @@ class GrupoController extends Controller
 
 
 			$events = array();
-			$query = Calendar::all();
+			$query = Clase::all();
 			foreach ($query as $fetch) {
 			  // Do work here
 				$e = array();
 			    $e['id'] = $fetch['id'];
-			    $e['title'] = $fetch['title'];
-			    $e['start'] = $fetch['startdate'];
-			    $e['end'] = $fetch['enddate'];
-
-			    $allday = ($fetch['allDay'] == "true") ? true : false;
-			    $e['allDay'] = $allday;
+			    $e['title'] = $fetch['descripcion'];
+			    $e['start'] = $fetch['fecha'];
+			   // $e['end'] = $fetch['enddate'];
+			   // $allday = ($fetch['allDay'] == "true") ? true : false;
+			   // $e['allDay'] = $allday;
 
 
 			    array_push($events, $e);

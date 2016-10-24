@@ -42,6 +42,13 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@clases'
 	]);
 
+	Route::get('clases/matricula',[
+
+		'as' => 'grupos.clase_matricula',
+		'uses' => 'GrupoController@clase_matricula'
+	]);
+
+
 
 	Route::post('process', [
 
