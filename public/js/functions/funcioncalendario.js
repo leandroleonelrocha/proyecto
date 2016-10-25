@@ -140,7 +140,7 @@ $(document).ready(function() {
       eventDrop: function(event, delta, revertFunc) {
             var title = event.title;
             var start = event.start.format();
-            var fecha_desde = 
+            
             console.log(event.start);
             var end = (event.end == null) ? start : event.end.format();
             $.ajax({
@@ -163,7 +163,7 @@ $(document).ready(function() {
         },
         eventClick: function(event, jsEvent, view) {
           	console.log(event.id);
-            document.location = "clases/matricula";
+            document.location = "clases/matricula/"+event.id;
 
       },
 

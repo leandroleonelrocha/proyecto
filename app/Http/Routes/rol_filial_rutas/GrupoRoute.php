@@ -42,7 +42,7 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@clases'
 	]);
 
-	Route::get('clases/matricula',[
+	Route::get('clases/matricula/{id}',[
 
 		'as' => 'grupos.clase_matricula',
 		'uses' => 'GrupoController@clase_matricula'
