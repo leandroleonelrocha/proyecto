@@ -9,6 +9,11 @@
 	<div class="row">
 		<div class="col-md-3">
 
+
+            <p id="trash">
+            Arrastre aqúi para borrar.
+              <img src="trash-can.png" id="trash" alt="">
+            </p>
 				
               <div class="box box-solid">
                 <div class="box-header with-border">
@@ -30,7 +35,7 @@
               </div><!-- /. box -->
               <div class="box box-solid">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Nueva clase</h3>
+                  <h3 class="box-title">Grupo</h3>
                 </div>
                 <div class="box-body">
                   
@@ -44,7 +49,7 @@
                    
                     <div class="bootstrap-timepicker">
                     <div class="form-group">
-                      <label>Time picker:</label>
+                      <label>Hora:</label>
                       <div class="input-group">
                         <input type="text" class="form-control timepicker" >
                         <div class="input-group-addon">

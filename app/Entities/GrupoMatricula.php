@@ -8,4 +8,5 @@ class GrupoMatricula extends Entity {
 
     protected $fillable   = ['grupo_id', 'matricula_1'];
 
+    
 }

@@ -46,13 +46,14 @@
 
                          @foreach($grupo as $g)
                           <tr>
-
+                             
                               <td ><input type="hidden" name="grupo_id" value="{{$clase->grupo_id}}" ></td>
                               <td ><input type="hidden" name="fecha" value="{{$clase->fecha}}"></td>
                               <td ><input type="hidden" name="matricula_id" value="{{$g->matricula_id}}"></td>
-                             
+                              
                               <td>{!! Form::checkbox('asistio', '1') !!}</td>
-                              <td class="mailbox-name">{{ $g->matricula_id}}</td>
+
+                              <td class="mailbox-name">{{ $g->matricula_id}}</td>                  
                               <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
                               <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                               <td class="mailbox-date">15 days ago</td>
