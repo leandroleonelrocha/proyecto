@@ -54,4 +54,22 @@ class LoginController extends Controller {
         session()->flush(); // Elimina todos los datos de la session
         return redirect('login');
     }
+
+    public function nueva()
+    {
+        return view('cambio_contrasena');
+    }
+
+    public function post_Nueva(Request $request)
+    {
+        $ch = curl_init();  
+        curl_setopt($ch, CURLOPT_URL, "localhost/webservice/public/cuenta/updateCuenta/{$request->mail}");  
+        curl_setopt($ch, CURLOPT_HEADER, false);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = json_decode(curl_exec($ch),true);
+        curl_close($ch);
+
+        var_dump($data);die;
+    }
+
 }

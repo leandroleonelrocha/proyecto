@@ -5,51 +5,51 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Editar Asesor</h3>
+					<h3 class="box-title">Nuevo Asesor</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
-							{!! Form::open(['route'=> 'asesor.postEdit', 'method'=>'post']) !!}
+							{!! Form::open(['route'=> 'filial.asesores_nuevo_post', 'method'=>'post']) !!}
 							<div class="col-md-6 form-group">
-								{!! Form::hidden('asesor', $asesor->id, array('class'=>'form-control')) !!}
 								<label>Tipo de Documento</label>
-								{!! Form::select('tipo_documento_id',$tipos->toArray(),$asesor->TipoDocumento->id,array('class' => 'form-control')) !!}
+								{!! Form::select('tipo_documento_id',$tipos->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>N&uacute;mero de Documento</label>
-								{!! Form::text('nro_documento', $asesor->nro_documento, array('class'=>'form-control')) !!}
+								{!! Form::text('nro_documento',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Apellido</label>
-								{!! Form::text('apellidos', $asesor->apellidos, array('class'=>'form-control')) !!}
+								{!! Form::text('apellidos',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Nombres</label>
-								{!! Form::text('nombres', $asesor->nombres, array('class'=>'form-control')) !!}
+								{!! Form::text('nombres',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Direcci&oacute;n</label>
-								{!! Form::text('direccion', $asesor->direccion, array('class'=>'form-control')) !!}
+								{!! Form::text('direccion',null,array('class'=>'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>Localidad</label>
-								{!! Form::text('localidad', $asesor->localidad, array('class'=>'form-control')) !!}
+								{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>Tel&eacute;fono</label>
-								{!! Form::text('telefono', $asesor->telefono, array('class'=>'form-control')) !!}
+								{!! Form::text('telefono',null,array('class'=>'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
-								<label>Mail</label>
-								{!! Form::email('mail', $asesor->mail, array('class'=>'form-control')) !!}
+								<label>E-Mail</label>
+								{!! Form::email('mail',null,array('class'=>'form-control')) !!}
 							</div>
 
+		
 							<div class="box-footer col-xs-12">
-							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
+							{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
 				          	</div>
 							{!! Form::close() !!}
 						</div>

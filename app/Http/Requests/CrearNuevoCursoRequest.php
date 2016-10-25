@@ -27,7 +27,7 @@ class CrearNuevoCursoRequest extends Request
             'id' => 'required',
             'nombre' => 'required',
             'duracion' => 'required',
-            'taller' => 'required',
+
 
         ];
     }
@@ -38,7 +38,7 @@ class CrearNuevoCursoRequest extends Request
             'id.required' => 'Escriba un número de curso',
             'nombre.required' => 'Escriba un nombre',
             'duracion.required' => 'Escriba la duración',
-            'taller.required' => 'Escriba el taller',  
+        
         ];
     }
 

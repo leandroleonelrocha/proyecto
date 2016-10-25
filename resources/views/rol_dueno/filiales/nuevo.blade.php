@@ -36,13 +36,13 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>Director</label>
-                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
+                                <label>E-Mail</label>
+                                {!! Form::email('mail',null,array('class'=>'form-control')) !!}
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <label>Mail</label>
-                                {!! Form::email('mail',null,array('class'=>'form-control')) !!}
+                             <div class="col-md-6 form-group">
+                                <label>Director</label>
+                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="box-footer col-xs-12">

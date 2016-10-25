@@ -32,9 +32,9 @@
 					     		{!! Form::textarea('descripcion',$curso->descripcion,array('class'=>'form-control','size'=>'30x3')) !!}
 							</div>
 
-							<div class="col-md-6 form-group">
-								<label>Taller</label>
-								{!! Form::text('taller', $curso->taller, array('class'=>'form-control')) !!}
+							<div class="col-md-12 form-group">
+								<label>Asiste a taller</label>
+								 {!! Form::checkbox('taller', '1') !!}
 							</div>
 				
 							<div class="box-footer col-xs-12">

@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>Mail</label>
+                                <label>E-Mail</label>
                                 {!! Form::email('mail',null,array('class'=>'form-control')) !!}
                             </div>
 

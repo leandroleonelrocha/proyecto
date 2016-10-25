@@ -10,7 +10,7 @@
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
-							{!! Form::open(['route'=> 'persona.postAdd', 'method'=>'post']) !!}
+							{!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
 
 							    	<div class="col-md-12 form-group">
 								<label>Asesor</label>

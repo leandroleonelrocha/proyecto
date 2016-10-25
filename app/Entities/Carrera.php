@@ -12,4 +12,9 @@ class Carrera extends Entity {
         return $this->belongsTo(PersonaInteres::getClass());
     }
 
+    public function getFullNameAttribute(){
+
+        return  $this->nombre;
+    }
+
 }

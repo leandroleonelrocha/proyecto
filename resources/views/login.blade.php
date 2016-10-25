@@ -27,40 +27,39 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <a href="../../index2.html"><b>GECO</b></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Ingrese los datos para iniciar la sesión</p>
         
             {!! Form::open(['route'=>'auth.postLogin','method' => 'post']) !!}
               <div class="form-group has-feedback">
-                {!! Form::text('usuario', null, array('id'=>'email', 'class'=>'form-control', 'placeholder'=>'Email' ))!!}
+                {!! Form::text('usuario', null, array('id'=>'email', 'class'=>'form-control', 'placeholder'=>'E-mail' ))!!}
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
               </div>
               <div class="form-group has-feedback">
-                {!! Form::password('password', array('id'=>'password', 'class'=>'form-control', 'placeholder'=>'Password' ))!!}
+                {!! Form::password('password', array('id'=>'password', 'class'=>'form-control', 'placeholder'=>'Contraseña' ))!!}
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
               <div class="row">
                 <div class="col-xs-8">
                   <div class="checkbox icheck"> 
                     <label>
-                      <input type="checkbox"> Remember Me
+                      <input type="checkbox">Recordarme
                     </label>
                   </div>
                 </div><!-- /.col -->
                 <div class="col-xs-4">
-                  <button id="Send" type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                  <button id="Send" type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
                 </div><!-- /.col -->
               </div>
             {!! Form::close() !!}
 
         
 
-        <a href="#">Cambio de contraseña</a><br>
-        <a href="{{ route('usuario.nuevo')}}" class="text-center">Registro</a>
-
-        <div class="row">
+       <!--   <a href="{{ route('usuario.nuevo')}}" class="text-center">Registro</a><br> -->
+        <a href="{{ route('contrasena.nueva')}}" class="text-center">Olvido la contraseña</a>
+        <div clas"s="row">
             <div class="col-xs-12">
                 <!-- Mensaje -->
                 @if (session()->has('msg_error'))

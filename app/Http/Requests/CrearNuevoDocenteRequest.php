@@ -40,7 +40,7 @@ class CrearNuevoDocenteRequest extends Request
             'nro_documento.required' => 'Escriba el número de documento',  
             'apellidos.required' => 'Escriba el nombre',
             'nombres.required' => 'Escriba el apellido',
-            'descripcion.required' => 'Escriba la descripcion',     
+            'descripcion.required' => 'Escriba la descripción',     
         ];
     }
 

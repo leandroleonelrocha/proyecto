@@ -32,12 +32,12 @@ class PersonaController extends Controller {
 	}
 
     // Página principal de Acesor
-    public function index(){
+    public function lista(){
 
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $persona = $this->personaRepo->allEneable(); // Obtención de todos las personas activos
-                return view('persona.index',compact('persona'));
+                return view('rol_filial.personas.lista',compact('persona'));
             }
             else
                 return redirect()->back();
@@ -52,7 +52,7 @@ class PersonaController extends Controller {
             if (session('usuario')['rol_id'] == 4){
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-            	return view('persona.alta_persona',compact('tipos','asesores'));
+            	return view('rol_filial.personas.nuevo',compact('tipos','asesores'));
             }
             else
                 return redirect()->back();
@@ -62,7 +62,7 @@ class PersonaController extends Controller {
     }
 
     // Alta persona
-    public function postAdd(CrearNuevaPersonaRequest $request){
+    public function nuevo_post(CrearNuevaPersonaRequest $request){
        
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
@@ -70,7 +70,7 @@ class PersonaController extends Controller {
                 
                 // Corroboro que la persona exista, si exite lo activa
                 if ( $persona = $this->personaRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
-                        return redirect()->route('persona.index')->with('msg_ok','La persona ha sida agregada con éxito');
+                        return redirect()->route('filial.personas')->with('msg_ok','La persona ha sida agregada con éxito');
                 }
                 else{
                     // Si no existe lo crea
@@ -89,9 +89,9 @@ class PersonaController extends Controller {
                         $telefono['telefono']=$request->telefono;
                         $this->personaTelefonoRepo->create($telefono);
              
-            	       return redirect()->route('persona.index')->with('msg_ok','La persona ha sida agregada con éxito');}
+            	       return redirect()->route('filial.personas')->with('msg_ok','La persona ha sida agregada con éxito');}
                    else
-                    return redirect()->route('persona.index')->with('msg_error','No se ha podido agregar a la persona, intente nuevamente.');
+                    return redirect()->route('filial.personas')->with('msg_error','No se ha podido agregar a la persona, intente nuevamente.');
                 }
             }
             else
@@ -102,13 +102,13 @@ class PersonaController extends Controller {
     }
 
     // Borrado lógico de la persona
-    public function getDelete($id){
+    public function borrar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 if($this->personaRepo->disable($this->personaRepo->find($id)))
-                    return redirect()->route('persona.index')->with('msg_ok','La persona fue eliminada correctamente');
+                    return redirect()->route('filial.personas')->with('msg_ok','La persona fue eliminada correctamente');
                 else
-                    return redirect()->route('persona.index')->with('msg_error',' La persona no ha podido ser eliminada.');
+                    return redirect()->route('filial.personas')->with('msg_error',' La persona no ha podido ser eliminada.');
             }
             else
                 return redirect()->back();   
@@ -118,13 +118,13 @@ class PersonaController extends Controller {
     }
 
     // Página de Editar
-    public function edit($id){
+    public function editar($id){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$persona = $this->personaRepo->find($id); // Obtengo a la persona
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
                 $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-            	return view('persona.editar',compact('persona','tipos','asesores'));
+            	return view('rol_filial.personas.editar',compact('persona','tipos','asesores'));
             }
             else
                 return redirect()->back();
@@ -134,7 +134,7 @@ class PersonaController extends Controller {
     }
 
     //Modificación de laa persona
-    public function postEdit(Request $request){
+    public function editar_post(Request $request){
 
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
@@ -145,9 +145,9 @@ class PersonaController extends Controller {
   
                 if($this->personaRepo->edit($model,$data)) // Modificación de los datos
 
-                    return redirect()->route('persona.index')->with('msg_ok','La persona ha sido modificada con éxito.');
+                    return redirect()->route('filial.personas')->with('msg_ok','La persona ha sido modificada con éxito.');
                 else
-                    return redirect()->route('persona.index')->with('msg_error','La persona no ha podido ser modificada.');
+                    return redirect()->route('filial.personas')->with('msg_error','La persona no ha podido ser modificada.');
             }
             else
                 return redirect()->back();

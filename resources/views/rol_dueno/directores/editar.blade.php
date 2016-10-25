@@ -37,7 +37,7 @@
 							</div>
 
 							<div class="col-md-6 form-group">
-								<label>Telefono</label>
+								<label>Tel&eacute;fono</label>
 								{!! Form::text('telefono', $director->telefono, array('class'=>'form-control')) !!}
 							</div>
 							<div class="box-footer col-xs-12">

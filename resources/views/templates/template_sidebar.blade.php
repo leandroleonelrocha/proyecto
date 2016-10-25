@@ -4,10 +4,10 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="dist/img/logo.png"  height="500" width="500" >
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
+              <p></p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -57,9 +57,20 @@
                 break;
                 case 4:
             ?>
-                <li>
-                <a href="#"> <i class="fa fa-child"></i> <span>@lang('menu.persona')</span> </a>
+                <li class="treeview">
+                    <a href="{{route('filial.personas')}}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.persona')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.personas')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.personas_nuevo') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+                    </ul>
                 </li>
+
+
+
+
+        
 
                 <li class="treeview">
                     <a href="{{route('filial.preinformes')}}">
@@ -69,7 +80,7 @@
                       <li class="active"><a href="{{route('filial.preinformes')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
                       <li> <a href="{{route('filial.preinformes_seleccion') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
                     </ul>
-                  </li>
+                </li>
 
                   <li class="treeview">
                     <a href="{{route('filial.matriculas')}}">
@@ -129,11 +140,19 @@
                   </a>
                   </li>
 
-                  <li>
-                  <a href="#">
-                    <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span>
-                  </a>
+ 
+
+                  <li class="treeview">
+                    <a href="{{route('filial.asesores')}}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    </ul>
                   </li>
+
+
 
                   <li class="treeview">
                     <a href="{{route('filial.docentes')}}">
@@ -159,6 +178,7 @@
                     <i class="fa fa-contao"></i> <span>@lang('menu.contacto')</span>
                   </a>
                 </li>
+
     
            
             <li class="header">LABELS</li>

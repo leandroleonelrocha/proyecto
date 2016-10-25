@@ -36,16 +36,19 @@
 					        <div class="col-md-6 form-group">
                                 <label>C&oacute;digo postal</label>
                                		{!! Form::text('codigo_postal', $filial->codigo_postal, array('class'=>'form-control')) !!}
+							</div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Tel&eacute;fono</label>
+                                {!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+                            </div>
 
 							<div class="col-md-6 form-group">
 								<label>Director</label>
      				            {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
 							</div>
 
-							<div class="col-md-6 form-group">
-								<label>Mail</label>
-			     				{!! Form::text('mail', $filial->mail, array('class'=>'form-control')) !!}
-							</div>
+
 				
 							<div class="box-footer col-xs-12">
 							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}

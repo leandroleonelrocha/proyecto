@@ -29,7 +29,7 @@
 
 
 							<div class="col-md-6 form-group">
-								<label>@lang('descripcion')</label>
+								<label>@lang('Descripcion')</label>
 					     		{!! Form::textarea('descripcion',$materia->descripcion,array('class'=>'form-control','size'=>'30x3')) !!}
 							</div>
 				

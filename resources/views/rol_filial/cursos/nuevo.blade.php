@@ -30,7 +30,7 @@
 
                            <div class="col-md-6 form-group">
                                 <label>@lang('curso.taller')</label>
-                                 {!! Form::checkbox('taller', '1') !!} Taller
+                                 {!! Form::checkbox('taller', '1') !!}
                             </div>
 
                             <div class="box-footer col-xs-12">

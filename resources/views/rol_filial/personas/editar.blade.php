@@ -10,7 +10,7 @@
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
-							{!! Form::open(['route'=> 'persona.postEdit', 'method'=>'post']) !!}
+							{!! Form::open(['route'=> 'filial.personas_editar_post', 'method'=>'post']) !!}
 
 					    	<div class="col-md-12 form-group">
 		    					{!! Form::hidden('persona', $persona->id, array('class'=>'form-control')) !!}
