@@ -17,4 +17,7 @@ class PagoRepo extends BaseRepo {
         return Pago::where('filial_id', $filial)->get();
     }
 
+    public function allMatricula($id){
+        return Pago::where('matricula_id', $id)->get();
+    }
 }

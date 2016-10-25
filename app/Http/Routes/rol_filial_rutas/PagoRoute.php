@@ -1,31 +1,31 @@
 <?php
 
-	Route::get('pagos',[
-		'as' 	=> 'filial.pagos',
-		'uses' 	=> 'CursoController@lista'
-	 ]);
+	Route::get('pagos_nuevo/{id}',[
+		'as'	=> 'filial.pagos_nuevo',
+		'uses'	=>	'PagoController@nuevo'
+	]);
 
-	// Route::get('cursos_nuevo', [
-	// 	'as' 	=> 'filial.cursos_nuevo',
-	// 	'uses' 	=> 'CursoController@nuevo'
-	// ]);
+	Route::post('pagos_nuevo_post',[
+		'as'	=> 'filial.pagos_nuevo_post',
+		'uses'	=>	'PagoController@nuevo_post'
+	]);
 
-	// Route::post('cursos_nuevo_post', [
-	// 	'as' => 'filial.cursos_nuevo_post',
-	// 	'uses' => 'CursoController@nuevo_post'
-	// ]);
+	Route::get('pagos_editar/{id}',[
+		'as'	=> 'filial.pagos_editar',
+		'uses'	=>	'PagoController@editar'
+	]);
 
-	// Route::get('cursos_editar/{id}',[
-	// 	'as'	=> 'filial.cursos_editar',
-	// 	'uses'	=>	'CursoController@editar'
-	// ]);
+	Route::post('pagos_editar_post',[
+		'as'	=> 'filial.pagos_editar_post',
+		'uses'	=>	'PagoController@editar_post'
+	]);
 
-	// Route::post('cursos_editar_post',[
-	// 	'as'	=> 'filial.cursos_editar_post',
-	// 	'uses'	=>	'CursoController@editar_post'
-	// ]);
-	
-	// Route::get('cursos_borrar/{id}',[
-	// 	'as'	=> 'filial.cursos_borrar',
-	// 	'uses'	=>	'CursoController@borrar'
-	// ]);
+	Route::get('pagos_actualizar/{id}',[
+		'as'	=> 'filial.pagos_actualizar',
+		'uses'	=>	'PagoController@actualizar'
+	]);
+
+	Route::post('pagos_actualizar_post',[
+		'as'	=> 'filial.pagos_actualizar_post',
+		'uses'	=>	'PagoController@actualizar_post'
+	]);

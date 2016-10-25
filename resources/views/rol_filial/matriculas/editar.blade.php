@@ -5,17 +5,20 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3>Nueva Matr&iacute;cula</h3>
+					<h3>Modificar Matr&iacute;cula</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
+						<?php foreach ($grupos as $grupo){
+							} ?>
 							{!! Form::open(['route'=> 'filial.matriculas_editar_post', 'method'=>'post']) !!}
 			              	<div class="col-xs-12">
 			                	<h4 class="box-title text-center">Datos de la Matr&iacute;cula</h4>
 			              	</div>
 			              	<div class="col-md-6 form-group">
 								<label>Asesor</label>
+								{!! Form::hidden('matricula', $matricula->id, array('class'=>'form-control')) !!}
 								{!! Form::select('asesor',$asesores->toArray(),$matricula->Asesor->id,array('class' => 'form-control')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
@@ -23,14 +26,14 @@
 								<select name="carreras_cursos" class="form-control">
 									<optgroup label="Carreras">
 										@foreach($carreras as $carrera)
-											<option value="carrera;{{$carrera->id}}" <?php if($matricula->carrera_id = $carrera->id) echo 'selected' ?>>
+											<option value="carrera;{{$carrera->id}}" <?php if($matricula->carrera_id == $carrera->id) echo 'selected' ?>>
 												{{$carrera->nombre}}
 											</option>
 										@endforeach
 									</optgroup>
 									<optgroup label="Cursos">
 										@foreach($cursos as $curso)
-											<option value="curso;{{$curso->id}}" <?php if($matricula->curso_id = $curso->id) echo 'selected' ?>>
+											<option value="curso;{{$curso->id}}" <?php if($matricula->curso_id == $curso->id) echo 'selected' ?>>
 												{{$curso->nombre}}
 											</option>
 										@endforeach
@@ -75,9 +78,8 @@
 								</div><!-- Fin pagos -->
 							@endforeach
 							</div><!-- Fin planDePagos -->
-							<!-- <div id="mas" class="col-md-12 btn btn-danger">Agregar Nuevo Pago</div> -->
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+								{!! Form::submit('Modificar',array('class'=>'btn btn-success')) !!}
 				          	</div>
 							{!! Form::close() !!}
 						</div>

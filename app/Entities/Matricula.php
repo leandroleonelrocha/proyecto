@@ -29,4 +29,20 @@ class Matricula extends Entity
     public function Grupo(){
         return $this->belongsToMany(Grupo::getClass());
     }
+
+    public function Filial(){
+        return $this->belongsTo(Filial::getClass());
+    }
+
+    public function Curso(){
+        return $this->belongsTo(Curso::getClass());
+    }
+
+    public function Carrera(){
+        return $this->belongsTo(Carrera::getClass());
+    }
+
+    public function MatriculaPermisos(){
+        return $this->belongsTo(MatriculaPermisos::getClass());
+    }
 }

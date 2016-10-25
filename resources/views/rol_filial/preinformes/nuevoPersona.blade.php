@@ -11,6 +11,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'filial.preinformes_nuevaPersona_post', 'method'=>'post']) !!}
+							<!-- ---------- Datos Personales ---------- -->
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">Datos Personales</h4>
 				            </div>

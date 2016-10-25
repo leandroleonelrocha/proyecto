@@ -17,4 +17,12 @@ class Filial extends Entity {
         return $this->hasMany(FilialTelefono::getClass());
     }
 
+    public function Matricula(){
+        return $this->hasMany(Matricula::getClass());
+    }
+
+    public function Pago(){
+        return $this->hasMany(Pago::getClass());
+    }
+
 }
