@@ -22,18 +22,18 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Carreras  </label>
             @if(empty($model))
-            {!! Form::select('carrera_id',(['' => 'Seleccionar curso'] + $carreras->toArray()), null, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
+            {!! Form::select('carrera_id',(['' => 'Seleccionar carrera'] + $carreras->toArray()), null, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
             @else
-            {!! Form::select('carrera_id',['' => 'Seleccionar curso'] + $carreras->toArray() ,$model->TipoVehiculo->id, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
+            {!! Form::select('carrera_id',['' => 'Seleccionar carrera'] + $carreras->toArray() ,$model->TipoVehiculo->id, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
             @endif
         </div>
 
          <div class="form-group">
             <label for="exampleInputEmail1">Materias  </label>
             @if(empty($model))
-            {!! Form::select('materia_id',(['' => 'Seleccionar curso'] + $materias->toArray()), null, ['id' => 'materia_id', 'class' => 'form-control']) !!}
+            {!! Form::select('materia_id',(['' => 'Seleccionar materia'] + $materias->toArray()), null, ['id' => 'materia_id', 'class' => 'form-control']) !!}
             @else
-            {!! Form::select('materia_id',['' => 'Seleccionar curso'] + $materias->toArray() ,$model->TipoVehiculo->id, ['id' => 'materia_id', 'class' => 'form-control']) !!}
+            {!! Form::select('materia_id',['' => 'Seleccionar materia'] + $materias->toArray() ,$model->TipoVehiculo->id, ['id' => 'materia_id', 'class' => 'form-control']) !!}
             @endif
         </div>
 
@@ -45,9 +45,9 @@
            <div class="form-group">
             <label for="exampleInputEmail1">Docente  </label>
             @if(empty($model))
-            {!! Form::select('docente_id',(['' => 'Seleccionar curso'] + $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control']) !!}
+            {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control']) !!}
             @else
-            {!! Form::select('docente_id',['' => 'Seleccionar curso'] + $docentes->toArray() ,$model->TipoVehiculo->id, ['id' => 'docente_id', 'class' => 'form-control']) !!}
+            {!! Form::select('docente_id',['' => 'Seleccionar docente'] + $docentes->toArray() ,$model->TipoVehiculo->id, ['id' => 'docente_id', 'class' => 'form-control']) !!}
             @endif
         </div>
 

@@ -57,9 +57,9 @@
                   </div>
 
                   <div class="input-group">
-                    <input id="new-event" type="text" class="form-control" placeholder="Event Title">
+                    <input id="new-event" type="text" class="form-control" placeholder="Titulo de la clase">
                     <div class="input-group-btn">
-                      <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
+                      <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Crear</button>
                     </div><!-- /btn-group -->
                   </div><!-- /input-group -->
                 </div>

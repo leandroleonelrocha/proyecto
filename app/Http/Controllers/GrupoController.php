@@ -10,7 +10,10 @@ use App\Http\Repositories\MateriaRepo;
 use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
+use App\Http\Repositories\ClaseMatriculaRepo;
 use App\Entities\Clase;
+use App\Entities\GrupoMatricula;
+
 
 
 class GrupoController extends Controller
@@ -21,8 +24,9 @@ class GrupoController extends Controller
 	protected $docenteRepo;
 	protected $grupoRepo;
 	protected $claseRepo;
+	protected $claseMatriculaRepo;
 
-	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo )
+	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo)
 	{
 		$this->cursoRepo = $cursoRepo;
 		$this->carreraRepo = $carreraRepo;
@@ -30,6 +34,7 @@ class GrupoController extends Controller
 		$this->docenteRepo = $docenteRepo;
 		$this->grupoRepo = $grupoRepo;
 		$this->claseRepo = $claseRepo;
+		$this->claseMatriculaRepo = $claseMatriculaRepo;
 		
 	}	
 
@@ -44,11 +49,9 @@ class GrupoController extends Controller
 	public function nuevo()
 	{
 		$cursos = $this->cursoRepo->lists('nombre', 'id');
-
 		$carreras = $this->carreraRepo->lists('nombre','id');
 		$materias =  $this->materiaRepo->lists('nombre','id');
 		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
-
 	
 		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
 	}
@@ -64,7 +67,7 @@ class GrupoController extends Controller
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->create($data);
-		return redirect()->route('rol_filial.grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
 
 	}
 
@@ -76,10 +79,34 @@ class GrupoController extends Controller
 	}
 
 
-	public function clase_matricula()
+	public function clase_matricula($data)
 	{
-		return view('rol_filial.grupos.clase_matricula');
+		$clase = $this->claseRepo->find($data);
+	
+		$grupo = GrupoMatricula::where('grupo_id', $clase->grupo_id)->get();
+		
+		return view('rol_filial.grupos.clase_matricula', compact('clase', 'grupo'));
 	}
+
+	public function cargar_clase(Request $request)
+	{
+		$data = $request->all();
+		$asistio = $request->has('asistio');
+
+		if($asistio === true)
+		{
+			$data['asistio'] = 1;
+			
+		}else
+		{
+			$data['asistio'] = 0;			
+		
+		}	
+		$this->claseMatriculaRepo->create($data);
+	
+		dd($data);
+	}
+
 
 
 	public function process(Request $request)

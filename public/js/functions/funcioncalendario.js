@@ -88,7 +88,7 @@ $(document).ready(function() {
         });
 
 
-    /* initialize the calendar
+    /*  initialize the calendar
     -----------------------------------------------------------------
         Datos del grupo
         Hora de la clase
@@ -162,9 +162,8 @@ $(document).ready(function() {
         });
         },
         eventClick: function(event, jsEvent, view) {
-          	console.log(event.id);
-            document.location = "clases/matricula";
-
+           var data = event.id;
+          window.location=("clases/matricula/" + data);
       },
 
       eventResize: function(event, delta, revertFunc) {
