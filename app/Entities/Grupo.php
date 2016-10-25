@@ -15,4 +15,28 @@ class Grupo extends Entity {
 	public function PersonaInteres(){
         return $this->belongsTo(PersonaInteres::getClass());
     }
+
+	public function Curso(){
+        return $this->belongsTo(Curso::getClass());
+    }
+
+	public function Carrera(){
+        return $this->belongsTo(Carrera::getClass());
+    }
+
+	public function Materia(){
+        return $this->belongsTo(Materia::getClass());
+    }
+
+ 	public function Docente(){
+        return $this->belongsTo(Docente::getClass());
+    }
+    
+    public function CLaseMatricula(){
+        return $this->belongsTo(CLaseMatricula::getClass());
+    }  
+
+    public function GrupoMatricula(){
+        return $this->belongsTo(GrupoMatricula::getClass());
+    }
 }
