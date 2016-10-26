@@ -29,7 +29,7 @@ $(document).ready(function(){
 	$('#cursos').click(function(){ seleccionoCarreraCurso(); });
 
 	// Permite agregar 'Otros' en Intereses -- Seccion de Preinformes
-   $('#ninguna').click(function(){
+    $('#ninguna').click(function(){
         if( $('#ninguna').prop('checked') ) {
 		    $('#otros').removeAttr('disabled');
 		}
@@ -37,10 +37,18 @@ $(document).ready(function(){
 			$('#otros').attr('disabled',true);
     });
 
-   /* ------------------------- Matrículas ------------------------- */
-   // Duplicar los campos de Pagos -- Plan de Pagos ~~ Alta Matrículas
-   $('#mas').click(function(){
+   	/* ------------------------- Matrículas ------------------------- */
+   	// Duplicar los campos de Pagos -- Plan de Pagos ~~ Alta Matrículas
+   	$('#mas').click(function(){
    		// Clonación - Búsqueda de cada campo - Reseteo del value
     	$( '.pagos:last' ).clone().appendTo( '#planDePagos' ).find(".pago-item").val("");
     });
+
+    // Bloquear Grupos según la carrera/curso elegido -- Datos de la Matrícula ~~ Alta Matrículas
+    function bloquearGrupos(){
+    	var cs = $('#carreras_cursos').val().split(';'); // cs -> Carrera/Curso Seleccionado
+    	// cs[0] = carrera/curso -- cs[1] = carrera_id/curso_id
+    	
+    }
+    // bloquearGrupos();
 });

@@ -5,12 +5,12 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3>Nuevo Preinforme</h3>
+					<h3>Nueva Matr&iacute;cula</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
-							{!! Form::open(['route'=> 'filial.preinformes_nuevaPersona_post', 'method'=>'post']) !!}
+							{!! Form::open(['route'=> 'filial.matriculas_nuevaPersona_post', 'method'=>'post']) !!}
 							<!-- ---------- Datos Personales ---------- -->
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">Datos Personales</h4>
@@ -95,44 +95,71 @@
 								<label>Aclaraciones</label>
 								{!! Form::textarea('aclaraciones',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
+										<!-- ---------- Datos de la Matrícula ---------- -->
 			              	<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Datos del Preinforme</h4>
+			                	<h4 class="box-title text-center">Datos de la Matr&iacute;cula</h4>
 			              	</div>
-			              	<div class="col-md-12 form-group">
+			              	<div class="col-md-6 form-group">
 								<label>Asesor</label>
 								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
-								<label>Descripci&oacute;n</label>
-								{!! Form::textarea('descripcion_preinforme',null,array('class'=>'form-control','size'=>'30x4')) !!}
-							</div>
-							<div class="col-md-6 form-group">
-								<label>Medio</label>
-								{!! Form::textarea('medio',null,array('class'=>'form-control','size'=>'30x4')) !!}
+								<label>Carreras y Cursos</label>
+								<select name="carreras_cursos" id="carreras_cursos" class="form-control">
+									<optgroup label="Carreras">
+										@foreach($carreras as $carrera)
+											<option value="carrera;{{$carrera->id}}">{{$carrera->nombre}}</option>
+										@endforeach
+									</optgroup>
+									<optgroup label="Cursos">
+										@foreach($cursos as $curso)
+											<option value="curso;{{$curso->id}}">{{$curso->nombre}}</option>
+										@endforeach
+									</optgroup>
+								</select>
 							</div>
 							<div class="col-md-12 form-group">
-								<label>¿C&oacute;mo nos encontr&oacute;?</label>
-								{!! Form::textarea('como_encontro',null,array('class'=>'form-control','size'=>'30x4')) !!}
+								<label>Grupos</label>
+								<small>Ctrl + click para seleccionar m&aacute; de un grupo.</small>
+								{!! Form::select('grupo[]',$grupos->toArray(),null,array('id'=>'grupos', 'class' => 'form-control', 'multiple')) !!}
 							</div>
+										<!-- ---------- Plan de Pagos ---------- -->
 							<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Intereses</h4>
+			                	<h4 class="box-title text-center">Plan de Pagos</h4>
+			                	<div>Acontinuaci&oacute;n cargue cada uno de los pagos que conformar&aacute;n el plan.</div>
 			              	</div>
-			              	<div class="col-md-5 form-group">
-								<label>Carreras</label>
-								{!! Form::select('carrera[]',$carreras->toArray(),null,array('id'=>'carreras', 'class' => 'form-control', 'multiple')) !!}
-							</div>
-							<div class="col-md-5 form-group">
-								<label>Cursos</label>
-								{!! Form::select('curso[]',$cursos->toArray(),null,array('id'=>'cursos', 'class' => 'form-control', 'multiple')) !!}
-							</div>
-							<div class="col-md-2 form-group">
-								<label>Ninguna</label>
-								<div>{!! Form::checkbox('ninguna', '1',null,array('id'=>'ninguna')) !!}</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<label>Otros</label>
-								{!! Form::textarea('descripcion_interes',null,array('id'=>'otros', 'class' => 'form-control','disabled','size'=>'30x4')) !!}
-							</div>
+							<div id="planDePagos">
+							<div class="pagos">
+				              	<div class="col-md-6 form-group">
+									<label>N&uacute;mero de Pago</label>
+									{!! Form::text('nro_pago[]',null,array('class'=>'pago-item form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>Fecha de Vencimiento</label>
+									{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>Monto Original</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">$</span>
+										{!! Form::text('monto_original[]',null,array('class'=>'pago-item form-control')) !!}
+									</div>
+								</div>
+								<div class="col-md-6 form-group">
+									<label>Recargo</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">$</span>
+										{!! Form::text('recargo[]',null,array('class'=>'pago-item form-control')) !!}
+		  							</div>
+								</div>
+								<div class="col-md-12 form-group">
+									<label>Descripci&oacute;n</label>
+									{!! Form::textarea('descripcion[]',null,array('class'=>'pago-item form-control','size'=>'30x4')) !!}
+									<div class="line"></div>
+								</div>
+							</div><!-- Fin pagos -->
+							</div><!-- Fin planDePagos -->
+							<div id="mas" class="col-md-12 btn btn-danger">Agregar Nuevo Pago</div>
 							<div class="box-footer col-xs-12">
 								{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
 				          	</div>
@@ -145,5 +172,5 @@
 	</div> <!-- Fin row -->
 	<!-- jQuery 2.1.4 -->
     <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
-	<script src="{{asset('js/functions/functions.js')}}"></script>
+    <script src="{{asset('js/functions/functions.js')}}"></script>
 @endsection

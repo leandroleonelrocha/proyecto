@@ -9,6 +9,11 @@
 	<div class="row">
 		<div class="col-md-3">
 
+
+            <p id="trash">
+            Arrastre aqúi para borrar.
+              <img src="trash-can.png" id="trash" alt="">
+            </p>
 				
               <div class="box box-solid">
                 <div class="box-header with-border">
@@ -30,7 +35,7 @@
               </div><!-- /. box -->
               <div class="box box-solid">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Nueva clase</h3>
+                  <h3 class="box-title">Grupo</h3>
                 </div>
                 <div class="box-body">
                   
@@ -39,12 +44,17 @@
                     {!! Form::select('grupo_id', $grupos, null, ['class' => 'form-control', 'id' => 'grupo_idselected']) !!}
                    
                   </div>
-
+                    <label>Docente</label>
+                   <div class="form-group">
+                   
+                    {!! Form::select('docente_id', $docentes, null, ['class' => 'form-control', 'id' => 'docente_idselected']) !!}
+                   
+                  </div>
                   <div class="form-group">
                    
                     <div class="bootstrap-timepicker">
                     <div class="form-group">
-                      <label>Time picker:</label>
+                      <label>Hora:</label>
                       <div class="input-group">
                         <input type="text" class="form-control timepicker" >
                         <div class="input-group-addon">
@@ -57,9 +67,9 @@
                   </div>
 
                   <div class="input-group">
-                    <input id="new-event" type="text" class="form-control" placeholder="Event Title">
+                    <input id="new-event" type="text" class="form-control" placeholder="Titulo de la clase">
                     <div class="input-group-btn">
-                      <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
+                      <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Crear</button>
                     </div><!-- /btn-group -->
                   </div><!-- /input-group -->
                 </div>

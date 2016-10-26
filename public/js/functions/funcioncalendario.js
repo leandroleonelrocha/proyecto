@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
     var hora_desde;
+    var grupo_id;
+    var docente_id;
+
 
     $(".timepicker").timepicker({
         showInputs: false,
@@ -88,7 +91,7 @@ $(document).ready(function() {
         });
 
 
-    /* initialize the calendar
+    /*  initialize the calendar
     -----------------------------------------------------------------
         Datos del grupo
         Hora de la clase
@@ -112,13 +115,13 @@ $(document).ready(function() {
         var grupo_id = $( "#grupo_idselected option:selected" ).val();
         var title = event.title;
         var start = event.start.format("YYYY-MM-DD");
-        var docente_id = 3;
+        var docente_id = $( "#docente_idselected option:selected" ).val();
         var dia = 1;
         var hora_desde = $('.timepicker').val();
         var hora_hasta = $('.timepicker').val();      
         $.ajax({
             url: 'process',
-            data: 'type=new&grupo_id='+grupo_id+'&fecha='+start+'&descripcion='+title+'&docente_id='+docente_id+'&dia='+dia+'&hora_desde='+hora_desde+'&hora_hasta='+hora_hasta,
+            data: 'type=new&grupo_id='+grupo_id+'&fecha='+start+'&descripcion='+title+'&docente_id='+docente_id+'&hora_desde='+hora_desde+'&hora_hasta='+hora_hasta,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -163,8 +166,9 @@ $(document).ready(function() {
         },
         eventClick: function(event, jsEvent, view) {
           	console.log(event.id);
-            document.location = "clases/matricula/"+event.id;
 
+           var data = event.id;
+          window.location=("clases/matricula/" + data);
       },
 
       eventResize: function(event, delta, revertFunc) {

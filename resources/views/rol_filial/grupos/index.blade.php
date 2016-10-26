@@ -8,27 +8,33 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listao de grupos</h3>
+					<h3 class="box-title">Listaso de grupos</h3>
 					<div class="box-tools pull-right no-print">
 						<a href="{{route('grupos.nuevo')}}" class="btn btn-success text-white"> Nuevo grupo</a>
+						<a href="{{route('grupos.clases')}}" class="btn btn-success text-white"> Ver clases</a>
+						
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
-						<thead> <tr>
-						<th>@lang('carrera.numero')</th>
-						<th>@lang('carrera.nombre')</th>
-						<th>@lang('carrera.duracion')</th>
-						<th>@lang('carrera.descripcion')</th>
-						<th class="no-print"></th>
-						</tr> </thead>
+						<thead> 
+						<tr>
+						<th>Curso</th>
+						<th>Carrera</th>
+						<th>Materia</th>
+						<th>Descripcion</th>
+						<th>Docente</th>
+						</tr> 
+						</thead>
 						<tbody>
 						@foreach($grupos as $grupo)
-						<td>{{ $grupo->curso_id }}</td>
-						<td>{{ $grupo->carrera_id }}</td>
-						<td>{{ $grupo->materia_id }}</td>
+						<tr>
+						<td>{{ $grupo->Curso->descripcion }}</td>
+						<td>{{ $grupo->Carrera->nombre }}</td>
+						<td>{{ $grupo->Materia->nombre }}</td>
 						<td>{{ $grupo->descripcion }}</td>
-						<td>{{ $grupo->docente_id }}</td>						
+						<td>{{ $grupo->Docente->fullname }}</td>	
+						</tr>					
 						@endforeach
 					    	
 				   		</tbody>

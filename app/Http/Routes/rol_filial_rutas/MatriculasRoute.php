@@ -44,3 +44,18 @@
 		'as'	=> 'filial.matriculas_borrar',
 		'uses'	=>	'MatriculaController@borrar'
 	]);
+
+	Route::get('matriculas_actualizar/{id}',[
+		'as'	=> 'filial.matriculas_actualizar',
+		'uses'	=>	'MatriculaController@actualizar'
+	]);
+
+	Route::post('matriculas_actualizar_post',[
+		'as'	=> 'filial.matriculas_actualizar_post',
+		'uses'	=>	'MatriculaController@actualizar_post'
+	]);
+
+	Route::get('matriculas_vista/{id}',[
+		'as'	=> 'filial.matriculas_vista',
+		'uses'	=>	'MatriculaController@vista'
+	]);

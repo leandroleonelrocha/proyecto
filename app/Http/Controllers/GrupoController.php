@@ -10,7 +10,12 @@ use App\Http\Repositories\MateriaRepo;
 use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
+use App\Http\Repositories\ClaseMatriculaRepo;
 use App\Entities\Clase;
+use App\Entities\GrupoMatricula;
+use App\Entities\ClaseMatricula;
+
+
 
 
 class GrupoController extends Controller
@@ -21,8 +26,9 @@ class GrupoController extends Controller
 	protected $docenteRepo;
 	protected $grupoRepo;
 	protected $claseRepo;
+	protected $claseMatriculaRepo;
 
-	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo )
+	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo)
 	{
 		$this->cursoRepo = $cursoRepo;
 		$this->carreraRepo = $carreraRepo;
@@ -30,25 +36,24 @@ class GrupoController extends Controller
 		$this->docenteRepo = $docenteRepo;
 		$this->grupoRepo = $grupoRepo;
 		$this->claseRepo = $claseRepo;
+		$this->claseMatriculaRepo = $claseMatriculaRepo;
 		
 	}	
 
 
 	public function index()
 	{
-		$grupos = $this->grupoRepo->allEneable();
-	
+		
+		$grupos = $this->grupoRepo->allEnable();	
 		return view('rol_filial.grupos.index', compact('grupos'));
 	}
 
 	public function nuevo()
 	{
 		$cursos = $this->cursoRepo->lists('nombre', 'id');
-
 		$carreras = $this->carreraRepo->lists('nombre','id');
 		$materias =  $this->materiaRepo->lists('nombre','id');
 		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
-
 	
 		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
 	}
@@ -64,22 +69,52 @@ class GrupoController extends Controller
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->create($data);
-		return redirect()->route('rol_filial.grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
 
 	}
 
 	public function clases()
 	{
 		$grupos = $this->grupoRepo->lists('descripcion', 'id');
-		
-		return view('rol_filial.grupos.clases', compact('grupos'));
+		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
+		return view('rol_filial.grupos.clases', compact('grupos', 'docentes'));
 	}
 
 
-	public function clase_matricula()
+	public function clase_matricula($data)
 	{
-		return view('rol_filial.grupos.clase_matricula');
+		$clase = $this->claseRepo->find($data);
+		$grupo = GrupoMatricula::where('grupo_id', $clase->grupo_id)->get();
+		
+		return view('rol_filial.grupos.clase_matricula', compact('clase', 'grupo'));
 	}
+
+	public function cargar_clase(Request $request)
+	{
+		$data = $request->all();
+		$asistio = $request->get('asistio');
+		$clase_id = $request->get('clase_id');
+		if($asistio)
+		{
+
+			foreach ($asistio as $a) {
+			$array = explode(";",$a);
+			$asistio = $array[0];
+			$matricula_id = $array[1];
+
+			$clase_matricula = new ClaseMatricula;
+			$clase_matricula->asistio = $asistio;
+			$clase_matricula->matricula_id = $matricula_id;			
+			$clase_matricula->clase_id = $clase_id;
+			$clase_matricula->save();
+				    
+		}
+
+		return redirect()->back()->with('msg_ok', 'Asistencia creado correctamente');
+		}
+
+	}
+
 
 
 	public function process(Request $request)
@@ -90,6 +125,7 @@ class GrupoController extends Controller
 		if($type == 'new')
 		{
 			$data = $request->all();
+
 			$this->claseRepo->create($data);
 		
 			echo json_encode(array('status'=>'success'));

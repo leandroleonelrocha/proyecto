@@ -48,6 +48,12 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@clase_matricula'
 	]);
 
+	Route::post('cargar_clase',[
+
+		'as' => 'grupos.cargar_clase',
+		'uses' => 'GrupoController@cargar_clase'
+	]);
+
 
 
 	Route::post('process', [
