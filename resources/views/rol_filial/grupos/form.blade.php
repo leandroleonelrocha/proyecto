@@ -15,7 +15,7 @@
             @if(empty($model))
             {!! Form::select('curso_id',(['' => 'Seleccionar curso'] + $cursos->toArray()), null, ['id' => 'curso_id', 'class' => 'form-control']) !!}
             @else
-            {!! Form::select('curso_id',['' => 'Seleccionar curso'] + $cursos->toArray() ,$model->TipoVehiculo->id, ['id' => 'curso_id', 'class' => 'form-control']) !!}
+            {!! Form::select('curso_id',['' => 'Seleccionar curso'] + $cursos->toArray() ,$model->Curso->id, ['id' => 'curso_id', 'class' => 'form-control']) !!}
             @endif
         </div>
 
@@ -24,7 +24,7 @@
             @if(empty($model))
             {!! Form::select('carrera_id',(['' => 'Seleccionar carrera'] + $carreras->toArray()), null, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
             @else
-            {!! Form::select('carrera_id',['' => 'Seleccionar carrera'] + $carreras->toArray() ,$model->TipoVehiculo->id, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
+            {!! Form::select('carrera_id',['' => 'Seleccionar carrera'] + $carreras->toArray() ,$model->Carrera->id, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
             @endif
         </div>
 
@@ -33,7 +33,7 @@
             @if(empty($model))
             {!! Form::select('materia_id',(['' => 'Seleccionar materia'] + $materias->toArray()), null, ['id' => 'materia_id', 'class' => 'form-control']) !!}
             @else
-            {!! Form::select('materia_id',['' => 'Seleccionar materia'] + $materias->toArray() ,$model->TipoVehiculo->id, ['id' => 'materia_id', 'class' => 'form-control']) !!}
+            {!! Form::select('materia_id',['' => 'Seleccionar materia'] + $materias->toArray() ,$model->Materia->id, ['id' => 'materia_id', 'class' => 'form-control']) !!}
             @endif
         </div>
 
@@ -47,7 +47,7 @@
             @if(empty($model))
             {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control']) !!}
             @else
-            {!! Form::select('docente_id',['' => 'Seleccionar docente'] + $docentes->toArray() ,$model->TipoVehiculo->id, ['id' => 'docente_id', 'class' => 'form-control']) !!}
+            {!! Form::select('docente_id',['' => 'Seleccionar docente'] + $docentes->toArray() ,$model->Docente->id, ['id' => 'docente_id', 'class' => 'form-control']) !!}
             @endif
         </div>
 
@@ -74,7 +74,14 @@
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
-                      <input type="text" name="fecha" class="form-control pull-right" id="reservation">
+                       @if(empty($model))
+                          {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
+                        @else
+                          {!! Form::text('fecha', $model->fulldate ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
+                     
+                        @endif
+                    
+                    
                     </div><!-- /.input group -->
         </div>                    
 

@@ -20,6 +20,7 @@ $(document).ready(function() {
 	        async: false,
 	        success: function(s){
 	         
+           console.log(s);
 	          json_events = s;
 	        }
 	  });

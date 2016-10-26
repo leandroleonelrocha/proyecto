@@ -58,9 +58,40 @@ class GrupoController extends Controller
 		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
 	}
 
+	public function edit($id)
+	{
+		$model = $this->grupoRepo->find($id);
+
+		$cursos = $this->cursoRepo->lists('nombre', 'id');
+		$carreras = $this->carreraRepo->lists('nombre','id');
+		$materias =  $this->materiaRepo->lists('nombre','id');
+		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
+		return view('rol_filial.grupos.form', compact('model', 'cursos', 'carreras', 'materias', 'docentes'));
+
+	}
+
+
 	public function postAdd(Request $request)
 	{
 		//$data  = $request->only('curso_id', 'carrera_id', 'materia_id', 'descripcion', 'docente_id');
+
+		$data = $request->all();
+		$array = explode("-", $request->get('fecha'));
+	
+		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
+		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
+		$data['filial_id'] = session('usuario')['entidad_id'];
+	
+
+		$this->grupoRepo->create($data);
+		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+
+	}
+
+	public function postEdit($id, Request $request)
+	{
+		$model = $this->grupoRepo->find($id);
+		
 		$data = $request->all();
 		$array = explode("-", $request->get('fecha'));
 	
@@ -68,10 +99,10 @@ class GrupoController extends Controller
 		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
-		$this->grupoRepo->create($data);
-		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
-
+		$this->grupoRepo->edit($model,$data);
+		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo editado correctamente');
 	}
+
 
 	public function clases()
 	{
@@ -91,12 +122,17 @@ class GrupoController extends Controller
 
 	public function cargar_clase(Request $request)
 	{
+		$clase_id = $request->get('clase_id');
+		$clase = $this->claseRepo->find($clase_id);
+		$clase->Matricula()->detach();
+
 		$data = $request->all();
 		$asistio = $request->get('asistio');
-		$clase_id = $request->get('clase_id');
-		if($asistio)
-		{
 
+
+
+		//$clase->Matricula()->sync($data);
+		if($asistio)
 			foreach ($asistio as $a) {
 			$array = explode(";",$a);
 			$asistio = $array[0];
@@ -109,9 +145,9 @@ class GrupoController extends Controller
 			$clase_matricula->save();
 				    
 		}
-
+		
 		return redirect()->back()->with('msg_ok', 'Asistencia creado correctamente');
-		}
+		
 
 	}
 
@@ -177,7 +213,8 @@ class GrupoController extends Controller
 			    $e['id'] = $fetch['id'];
 			    $e['title'] = $fetch['descripcion'];
 			    $e['start'] = $fetch['fecha'];
-			   // $e['end'] = $fetch['enddate'];
+				$e['time'] = $fetch['fecha'];
+			  
 			   // $allday = ($fetch['allDay'] == "true") ? true : false;
 			   // $e['allDay'] = $allday;
 

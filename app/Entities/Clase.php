@@ -8,9 +8,9 @@ class Clase extends Entity {
 
     protected $fillable   = ['id', 'grupo_id','fecha', 'descripcion','docente_id', 'horario_desde', 'horario_hasta'];
 
-    public function ClaseMatricula()
+    public function Matricula()
     {
-    	return $this->belongsToMany(ClaseMatricula::getClass());
+    	return $this->belongsToMany(Matricula::getClass())->withPivot('asistio');
 
     }
 

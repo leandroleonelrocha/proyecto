@@ -36,22 +36,36 @@
                     </div><!-- /.pull-right -->
                   </div>
                   <div class="table-responsive mailbox-messages">
-                    <table class="table table-hover table-striped">
-                      <tbody>
-                        
-                      
+                    
                         @if(isset($model))
                             {!! Form::model($model,['route'=>['grupos.cargar_clase',$model->id]]) !!}
                         @else
                             {!! Form::open(['route'=>'grupos.cargar_clase']) !!}
                         @endif  
+                    <table class="table table-hover table-striped">
+                      <tbody>
+                        
+                      
+                    
 
+                       
                          @foreach($grupo as $g)
                           <tr>
-                         
-                              
-                              <td> <input type='checkbox' name='asistio[];matricula_id[]' value='1;{{ $g->matricula_id}}'>1<br></td>
 
+                              @if(count($g->Matricula->Clase) > 0 ) 
+
+                                  @foreach($g->Matricula->Clase as $mc)
+                                 
+                                  <td> <input type='checkbox' name='asistio[];matricula_id[]' value="1;{{$g->matricula_id }}" {{ $mc->pivot->asistio == 1  ? 'checked' : ''  }} ></td>
+                                  @endforeach
+
+                              @else
+                                  <td> <input type='checkbox' name='asistio[];matricula_id[]' value='1;{{$g->matricula_id}}'></td>
+                               
+                              @endif
+
+                           
+                             
                               <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
                               <td class="mailbox-name">{{ $g->Matricula->Persona->fullname}}</td>                  
                               <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
@@ -60,11 +74,14 @@
                            </tr>
                           @endforeach 
 
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                       {!! Form::close() !!}
-
+                    
                       </tbody>
                     </table><!-- /.table -->
+
+                       <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+                       {!! Form::close() !!}
+
+
                   </div><!-- /.mail-box-messages -->
                 </div><!-- /.box-body -->
                
