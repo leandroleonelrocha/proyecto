@@ -97,6 +97,7 @@ class GrupoController extends Controller
 	
 		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
 		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
+
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->edit($model,$data);
@@ -116,8 +117,10 @@ class GrupoController extends Controller
 	{
 		$clase = $this->claseRepo->find($data);
 		$grupo = GrupoMatricula::where('grupo_id', $clase->grupo_id)->get();
+		$clase_matricula = ClaseMatricula::where('clase_id', $clase->id)->get();
 		
-		return view('rol_filial.grupos.clase_matricula', compact('clase', 'grupo'));
+		
+		return view('rol_filial.grupos.clase_matricula', compact('clase', 'grupo', 'clase_matricula'));
 	}
 
 	public function cargar_clase(Request $request)
@@ -158,6 +161,8 @@ class GrupoController extends Controller
 		if($type == 'new')
 		{
 			$data = $request->all();
+			$fecha = explode(" ", $request->get('hora_desde'));
+			$data['hora_desde'] = $fecha[0];
 
 			$this->claseRepo->create($data);
 		
