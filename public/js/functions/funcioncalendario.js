@@ -130,6 +130,7 @@ $(document).ready(function() {
             success: function(response){
               event.id = response.eventid;
               $('#calendar').fullCalendar('updateEvent',event);
+              getFreshEvents();
             },
             error: function(e){
               console.log(e.responseText);
