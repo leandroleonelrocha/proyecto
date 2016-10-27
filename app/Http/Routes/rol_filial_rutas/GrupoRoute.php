@@ -25,7 +25,7 @@ Route::group(['prefix' => 'grupos'], function(){
 	]);
 
 	
-	Route::post('postEditar',[
+	Route::post('postEditar/{id}',[
 	'as'	=> 'grupos.postEdit',
 	'uses'	=>	'GrupoController@postEdit'
 	]);

@@ -13,5 +13,10 @@ class ClaseMatricula extends Entity {
     	return $this->belongsTo(Clase::getClass());
     }
 
+    public function Matricula()
+    {
+    	return $this->belongsTo(Matricula::getClass());
+    }
+
 	
 }

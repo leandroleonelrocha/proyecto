@@ -20,6 +20,7 @@ $(document).ready(function() {
 	        async: false,
 	        success: function(s){
 	         
+           console.log(s);
 	          json_events = s;
 	        }
 	  });
@@ -100,6 +101,7 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
       events: JSON.parse(json_events),
+     
 
       utc: true,
       header: {

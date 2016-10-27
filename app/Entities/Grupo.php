@@ -41,4 +41,14 @@ class Grupo extends Entity {
         return $this->belongsTo(GrupoMatricula::getClass());
     }
 
+    public function getFullDateAttribute()
+    {
+        //10/26/2016 - 10/26/2016
+
+        $inicio = date("d/m/Y", strtotime($this->fecha_inicio));
+        $fin =date("d/m/Y", strtotime($this->fecha_fin));
+        
+        return $inicio .' - '. $fin;
+    }
+
 }

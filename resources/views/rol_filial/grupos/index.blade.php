@@ -24,6 +24,8 @@
 						<th>Materia</th>
 						<th>Descripcion</th>
 						<th>Docente</th>
+						<th></th>
+						
 						</tr> 
 						</thead>
 						<tbody>
@@ -34,6 +36,10 @@
 						<td>{{ $grupo->Materia->nombre }}</td>
 						<td>{{ $grupo->descripcion }}</td>
 						<td>{{ $grupo->Docente->fullname }}</td>	
+						   	<td class="text-center">
+					           		<a href="{{route('grupos.edit',$grupo->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
+									</td>
+							   
 						</tr>					
 						@endforeach
 					    	
