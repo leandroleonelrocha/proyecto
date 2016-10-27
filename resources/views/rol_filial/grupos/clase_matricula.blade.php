@@ -44,36 +44,38 @@
                         @endif  
                     <table class="table table-hover table-striped">
                       <tbody>
-                        
-                      
-                    
-
                        
                          @foreach($grupo as $g)
                           <tr>
-
+                              <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
                               @if(count($g->Matricula->Clase) > 0 ) 
 
                                   @foreach($g->Matricula->Clase as $mc)
                                  
-                                  <td> <input type='checkbox' name='asistio[];matricula_id[]' value="1;{{$g->matricula_id }}" {{ $mc->pivot->asistio == 1  ? 'checked' : ''  }} ></td>
+                                  <td> 
+                                  <input type='radio' name='asistio[][{{$g->matricula_id}}]' value="1" {{ $mc->pivot->asistio == 1  ? 'checked' : ''  }} >
+                                  <input type='radio' name='asistio[][{{$g->matricula_id}}]' value="0" {{ $mc->pivot->asistio == 0  ? 'checked' : ''  }} >
+ 
+                                  </td>
                                   @endforeach
 
                               @else
-                                  <td> <input type='checkbox' name='asistio[];matricula_id[]' value='1;{{$g->matricula_id}}'></td>
-                               
-                              @endif
+                                  <td> 
+                                  
+                                      <input id="exampleRadioSwitch11" type="radio"  name='asistio[][{{$g->matricula_id}}]' value="1">
+                                      <input id="exampleRadioSwitch11" type="radio"  name='asistio[][{{$g->matricula_id}}]' value="0">
+                                  </td>
 
+                              @endif
                            
                              
-                              <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
+
                               <td class="mailbox-name">{{ $g->Matricula->Persona->fullname}}</td>                  
                               <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
                               <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                               <td class="mailbox-date">15 days ago</td>
                            </tr>
                           @endforeach 
-
                     
                       </tbody>
                     </table><!-- /.table -->

@@ -125,22 +125,19 @@ class GrupoController extends Controller
 		$clase_id = $request->get('clase_id');
 		$clase = $this->claseRepo->find($clase_id);
 		$clase->Matricula()->detach();
-
 		$data = $request->all();
 		$asistio = $request->get('asistio');
-
-
+	
 
 		//$clase->Matricula()->sync($data);
 		if($asistio)
 			foreach ($asistio as $a) {
-			$array = explode(";",$a);
-			$asistio = $array[0];
-			$matricula_id = $array[1];
 
+			list($matricula, $valor) = array_divide($a);
+			
 			$clase_matricula = new ClaseMatricula;
-			$clase_matricula->asistio = $asistio;
-			$clase_matricula->matricula_id = $matricula_id;			
+			$clase_matricula->asistio = $valor[0];
+			$clase_matricula->matricula_id = $matricula[0];			
 			$clase_matricula->clase_id = $clase_id;
 			$clase_matricula->save();
 				    
@@ -176,11 +173,17 @@ class GrupoController extends Controller
 
 		if($type == 'resetdate')
 		{
-			$title = $_POST['title'];
-			$startdate = $_POST['start'];
-			$enddate = $_POST['end'];
-			$eventid = $_POST['eventid'];
-			$update = mysqli_query($con,"UPDATE calendar SET title='$title', startdate = '$startdate', enddate = '$enddate' where id='$eventid'");
+			//$title = $_POST['title'];
+			//$startdate = $_POST['start'];
+			//$enddate = $_POST['end'];
+			//$eventid = $_POST['eventid'];
+			//$data = $request->get('eventid');
+			$eventid=$request->get('eventid');
+			$data['fecha'] = $request->get('start');
+
+			$clase=$this->claseRepo->find($eventid);
+			$update=$this->claseRepo->edit($clase,$data);
+
 			if($update)
 				echo json_encode(array('status'=>'success'));
 			else
@@ -213,10 +216,10 @@ class GrupoController extends Controller
 			    $e['id'] = $fetch['id'];
 			    $e['title'] = $fetch['descripcion'];
 			    $e['start'] = $fetch['fecha'];
-				$e['time'] = $fetch['fecha'];
+				//$e['time'] = $fetch['fecha'];
 			  
-			   // $allday = ($fetch['allDay'] == "true") ? true : false;
-			   // $e['allDay'] = $allday;
+			    //$allday = ($fetch['allDay'] == "true") ? true : false;
+			    //$e['allDay'] = $allday;
 
 
 			    array_push($events, $e);

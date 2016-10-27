@@ -101,6 +101,7 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
       events: JSON.parse(json_events),
+     
 
       utc: true,
       header: {
