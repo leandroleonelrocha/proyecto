@@ -2,7 +2,7 @@
 
 Route::group(['prefix' => 'grupos'], function(){
 
-	Route::get('/',[
+	Route::get('',[
 		'as' => 'grupos.index',
 		'uses' => 'GrupoController@index'
 	 ]);
