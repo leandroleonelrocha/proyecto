@@ -6,11 +6,11 @@
 	<div class="row">
 		<div class="col-xs-12">
 
-                    @if(isset($model))
-                      {!! Form::model($model,['route'=>['grupos.cargar_clase',$model->id]]) !!}
-                    @else
-                      {!! Form::open(['route'=>'grupos.cargar_clase']) !!}
-                    @endif        
+        @if(isset($model))
+          {!! Form::model($model,['route'=>['grupos.cargar_clase',$model->id]]) !!}
+        @else
+          {!! Form::open(['route'=>'grupos.cargar_clase']) !!}
+        @endif        
 
         <div class="box">
 
@@ -25,8 +25,6 @@
                   <b>Docente:</b><br>
                   <b>Account:</b> 968-34567
                 </div>
-
-
 
                   <div class="col-sm-4 invoice-col">
                     From
@@ -49,14 +47,10 @@
                       @foreach($grupo_matricula as $gm)
                           <tr>
                              <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
-                             @if(!empty($search->buscarClasePorMatricula($gm->matricula_id, $clase->id)))
-                              <?php
-                                $r = $search->buscarClasePorMatricula($gm->matricula_id, $clase->id);
-                              ?>
-                                    
+                             @if( !empty($search->buscarClasePorMatricula($gm->matricula_id, $clase->id)))
                               <td>
-                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="1"  {{ $r == 1 ? 'checked' : ''}}   >
-                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="0"  {{ $r == 'null' ? 'checked' : ''}}   >
+                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="1"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'true' ? 'checked' : ''  }}    >
+                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="0"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'false' ? 'checked' : ''  }}  >
                               </td>
                              @else
                               <td> 
@@ -73,9 +67,9 @@
                  
                 </div><!-- /.box-body -->
 
-              </div>
-                <button type="submit" class="btn btn-primary pull-right">Guardar</button>
-                {!! Form::close() !!}
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+        {!! Form::close() !!}
 
 </div><!-- /.mail-box-messages -->
 </div><!-- /.box-body -->

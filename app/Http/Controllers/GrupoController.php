@@ -16,8 +16,6 @@ use App\Entities\GrupoMatricula;
 use App\Entities\ClaseMatricula;
 
 
-
-
 class GrupoController extends Controller
 {
 	protected $cursoRepo;
@@ -131,7 +129,6 @@ class GrupoController extends Controller
 		$data = $request->all();
 		$asistio = $request->get('asistio');
 	
-
 		//$clase->Matricula()->sync($data);
 		if($asistio)
 			foreach ($asistio as $a) {
@@ -148,7 +145,6 @@ class GrupoController extends Controller
 		
 		return redirect()->back()->with('msg_ok', 'Asistencia creado correctamente');
 		
-
 	}
 
 
