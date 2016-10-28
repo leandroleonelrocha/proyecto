@@ -46,32 +46,27 @@
                      
                     </tr>
                     
-                      @foreach($grupo as $g)
+                      @foreach($grupo_matricula as $gm)
                           <tr>
-
-                              <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
-                            
-                              @if(!empty($clase_matricula)) 
-                                                       
-                                  @foreach($clase_matricula as $mc)
-                                
-                                  <td> 
-                                      <input type='radio' class='flat-red' name='asistio[][{{$g->matricula_id}}]' value="1" {{ $mc->asistio == 1  ? 'checked' : ''  }} >
-                                      <input type='radio' class='flat-red' name='asistio[][{{$g->matricula_id}}]' value="0" {{ $mc->asistio == 0  ? 'checked' : ''  }} >
-                                  </td>
-                                  @endforeach
-                              @else
-                                  <td> 
-                                      <input  class='flat-red'  type="radio"  name='asistio[][{{$g->matricula_id}}]' value="1">
-                                      <input  class='flat-red'  type="radio"  name='asistio[][{{$g->matricula_id}}]' value="0">
-                                  </td>
-
-                              @endif
-                              <td>{{ $g->Matricula->Persona->fullname}}</td>                  
-                             
-                             
-                           </tr>
-                          @endforeach 
+                             <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
+                             @if(!empty($search->buscarClasePorMatricula($gm->matricula_id, $clase->id)))
+                              <?php
+                                $r = $search->buscarClasePorMatricula($gm->matricula_id, $clase->id);
+                              ?>
+                                    
+                              <td>
+                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="1"  {{ $r == 1 ? 'checked' : ''}}   >
+                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="0"  {{ $r == 'null' ? 'checked' : ''}}   >
+                              </td>
+                             @else
+                              <td> 
+                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="1">
+                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="0">
+                              </td>
+                             @endif
+                               <td>{{$gm->Matricula->Persona->fullname}}</td>    
+                          </tr>
+                      @endforeach 
                     
                   </tbody>
                   </table>

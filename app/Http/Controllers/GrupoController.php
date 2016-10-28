@@ -116,11 +116,11 @@ class GrupoController extends Controller
 	public function clase_matricula($data)
 	{
 		$clase = $this->claseRepo->find($data);
-		$grupo = GrupoMatricula::where('grupo_id', $clase->grupo_id)->get();
-		$clase_matricula = ClaseMatricula::where('clase_id', $clase->id)->get();
-		
-		
-		return view('rol_filial.grupos.clase_matricula', compact('clase', 'grupo', 'clase_matricula'));
+		$grupo_matricula = GrupoMatricula::where('grupo_id', $clase->grupo_id)->get();
+		$clase_matricula = ClaseMatricula::where('clase_id', $clase->id)->get();		
+     	$search = $this->claseMatriculaRepo;
+     
+		return view('rol_filial.grupos.clase_matricula', compact('clase', 'grupo_matricula', 'clase_matricula', 'search'));
 	}
 
 	public function cargar_clase(Request $request)

@@ -7,6 +7,7 @@ class ClaseMatricula extends Entity {
    // protected $primaryKey= 'id_curso';
 
     protected $fillable   = ['asistio','matricula_id','clase_id'];
+    
 
     public function Clase()
     {
