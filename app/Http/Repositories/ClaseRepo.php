@@ -12,4 +12,7 @@ class ClaseRepo extends BaseRepo {
         return new Clase();
     }
 
+    
+
+
 }

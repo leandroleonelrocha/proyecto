@@ -12,4 +12,16 @@ class ClaseMatriculaRepo extends BaseRepo {
         return new ClaseMatricula();
     }
 
+    public function buscarClasePorMatricula($matricula, $clase)
+    {
+    	$qry = $this->model->where('matricula_id', $matricula)->where('clase_id',$clase)->first();
+        if(count($qry) > 0)
+        { 
+            return $qry->asistio ? 'true' : 'false';
+        }else{
+            return false;
+        }
+        
+    }
+
 }

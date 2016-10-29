@@ -123,11 +123,16 @@
                   </a>
                   </li>
 
-                  <li>
-                  <a href="#">
-                    <i class="fa fa-file-text-o"></i> <span>@lang('menu.examen')</span>
-                  </a>
+                   <li class="treeview">
+                    <a href="{{route('filial.materias')}}">
+                      <i class="fa fa-file-text-o"></i> <span>@lang('menu.examen')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.examenes')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.examenes_nuevo') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+                    </ul>
                   </li>
+
 
                   <li>
                   <a href="#">
