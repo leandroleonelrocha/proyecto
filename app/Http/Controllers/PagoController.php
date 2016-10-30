@@ -17,11 +17,22 @@ class PagoController extends Controller
 {
 	protected $pagoRepo;
 
-	public function __construct(PagoRepo $pagoRepo, Matricula $matriculaRepo)
+	public function __construct(PagoRepo $pagoRepo, MatriculaRepo $matriculaRepo)
 	{
 		$this->pagoRepo = $pagoRepo;
 		$this->matriculaRepo = $matriculaRepo;
 	}
+
+	public function vista(){
+    	$matriculas = $this->matriculaRepo->allEneable();
+        return view('rol_filial.pagos.vista',compact('matriculas'));
+    }
+
+	 public function lista($id){
+    	$matricula  = $this->matriculaRepo->find($id);
+        $pagos  = $this->pagoRepo->allMatricula($id);
+        return view('rol_filial.pagos.lista',compact('matricula','pagos'));
+    }
 
 	public function nuevo($id){
 		if (null !== session('usuario')){
@@ -87,7 +98,8 @@ class PagoController extends Controller
 				$modelP->save();
 
 				if( $this->pagoRepo->edit($modelP,$request->all()) )
-					return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_ok','El pago ha sido modificado con éxito');
+					return redirect()->back()->with('msg_ok','El pago ha sido modificado con éxito');
+					// return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_ok','El pago ha sido modificado con éxito');
 				else
 					return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_error','El pago no ha podido ser modificado');
 			}
@@ -122,7 +134,7 @@ class PagoController extends Controller
 						$pago['terminado'] = 1;
 
 					if( $this->pagoRepo->edit($modelP,$pago) )
-						return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_ok','El pago ha sido actualizado con éxito');
+						return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
 					else
 						return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_error','El pago no ha podido ser actualizado');
 				}

@@ -98,9 +98,9 @@
 										<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="Actualizar"><i class="btn btn-primary glyphicon glyphicon-repeat"></i></a>
 									<?php
 										}
-										else{
+										if(isset($pago->Recibo->id)){
 									?>
-										<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="Ver Recibo"><i class="btn btn-primary glyphicon glyphicon-list-alt"></i></a>
+										<a href="{{route('filial.pagos_actualizar',$pago->Recibo->id)}}" title="Ver Recibo"><i class="btn btn-primary glyphicon glyphicon-list-alt"></i></a>
 									<?php
 										}
 									?>

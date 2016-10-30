@@ -21,7 +21,7 @@ Route::group(['prefix' => 'filial'], function(){
 	require_once('PagoRoute.php');
 
 	// Rutas Operaciones ---------- Recibos
-	// require_once('Route.php');
+	require_once('ReciboRoute.php');
 
 	// Rutas Operaciones ---------- Cursos
 	require_once('CursosRoute.php');
@@ -34,8 +34,6 @@ Route::group(['prefix' => 'filial'], function(){
 
 	// Rutas Operaciones ---------- Grupos
 	require_once('GrupoRoute.php');
-
-	// require_once('GruposRoute.php');
 
 	// Rutas Operaciones ---------- Exámenes
 	 require_once('ExamenesRoute.php');

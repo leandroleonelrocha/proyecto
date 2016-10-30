@@ -6,6 +6,7 @@ return [
     'persona'       => 'Persons',
     'preinforme'    => 'Reports',
     'matricula'     => 'Enrollment',
+    'pago'          => 'Payments',
     'recibo'        => 'Receipts',
     'curso'         => 'Courses',
     'carrera'       => 'Careers',
