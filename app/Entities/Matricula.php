@@ -45,4 +45,20 @@ class Matricula extends Entity
     public function MatriculaPermisos(){
         return $this->belongsTo(MatriculaPermisos::getClass());
     }
+
+    public function Clase(){ 
+        return $this->belongsToMany(Clase::getClass())->withPivot('asistio');
+    
+    }
+
+    public function Examen(){ 
+        return $this->hasMany(Clase::getClass())->withPivot('asistio');
+    
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->persona_id;
+    }
+
 }

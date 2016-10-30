@@ -8,5 +8,10 @@ class GrupoMatricula extends Entity {
 
     protected $fillable   = ['grupo_id', 'matricula_1'];
 
+    public function Matricula()
+    {
+    	return $this->belongsTo(Matricula::getClass());
+    }
+
     
 }

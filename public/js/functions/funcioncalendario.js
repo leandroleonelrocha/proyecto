@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
     var hora_desde;
+    var grupo_id;
+    var docente_id;
+
 
     $(".timepicker").timepicker({
         showInputs: false,
@@ -17,6 +20,7 @@ $(document).ready(function() {
 	        async: false,
 	        success: function(s){
 	         
+           console.log(s);
 	          json_events = s;
 	        }
 	  });
@@ -97,6 +101,7 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
       events: JSON.parse(json_events),
+     
 
       utc: true,
       header: {
@@ -112,13 +117,13 @@ $(document).ready(function() {
         var grupo_id = $( "#grupo_idselected option:selected" ).val();
         var title = event.title;
         var start = event.start.format("YYYY-MM-DD");
-        var docente_id = 3;
+        var docente_id = $( "#docente_idselected option:selected" ).val();
         var dia = 1;
         var hora_desde = $('.timepicker').val();
         var hora_hasta = $('.timepicker').val();      
         $.ajax({
             url: 'process',
-            data: 'type=new&grupo_id='+grupo_id+'&fecha='+start+'&descripcion='+title+'&docente_id='+docente_id+'&dia='+dia+'&hora_desde='+hora_desde+'&hora_hasta='+hora_hasta,
+            data: 'type=new&grupo_id='+grupo_id+'&fecha='+start+'&descripcion='+title+'&docente_id='+docente_id+'&hora_desde='+hora_desde+'&hora_hasta='+hora_hasta,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -127,6 +132,7 @@ $(document).ready(function() {
             success: function(response){
               event.id = response.eventid;
               $('#calendar').fullCalendar('updateEvent',event);
+              getFreshEvents();
             },
             error: function(e){
               console.log(e.responseText);
@@ -140,7 +146,7 @@ $(document).ready(function() {
       eventDrop: function(event, delta, revertFunc) {
             var title = event.title;
             var start = event.start.format();
-            var fecha_desde = 
+            
             console.log(event.start);
             var end = (event.end == null) ? start : event.end.format();
             $.ajax({
@@ -162,6 +168,8 @@ $(document).ready(function() {
         });
         },
         eventClick: function(event, jsEvent, view) {
+          	console.log(event.id);
+
            var data = event.id;
           window.location=("clases/matricula/" + data);
       },

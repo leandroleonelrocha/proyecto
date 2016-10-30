@@ -44,7 +44,12 @@
                     {!! Form::select('grupo_id', $grupos, null, ['class' => 'form-control', 'id' => 'grupo_idselected']) !!}
                    
                   </div>
-
+                    <label>Docente</label>
+                   <div class="form-group">
+                   
+                    {!! Form::select('docente_id', $docentes, null, ['class' => 'form-control', 'id' => 'docente_idselected']) !!}
+                   
+                  </div>
                   <div class="form-group">
                    
                     <div class="bootstrap-timepicker">
