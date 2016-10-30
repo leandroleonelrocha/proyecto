@@ -125,7 +125,7 @@
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
                       <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
-                      <li> <a href="{{route('grupos.test') }}"><i class="fa fa-circle-o"></i>Clases</a></li>
+                      <li> <a href="{{route('grupos.clases') }}"><i class="fa fa-circle-o"></i>Clases</a></li>
                     </ul>
                   </li>
 
