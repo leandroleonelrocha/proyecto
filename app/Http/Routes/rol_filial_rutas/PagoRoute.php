@@ -1,4 +1,14 @@
 <?php
+	
+	Route::get('pagos_matriculas',[
+		'as'	=> 'filial.pagos_matriculas',
+		'uses'	=>	'PagoController@vista'
+	]);
+
+	Route::get('pagos/{id}',[
+		'as'	=> 'filial.pagos',
+		'uses'	=>	'PagoController@lista'
+	]);
 
 	Route::get('pagos_nuevo/{id}',[
 		'as'	=> 'filial.pagos_nuevo',

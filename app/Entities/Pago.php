@@ -18,6 +18,10 @@ class Pago extends Entity
         return $this->hasMany(Matricula::getClass());
     }
 
+    public function Recibos(){
+        return $this->hasMany(Recibo::getClass());
+    }
+
     public function Filial(){
         return $this->belongsTo(Filial::getClass());
     }
