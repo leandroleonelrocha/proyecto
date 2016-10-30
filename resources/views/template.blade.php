@@ -50,6 +50,7 @@
      @include('templates.template_aside')
     </div><!-- ./wrapper -->
 
+  
     @include('templates.template_js')
     @yield('js')
 

@@ -117,11 +117,18 @@
                     </ul>
                   </li>
 
-                  <li>
-                  <a href="{{ route('grupos.index')}}">
-                    <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span>
-                  </a>
+
+                    <li class="treeview">
+                    <a href="{{route('grupos.index')}}">
+                      <i class="fa fa-users"></i> <span>@lang('menu.grupo')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
+                      <li> <a href="{{route('grupos.test') }}"><i class="fa fa-circle-o"></i>Clases</a></li>
+                    </ul>
                   </li>
+
 
                    <li class="treeview">
                     <a href="{{route('filial.materias')}}">

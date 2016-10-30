@@ -110,6 +110,58 @@ class GrupoController extends Controller
 		return view('rol_filial.grupos.clases', compact('grupos', 'docentes'));
 	}
 
+	public function test()
+	{
+		$grupos = $this->grupoRepo->lists('descripcion', 'id');
+		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
+		$events = $this->claseRepo->all();
+		return view('rol_filial.grupos.test', compact('grupos', 'docentes', 'events'));
+
+	}
+
+	public function nueva_clase(Request $request)
+	{
+		//dd($request->all());
+		$data = $request->all();
+		//$fecha = explode(" ", $request->get('hora_desde'));
+		//$data['hora_desde'] = $fecha[0];
+
+		$this->claseRepo->create($data);
+		return redirect()->back()->with('msg_ok', 'Clase creada correctamente');
+		
+	}
+
+	public function editar_clase(Request $request)
+	{
+		dd($request->all());
+	}
+
+	public function editar_clase_arrastrando(Request $request)
+	{
+		$clase= $request->get('Event');
+
+		$id = $clase[0];
+		$fecha = $clase[1]; 
+		$model = $this->claseRepo->find($id);		
+		
+		$model->fecha = $fecha;
+		$model->save();
+		if($model)
+				echo json_encode('success');
+			else
+				echo json_encode('failed');
+		
+		
+	}
+
+
+	public function borrar_clase($id = null)
+	{
+		dd($id);
+	}
+
+	
+	
 
 	public function clase_matricula($data)
 	{
@@ -150,6 +202,7 @@ class GrupoController extends Controller
 
 
 
+
 	public function process(Request $request)
 	{
 		
@@ -161,9 +214,12 @@ class GrupoController extends Controller
 			$fecha = explode(" ", $request->get('hora_desde'));
 			$data['hora_desde'] = $fecha[0];
 
-			$this->claseRepo->create($data);
-		
-			echo json_encode(array('status'=>'success'));
+			$update =$this->claseRepo->create($data);
+			if($update)
+				echo json_encode(array('status'=>'success'));
+			else
+				echo json_encode(array('status'=>'failed'));
+			
 		}
 
 		if($type == 'changetitle')
