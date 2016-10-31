@@ -8,4 +8,10 @@ class Materia extends Entity {
 
     protected $fillable   = ['id', 'carrera_id', 'nombre','descripcion'];
 
+    public function Carrera()
+    {
+    	return $this->belongsTo(Carrera::getClass());
+    }
+
+
 }

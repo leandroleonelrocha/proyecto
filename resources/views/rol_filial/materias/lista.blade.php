@@ -25,7 +25,7 @@
 						    @foreach($materia as $m)
 							    <tr role="row" class="odd">
 							        <td class="sorting_1">{{ $m->id}}</td>
-						          	<td>{{ $m->carrera_id }}</td>
+						          	<td>{{ $m->Carrera->fullname }}</td>
 							        <td>{{ $m->nombre }}</td>
 						            <td>{{ $m->descripcion }}</td>
 						           	<td class="text-center">

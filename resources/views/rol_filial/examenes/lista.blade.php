@@ -32,7 +32,7 @@
 										{{$examen->nro_acta}}
 									</td>
 									
-									<td>{{$examen->matricula_id}}</td>
+									<td>{{$examen->Matricula->Persona->fullname}}</td>
 									<td>{{$examen->Grupo->descripcion}}</td>
 									<td>{{$examen->nota}}</td>
 										

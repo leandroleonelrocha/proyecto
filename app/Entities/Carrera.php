@@ -16,4 +16,9 @@ class Carrera extends Entity {
         return $this->hasMany(Matricula::getClass());
     }
 
+    public function getFullNameAttribute()
+    {
+    	return $this->nombre .', '. $this->descripcion;
+    }
+
 }
