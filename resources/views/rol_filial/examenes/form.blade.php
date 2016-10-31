@@ -19,11 +19,20 @@
 							
 							<div class="col-md-6 form-group">
 								<label>N&uacute;mero de Acta</label>
+								@if(empty($model))
 								{!! Form::text('nro_acta',null,array('class'=>'form-control')) !!}
+								@else
+								{!! Form::text('nro_acta',null,array('class'=>'form-control', 'disabled')) !!}
+								@endif		
 							</div>
 							<div class="col-md-6 form-group">
+							
 								<label>N&uacute;mero de Recuperatorio</label>
+								@if(empty($model))
 								{!! Form::text('recuperatorio_nro_acta',null,array('class'=>'form-control')) !!}
+								@else
+								{!! Form::text('recuperatorio_nro_acta',null,array('class'=>'form-control', 'disabled')) !!}
+								@endif
 							</div>
 							
 							<div class="col-md-6 form-group">

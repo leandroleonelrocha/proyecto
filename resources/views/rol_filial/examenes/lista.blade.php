@@ -17,8 +17,12 @@
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
 						<th>Nro Acta</th>
-						<th>Persona</th>
+				
 						<th>Matricula</th>
+						<th>Grupo</th>
+						<th>Nota</th>
+						<th>Docente</th>
+						
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
@@ -27,12 +31,13 @@
 									<td>
 										{{$examen->nro_acta}}
 									</td>
-									<td>
-										{{ $examen->Matricula->Persona->fullname }}
-									</td>
-
-								
+									
 									<td>{{$examen->matricula_id}}</td>
+									<td>{{$examen->Grupo->descripcion}}</td>
+									<td>{{$examen->nota}}</td>
+										
+									<td>{{$examen->Docente->fullname}}</td>
+										
 								
 									<td class="text-center">
 									<a href="{{route('filial.examenes_editar',$examen->nro_acta)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>

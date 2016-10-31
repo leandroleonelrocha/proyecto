@@ -37,7 +37,7 @@ class ExamenController extends Controller
 	
 	public function index(){
 	
-		$examenes = $this->examenPermisosRepo->allEneable();
+		$examenes = $this->examenRepo->all();
 
 		
 		return view('rol_filial.examenes.lista', compact('examenes'));

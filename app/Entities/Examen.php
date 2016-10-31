@@ -17,8 +17,16 @@ class Examen extends Entity
 
     // Relaciones
     
+   
     public function Matricula(){
         return $this->belongsTo(Matricula::getClass());
+    }
+
+    public function Grupo(){
+        return $this->belongsTo(Grupo::getClass());
+    }
+    public function Docente(){
+        return $this->belongsTo(Docente::getClass());
     }
 
 }
