@@ -16,7 +16,7 @@ use App\Http\Repositories\ReciboRepo;
 use App\Http\Repositories\ReciboTipoRepo;
 use App\Http\Repositories\ReciboConceptoPagoRepo;
 use App\Http\Repositories\PagoRepo;
-use Dompdf\Dompdf;
+use PDF;
 
 class ReciboController extends Controller
 {
@@ -56,4 +56,27 @@ class ReciboController extends Controller
 		$pdf->download('recibos.pdf');
 		return redirect()->back();
 	}
+
+	
+    public function invoice() 
+    {
+        $data = $this->getData();
+        $date = date('Y-m-d');
+        $invoice = "2222";
+        $view =  \View::make('pdf.invoice', compact('data', 'date', 'invoice'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('invoice');
+    }
+ 
+    public function getData() 
+    {
+        $data =  [
+            'quantity'      => '1' ,
+            'description'   => 'some ramdom text',
+            'price'   => '500',
+            'total'     => '500'
+        ];
+        return $data;
+    }
 }

@@ -138,8 +138,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
-
+       
         /*
          * Application Service Providers...
          */
@@ -153,6 +152,11 @@ return [
 
         /*Dependencias formulario blade*/    
         Collective\Html\HtmlServiceProvider::class,
+
+        /*Dompdf*/    
+        Barryvdh\DomPDF\ServiceProvider::class,
+
+
     ],
 
     /*
@@ -204,7 +208,7 @@ return [
         // ...
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-        'PDF'       => Barryvdh\DomPDF\Facade::class
+        'PDF' => 'Barryvdh\DomPDF\Facade',
         // ...
     ],
 
