@@ -26,6 +26,7 @@ class CrearNuevoDocenteRequest extends Request
 
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
+            'nro_documento' => 'required|unique:docente,nro_documento',
             'apellidos' => 'required',
             'nombres' => 'required',
             'descripcion' => 'required',
@@ -38,6 +39,7 @@ class CrearNuevoDocenteRequest extends Request
         return [
             'tipo_documento_id.required' => 'Escriba un tipo de documento',
             'nro_documento.required' => 'Escriba el número de documento',  
+            'nro_documento.unique'=> 'El número de documento ya está en uso', 
             'apellidos.required' => 'Escriba el nombre',
             'nombres.required' => 'Escriba el apellido',
             'descripcion.required' => 'Escriba la descripción',     

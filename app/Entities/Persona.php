@@ -22,6 +22,10 @@ class Persona extends Entity
         return $this->belongsTo(TipoDocumento::getClass());
     }
 
+    public function Asesor(){
+        return $this->belongsTo(Asesor::getClass());
+    }
+
     public function Preinforme(){
         return $this->hasMany(Preinforme::getClass());
     }

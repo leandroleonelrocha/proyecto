@@ -27,9 +27,11 @@ require_once(__DIR__ . '/Routes/rol_director_rutas/DirectorRoute.php');
 
 require_once(__DIR__ . '/Routes/LenguajeRoute.php');
 
+
 require_once(__DIR__ . '/Routes/UsuarioRoute.php'); // Esto?
 
 require_once(__DIR__ . '/Routes/ContrasenaRoute.php'); 
+require_once(__DIR__ . '/Routes/RestauracionCuentaRoute.php'); 
 
 Route::get('/', function () {
     return view('login');

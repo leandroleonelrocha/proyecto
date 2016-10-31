@@ -14,7 +14,9 @@ class AsesorFilial extends Entity
     protected $fillable = ['asesor_id','filial_id'];
 
     // Relaciones
-    public function AsesorF(){
-        return $this->belongsTo(AsesorF::getClass());
-    }
+
+
+     public function Asesor(){
+         return $this->belongsTo(Asesor::getClass());
+     }
 }

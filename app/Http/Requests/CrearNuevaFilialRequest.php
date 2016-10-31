@@ -38,7 +38,9 @@ class CrearNuevaFilialRequest extends Request
             'codigo_postal' => 'required',
             'nombre' => 'required|unique:filial,nombre',
            	'director_id' => 'required',
-           	'mail' => 'required'
+            'telefono' => 'required',
+           	'mail' => 'required',
+            'mail' => 'required|unique:filial,mail'
 
         ];
     }
@@ -47,13 +49,14 @@ class CrearNuevaFilialRequest extends Request
     {
         return [
             'nombre.required' => 'Escriba un Nombre',
-
             'direccion.required' => 'Escriba una dirección',
             'localidad.required' => 'Escriba una localidad',
             'codigo_postal.required' => 'Escriba el código postal',
-            'nombre.unique'=> 'El nombe de la filial ya esta en uso',
-            'director_id.required' => 'Selecciona un director',  
-            'mail.required' => 'Escriba un email'
+            'nombre.unique'=> 'El nombe de la filial ya está en uso',
+            'director_id.required' => 'Selecciona un director',
+            'telefono.required' => 'Escriba el teléfono',  
+            'mail.required' => 'Escriba un email',
+            'mail.unique'=> 'El mail ya está en uso'
         ];
     }
 

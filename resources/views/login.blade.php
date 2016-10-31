@@ -57,9 +57,10 @@
 
         
 
-       <!--   <a href="{{ route('usuario.nuevo')}}" class="text-center">Registro</a><br> -->
-        <a href="{{ route('contrasena.nueva')}}" class="text-center">Olvido la contraseña</a>
-        <div clas"s="row">
+       
+        <a href="{{ route('contrasena.nueva')}}" class="text-center">Cambio de contraseña del usuario</a> <br/>
+        <a href="{{ route('restaurarCuenta.nueva')}}" class="text-center">Olvidó la contraseña</a>
+        <div class ="row">
             <div class="col-xs-12">
                 <!-- Mensaje -->
                 @if (session()->has('msg_error'))

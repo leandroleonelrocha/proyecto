@@ -12,9 +12,9 @@
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
 
-							    	<div class="col-md-12 form-group">
+					    	<div class="col-md-12 form-group">
 								<label>Asesor</label>
-								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor_id',$asesores->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">Datos Personales</h4>

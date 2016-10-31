@@ -14,6 +14,7 @@ use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevaPersonaRequest;
+use App\Http\Requests\EditarPersonaRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -23,11 +24,11 @@ class PersonaController extends Controller {
 	
     public function __construct(PersonaRepo $personaRepo, TipoDocumento $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, AsesorRepo $asesorRepo)
 	{
-		$this->personaRepo        =   $personaRepo;
-		$this->tipoDocumentoRepo  =   $tipoDocumentoRepo;
-        $this->personaMailRepo  =       $personaMailRepo;
-        $this->personaTelefonoRepo  = $personaTelefonoRepo;
-        $this->asesorRepo=              $asesorRepo;
+		$this->personaRepo         =   $personaRepo;
+		$this->tipoDocumentoRepo   =   $tipoDocumentoRepo;
+        $this->personaMailRepo     =   $personaMailRepo;
+        $this->personaTelefonoRepo =   $personaTelefonoRepo;
+        $this->asesorRepo          =   $asesorRepo;
 
 	}
 
@@ -76,7 +77,8 @@ class PersonaController extends Controller {
                     // Si no existe lo crea
 
                     $data['filial_id'] = session('usuario')['entidad_id'];
-                    $data['asesor_id'] = $request->asesor;
+                    $data['asesor_id'] = $request->asesor_id;
+
                     if($this->personaRepo->create($data)){
 
                         $persona=$this->personaRepo->all()->last();
@@ -123,8 +125,10 @@ class PersonaController extends Controller {
             if (session('usuario')['rol_id'] == 4){
             	$persona = $this->personaRepo->find($id); // Obtengo a la persona
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-            	return view('rol_filial.personas.editar',compact('persona','tipos','asesores'));
+                $asesores = $this->asesorRepo->all()->lists('full_name','id');
+                $mail=$this->personaMailRepo->findMail($id);// Obtengo al mail
+                $telefono=$this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
+            	return view('rol_filial.personas.editar',compact('persona','tipos','asesores','mail','telefono'));
             }
             else
                 return redirect()->back();
@@ -133,8 +137,8 @@ class PersonaController extends Controller {
             return redirect('login');
     }
 
-    //Modificación de laa persona
-    public function editar_post(Request $request){
+    //Modificación de la persona
+    public function editar_post(EditarPersonaRequest $request){
 
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
@@ -142,10 +146,14 @@ class PersonaController extends Controller {
 
                 $model = $this->personaRepo->find($data['persona']); // Busco a la persona
                 
-  
                 if($this->personaRepo->edit($model,$data)) // Modificación de los datos
-
-                    return redirect()->route('filial.personas')->with('msg_ok','La persona ha sido modificada con éxito.');
+                {
+                    //editar mail
+                    $this->personaMailRepo->editMail($data['persona'],$data['mail']); 
+                     //editar telefono
+                    $this->personaTelefonoRepo->editTelefono($data['persona'],$data['telefono']); 
+                   
+                    return redirect()->route('filial.personas')->with('msg_ok','La persona ha sido modificada con éxito.');}
                 else
                     return redirect()->route('filial.personas')->with('msg_error','La persona no ha podido ser modificada.');
             }

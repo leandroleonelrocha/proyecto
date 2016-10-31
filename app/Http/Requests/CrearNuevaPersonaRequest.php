@@ -23,9 +23,10 @@ class CrearNuevaPersonaRequest extends Request
     public function rules()
     {
         return [
-
+           // 'asesor_id' => 'required',
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
+            'nro_documento' => 'required|unique:persona,nro_documento',
             'apellidos' => 'required',
             'nombres' => 'required',
             'genero'=> 'required',
@@ -33,9 +34,11 @@ class CrearNuevaPersonaRequest extends Request
             'domicilio' => 'required',
             'localidad' => 'required',
             'telefono' => 'required',
+            'mail' => 'required',
             'estado_civil' => 'required',
             'nivel_estudios' => 'required',
             'aclaraciones' => 'required',
+            'mail' => 'required|unique:persona_mail,mail',
 
         ];
     }
@@ -43,8 +46,11 @@ class CrearNuevaPersonaRequest extends Request
     public function messages()
     {
         return [
+
+          //  'asesor_id.required' => 'Seleccione un asesor',
             'tipo_documento_id.required' => 'Seleccione un tipo de documento',
             'nro_documento.required' => 'Escriba un número documento',
+            'nro_documento.unique'=> 'El número de documento ya está en uso', 
             'apellidos.required' => 'Escriba el apellido',
             'nombres.required' => 'Escriba el nombre',
             'genero.required' => 'Seleccione un género',
@@ -52,10 +58,12 @@ class CrearNuevaPersonaRequest extends Request
             'domicilio.required' => 'Escriba el domicilio',
             'localidad.required' => 'Escriba la localidad',
             'telefono.required' => 'Escriba el teléfono',
+            'mail.required' => 'Escriba el mail',
             'localidad.required' => 'Escriba la localidad',
             'estado_civil.required' => 'Escriba el estado civil',
             'nivel_estudios.required' => 'Escriba el nivel de estudios',
             'aclaraciones.required' => 'Escriba una aclaración',
+            'mail.unique'=> 'El mail ya está en uso', 
         ];
     }
 

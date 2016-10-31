@@ -129,7 +129,7 @@
                   </li>
 
                   <li>
-                  <a href="#">
+                  <a href="{{ route('grupos.index')}}">
                     <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span>
                   </a>
                   </li>
@@ -149,6 +149,7 @@
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
                       <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                       <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i> Asignaci&oacute;n a filial</a></li>
                     </ul>
                   </li>
 

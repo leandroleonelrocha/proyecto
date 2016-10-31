@@ -5,7 +5,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3>Alta de persona</h3>
+					<h3>Editar persona</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
@@ -15,7 +15,7 @@
 					    	<div class="col-md-12 form-group">
 		    					{!! Form::hidden('persona', $persona->id, array('class'=>'form-control')) !!}
 								<label>Asesor</label>
-								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor_id',$asesores->toArray(),$persona->Asesor->id,array('class' => 'form-control')) !!}
 							</div>
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">Datos Personales</h4>
@@ -23,7 +23,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>Tipo de Documento</label>
-								{!! Form::select('tipo_documento_id',$tipos->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('tipo_documento_id',$tipos->toArray(),$persona->TipoDocumento->id,array('class' => 'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>N&uacute;mero de Documento</label>
@@ -61,11 +61,15 @@
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Tel&eacute;fono</label>
-								{!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+								@foreach ($telefono as $t)
+									{!! Form::text('telefono',$t->telefono,array('class'=>'form-control')) !!}
+								@endforeach
 							</div>
 							<div class="col-md-6 form-group">
 								<label>E-mail</label>
-								{!! Form::email('mail',null,array('class'=>'form-control')) !!}
+								@foreach ($mail as $m)
+									{!! Form::email('mail',$m->mail,array('class'=>'form-control')) !!}
+								@endforeach
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Estado Civil</label>
@@ -77,25 +81,31 @@
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Estudios de Computaci&oacute;n</label>
-								<div>{!! Form::checkbox('estudio_computacion', '1') !!} Si</div>
+								{!!Form::hidden('estudio_computacion', '0') !!}
+								<div>{!! Form::checkbox('estudio_computacion', '1',$persona->estudio_computacion) !!} Si</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Posee Computadoras</label>
-								<div>{!! Form::checkbox('posee_computadora', '1') !!} Si</div>
+								{!!Form::hidden('posee_computadora', '0') !!}
+								<div>{!! Form::checkbox('posee_computadora', '1',$persona->posee_computadora) !!} Si</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Disponibilidad</label>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_manana', '1') !!} Ma&ntilde;ana
+								 	{!!Form::hidden('disponibilidad_manana', '0') !!}
+									{!! Form::checkbox('disponibilidad_manana','1',$persona->disponibilidad_manana)!!} Ma&ntilde;ana
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_tarde', '1') !!} Tarde
+								 	{!!Form::hidden('disponibilidad_tarde', '0') !!}
+									{!! Form::checkbox('disponibilidad_tarde', 'value',$persona->disponibilidad_tarde) !!} Tarde
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_noche', '1') !!} Noche
+								 	{!!Form::hidden('disponibilidad_noche', '0') !!}
+									{!! Form::checkbox('disponibilidad_noche', '1',$persona->disponibilidad_noche) !!} Noche
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_sabados', '1') !!} S&aacute;bados
+								 	{!!Form::hidden('disponibilidad_sabados', '0') !!}
+									{!! Form::checkbox('disponibilidad_sabados','1', $persona->disponibilidad_sabados) !!} S&aacute;bados
 								</div>
 							</div>
 							<div class="col-md-6 form-group">

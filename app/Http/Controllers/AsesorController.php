@@ -12,6 +12,7 @@ use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevoAsesorRequest;
+use App\Http\Requests\EditarAsesorRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -26,8 +27,6 @@ class AsesorController extends Controller {
         $this->asesorMailRepo  = $asesorMailRepo;
         $this->asesorTelefonoRepo  = $asesorTelefonoRepo;
         $this->asesorFilialRepo  = $asesorFilialRepo;
-
-
 	}
 
     // Página principal de Acesor
@@ -78,9 +77,9 @@ class AsesorController extends Controller {
                         $asesor=$this->asesorRepo->all()->last();
 
                         $f = session('usuario')['entidad_id'];
-                        $filial['asesor_id']=$asesor->id;
-                        $filial['filial_id']=$f;
-                        $this->asesorFilialRepo->create($filial);
+                        // $filial['asesor_id']=$asesor->id;
+                        // $filial['filial_id']=$f;
+                        // $this->asesorFilialRepo->create($filial);
 
                         $mail['asesor_id']=$asesor->id;
                         $mail['mail']=$request->mail;
@@ -109,7 +108,9 @@ class AsesorController extends Controller {
             if (session('usuario')['rol_id'] == 4){
                 $asesor = $this->asesorRepo->find($id); // Obtengo al Asesor
                 $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-                return view('rol_filial.asesores.editar',compact('asesor','tipos'));
+                $mail=$this->asesorMailRepo->findMail($id);
+                $telefono=$this->asesorTelefonoRepo->findTelefono($id); 
+                return view('rol_filial.asesores.editar',compact('asesor','tipos','mail','telefono'));
             }
             else
                 return redirect()->back();
@@ -119,20 +120,21 @@ class AsesorController extends Controller {
     }
 
     //Modificación del Acesor
-    public function editar_post(Request $request){
+    public function editar_post(EditarAsesorRequest $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $data = $request->all();
-             //   $asesor=$this->asesorRepo->all()->last();
-        
-                $model = $this->asesorRepo->find($data['asesor']); // Busco al asesor
+                $model = $this->asesorRepo->find($data['asesor']);
 
-                //$mail['asesor_id']=$asesor->id;
-                //$mail['mail']=$request->mail;
-                //$this->asesorMailRepo->edit($mail);
                 if($this->asesorRepo->edit($model,$data)) // Modificación de los datos
-
+                {
+                    //editar mail
+                    $this->asesorMailRepo->editMail($data['asesor'],$data['mail']); 
+                     //editar telefono
+                    $this->asesorTelefonoRepo->editTelefono($data['asesor'],$data['telefono']); 
+             
                     return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido modificado con éxito.');
+                }
                 else
                     return redirect()->route('filial.asesores')->with('msg_error',' El asesor no ha podido ser modificado.');
             }

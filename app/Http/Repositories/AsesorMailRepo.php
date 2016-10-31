@@ -11,4 +11,12 @@ class AsesorMailRepo extends BaseRepo {
     {
         return new AsesorMail();
     }
+
+    public function findMail($asesor_id){
+    	return AsesorMail::where('asesor_id',$asesor_id)->get();
+    }
+
+    public function editMail($id,$mail){
+    	return AsesorMail::where('asesor_id', $id)->update(array('mail' => $mail));
+    }
 }

@@ -11,4 +11,12 @@ class AsesorTelefonoRepo extends BaseRepo {
     {
         return new AsesorTelefono();
     }
+
+    public function findTelefono($asesor_id){
+    	return AsesorTelefono::where('asesor_id',$asesor_id)->get();
+    }
+
+    public function editTelefono($id,$tel){
+    	return AsesorTelefono::where('asesor_id', $id)->update(array('telefono' => $tel));
+    }
 }

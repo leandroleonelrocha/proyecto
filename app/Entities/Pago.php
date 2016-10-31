@@ -17,4 +17,8 @@ class Pago extends Entity
     public function Matricula(){
         return $this->hasMany(Matricula::getClass());
     }
+
+    public function Filial(){
+        return $this->belongsTo(Filial::getClass());
+    }
 }

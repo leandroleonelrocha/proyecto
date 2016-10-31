@@ -19,7 +19,6 @@ class Asesor extends Entity
         return  $this->apellidos . ', ' . $this->nombres ;
     }
 
-
     // Relaciones
     public function Preinforme(){
         return $this->hasMany(Preinforme::getClass());
@@ -28,7 +27,6 @@ class Asesor extends Entity
     public function TipoDocumento(){
         return $this->belongsTo(TipoDocumento::getClass());
     }
-
 
     public function AsesorMail(){
         return $this->hasMany(AsesorMail::getClass());
@@ -41,4 +39,5 @@ class Asesor extends Entity
     public function AsesorFilial(){
         return $this->hasMany(AsesorFilial::getClass());
     }
+
 }

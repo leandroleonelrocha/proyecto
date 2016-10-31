@@ -40,12 +40,17 @@
 
 							<div class="col-md-6 form-group">
 								<label>Tel&eacute;fono</label>
-								{!! Form::text('telefono', $asesor->telefono, array('class'=>'form-control')) !!}
+								@foreach ($telefono as $t)
+									{!! Form::text('telefono', $t->telefono, array('class'=>'form-control')) !!}		
+								@endforeach
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>E-Mail</label>
-								{!! Form::email('mail', $asesor->mail, array('class'=>'form-control')) !!}
+								@foreach ($mail as $m)
+									{!! Form::email('mail',$m->mail , array('class'=>'form-control')) !!}
+								@endforeach
+
 							</div>
 
 							<div class="box-footer col-xs-12">

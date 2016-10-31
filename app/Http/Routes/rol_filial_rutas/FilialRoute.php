@@ -17,6 +17,9 @@ Route::group(['prefix' => 'filial'], function(){
 	// Rutas Operaciones ---------- Matrículas
 	require_once('MatriculasRoute.php');
 
+	// Rutas Operaciones ---------- Pago
+	require_once('PagoRoute.php');
+
 	// Rutas Operaciones ---------- Recibos
 	// require_once('Route.php');
 
@@ -30,6 +33,8 @@ Route::group(['prefix' => 'filial'], function(){
 	require_once('MateriasRoute.php');
 
 	// Rutas Operaciones ---------- Grupos
+	require_once('GrupoRoute.php');
+
 	// require_once('GruposRoute.php');
 
 	// Rutas Operaciones ---------- Exámenes
@@ -41,6 +46,7 @@ Route::group(['prefix' => 'filial'], function(){
 	// Rutas Operaciones ---------- Docentes
 	require_once('DocentesRoute.php');
 	require_once('AsesoresRoute.php');
+	require_once('AsignacionAsesoresRoute.php');
 	require_once('PersonasRoute.php');
 	// Rutas Operaciones ---------- Estadísticas
 	// require_once('Route.php');

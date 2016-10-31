@@ -31,23 +31,51 @@
       </div>
 
       <div class="register-box-body">
-        <p class="login-box-msg">Restablecer contraseña del usuario</p>
+        <p class="login-box-msg">Cambio de contraseña del usuario</p>
         {!! Form::open(['route'=>'contrasena.postNueva', 'method' => 'post']) !!}
 
   
           <div class="form-group has-feedback">
-           {!! Form::email('mail', null ,  array('class'=>'form-control', 'placeholder'=>'Ingrese E-mail')) !!}  
+           {!! Form::email('mail', null ,  array('class'=>'form-control', 'placeholder'=>'Ingrese el E-mail')) !!}  
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
 
+          <div class="form-group has-feedback">
+             {!! Form::password('passwordActual', array('id'=>'password', 'class'=>'form-control', 'placeholder'=>'Ingrese la contraseña actual' ))!!}  
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+
+          <div class="form-group has-feedback">
+             {!! Form::password('password', array('id'=>'password', 'class'=>'form-control', 'placeholder'=>'Ingrese la nueva contraseña' ))!!}  
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+
           <div class="row">
-          
             <div class="col-xs-12">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Enviar Mail</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Cambiar</button> <br/>
             </div><!-- /.col -->
           </div>
         {!! Form::close() !!}
-        
+
+        <div class ="row">
+          <div class="col-xs-12">
+            @if (session()->has('msg_error'))
+                <div class="alert alert-danger">
+                    <strong>Error!</strong><br />
+                    {{ session('msg_error') }}
+                </div>
+            @endif
+
+            @if (session()->has('msg_ok'))
+                 <div class="alert alert-success">
+                    <strong>Exito!</strong><br />
+                    {{ session('msg_ok') }}
+                    <a href="../login">Volver al Login</a>
+                </div>
+
+            @endif
+          </div>     
+        </div>   
     </div><!-- /.register-box -->
 
     <!-- jQuery 2.1.4 -->

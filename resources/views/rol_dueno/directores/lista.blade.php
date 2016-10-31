@@ -15,7 +15,7 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-		
+						<th>Tipo Documento</th>
 						<th>N&uacute;mero de Documento</th>
 						<th>Apellido</th>
 						<th>Nombres</th>
@@ -26,6 +26,7 @@
 	    				<tbody>
 						    @foreach($directores as $d)
 							    <tr role="row" class="odd">
+				    				<td>{{$d->TipoDocumento->tipo_documento}}</td>
 							      	<td>{{ $d->nro_documento}}</td>
 							        <td>{{ $d->apellidos }}</td>
 							        <td>{{ $d->nombres }}</td>

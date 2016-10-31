@@ -35,15 +35,19 @@
 							<div class="col-md-6 form-group">
 								<label>Disponibilidad</label>
 								<div class="col-xs-12">
+									{!!Form::hidden('disponibilidad_manana', '0') !!}
 									{!! Form::checkbox('disponibilidad_manana','1', $docente->disponibilidad_manana) !!} Ma&ntilde;ana
 								</div>
 								<div class="col-xs-12">
+									{!!Form::hidden('disponibilidad_tarde', '0') !!}
 									{!! Form::checkbox('disponibilidad_tarde','1', $docente->disponibilidad_tarde) !!} Tarde
 								</div>
 								<div class="col-xs-12">
+									{!!Form::hidden('disponibilidad_noche', '0') !!}
 									{!! Form::checkbox('disponibilidad_noche','1', $docente->disponibilidad_noche) !!} Noche
 								</div>
 								<div class="col-xs-12">
+									{!!Form::hidden('disponibilidad_sabados', '0') !!}
 									{!! Form::checkbox('disponibilidad_sabados', '1', $docente->disponibilidad_sabados) !!} S&aacute;bados
 								</div>
 							</div>

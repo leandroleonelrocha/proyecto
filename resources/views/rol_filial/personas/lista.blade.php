@@ -42,14 +42,14 @@
 					            	@endforeach</td>
 					            	<td>
 				            	   	@foreach($p->PersonaMail as $mail)
-						            		{{$mail->mail}}</td>
-					            	@endforeach
+						            		{{$mail->mail}}
+					            	@endforeach</td>
 							
 						         	<td><?php if($p->disponibilidad_manana == 1) echo'M ';?>
 						         		<?php if($p->disponibilidad_tarde == 1) echo'T ';?>
-										<?php if($p->disponibilidad_noche == 1)  echo 'N ';?>
-										<?php if($p->disponibilidad_sabado == 1) echo'Sab';?>
-										<?php if($p->disponibilidad_sabado == 0 and $p->disponibilidad_manana == 0 and $p->disponibilidad_tarde == 0 and $p->disponibilidad_noche == 0) echo'Ninguna';?>
+										<?php if($p->disponibilidad_noche == 1) echo'N ';?>
+										<?php if($p->disponibilidad_sabados == 1)  echo 'SAB';?>
+										<?php if($p->disponibilidad_sabados == 0 and $p->disponibilidad_manana == 0 and $p->disponibilidad_tarde == 0 and $p->disponibilidad_noche == 0) echo'Ninguna';?>
 						         	</td>  
 				
 

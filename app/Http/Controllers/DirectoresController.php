@@ -12,11 +12,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevoDirectorRequest;
+use App\Http\Requests\EditarDirectorRequest;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\DirectorMailRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
-
+use Mail;
 
 
 class DirectoresController extends Controller
@@ -73,8 +74,20 @@ class DirectoresController extends Controller
 		        $data = json_decode(curl_exec($ch),true);
 		        curl_close($ch);
 
+                // Datos del mail
+    			$user = $request->mail;
+    			$nombrefull= $request->nombres . " " . $request->apellidos; 
+        		$datosMail = array(	'filial' 	=> $nombrefull, 
+        					'user' 		=> $user, 
+        					'password' 	=> $data);
 
-	       		return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido agregado con éxito');}
+		        // Envío del mail
+		        Mail::send('mailing.cuenta',$datosMail,function($msj) use($user){
+		        	$msj->subject('GeCo -- Nueva Cuenta');
+		        	$msj->to($user);
+		        });
+
+	       		return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido agregado con éxito,');}
 	   		else
 	    		return redirect()->route('dueño.directores')->with('msg_error','No se ha podido agregar al director, intente nuevamente.');
 			}
@@ -85,28 +98,31 @@ class DirectoresController extends Controller
 
 	//	return redirect()->route('director.index')->with('msg_ok', 'Director creado correctamente');
 
-			return redirect()->route('dueño.directores')->with('msg_ok', 'Director creado correctamente');
+			return redirect()->route('dueño.directores')->with('msg_ok', 'Director creado correctamente,');
 
 	}
 
     public function borrar($id){
        	if($this->directorRepo->disable($this->directorRepo->find($id)))
-         	return redirect()->back()->with('msg_ok', 'Director eliminado correctamente');
+         	return redirect()->back()->with('msg_ok', 'Director eliminado correctamente,');
     	else
             return redirect()->back()->with('msg_error','El director no ha podido ser eliminado.');
     }
 
   	public function editar($id){
     	$director = $this->directorRepo->find($id);
-    	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id_tipo_documento');
-    	return view('rol_dueno.directores.editar',compact('director','tipos'));
+    	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+	  	$telefono=$this->directorTelefonoRepo->findTelefono($id);
+    	return view('rol_dueno.directores.editar',compact('director','tipos','telefono'));
     }
 
-    public function editar_post(Request $request){
+    public function editar_post(EditarDirectorRequest $request){
         $data = $request->all();
         $model = $this->directorRepo->find($data['id']);
-        if($this->directorRepo->edit($model,$data))
-            return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido modificado con éxito');
+        if($this->directorRepo->edit($model,$data)){
+	      //editar telefono
+	        $this->directorTelefonoRepo->editTelefono($data['id'],$data['telefono']);
+            return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido modificado con éxito.');}
         else
             return redirect()->route('dueño.directores')->with('msg_error','El director no ha podido ser modificado.');
     }

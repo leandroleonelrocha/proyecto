@@ -15,7 +15,7 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Documento</th>
+						<th>N&uacute;mero de Documento</th>
 						<th>Apellido</th>
 						<th>Nombres</th>
 						<th>Direcci&oacuten</th>

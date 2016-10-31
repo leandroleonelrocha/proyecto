@@ -19,7 +19,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>Tipo de documento</label>
-     				      		{!! Form::select('tipo_documento_id',$tipos->toArray(),null,array('class' => 'form-control')) !!}
+     				      		{!! Form::select('tipo_documento_id',$tipos->toArray(),$director->TipoDocumento->id,array('class' => 'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
@@ -38,7 +38,9 @@
 
 							<div class="col-md-6 form-group">
 								<label>Tel&eacute;fono</label>
-								{!! Form::text('telefono', $director->telefono, array('class'=>'form-control')) !!}
+								@foreach ($telefono as $t)
+									{!! Form::text('telefono', $t->telefono, array('class'=>'form-control')) !!}		
+								@endforeach
 							</div>
 							<div class="box-footer col-xs-12">
 							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}

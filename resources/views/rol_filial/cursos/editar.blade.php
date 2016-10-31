@@ -32,11 +32,14 @@
 					     		{!! Form::textarea('descripcion',$curso->descripcion,array('class'=>'form-control','size'=>'30x3')) !!}
 							</div>
 
-							<div class="col-md-12 form-group">
-								<label>Asiste a taller</label>
-								 {!! Form::checkbox('taller', '1') !!}
-							</div>
-				
+							<div class="col-md-8 form-group">
+	 				         <div class="col-xs-1"><label>Taller</label></div>
+                                <div class="col-xs-11">
+		                            {!!Form::hidden('taller', '0') !!}
+		                            {!! Form::checkbox('taller','1')!!}
+                                </div>
+						
+					</div>
 							<div class="box-footer col-xs-12">
 							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
 				          	</div>

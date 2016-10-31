@@ -40,12 +40,14 @@
 
                             <div class="col-md-6 form-group">
                                 <label>Tel&eacute;fono</label>
-                                {!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+								@foreach ($telefono as $t)
+									{!! Form::text('telefono', $t->telefono, array('class'=>'form-control')) !!}		
+								@endforeach
                             </div>
 
 							<div class="col-md-6 form-group">
 								<label>Director</label>
-     				            {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
+     				            {!! Form::select('director_id', $directores->toArray() , $filial->Director->id, array('class'=>'form-control')) !!}
 							</div>
 
 
