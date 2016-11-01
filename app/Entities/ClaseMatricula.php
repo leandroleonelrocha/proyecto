@@ -4,9 +4,20 @@ namespace App\Entities;
 class ClaseMatricula extends Entity {
 
     protected  $table= 'clase_matricula';
-   // protected $primaryKey= 'id_curso';
+    protected $fillable   = ['asistio','matricula_id','clase_id'];
+    protected $attributes = [
+       'asistio' => 'false'
+    ];
+   
+    public function Clase()
+    {
+    	return $this->belongsTo(Clase::getClass());
+    }
 
-    protected $fillable   = ['grupo_id','fecha', 'matricula_id','asistion'];
+    public function Matricula()
+    {
+    	return $this->belongsTo(Matricula::getClass());
+    }
 
 	
 }

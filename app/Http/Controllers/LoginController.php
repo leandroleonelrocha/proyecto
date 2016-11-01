@@ -17,15 +17,13 @@ class LoginController extends Controller {
 
     public function postLogin(Request $request)
     {
-        
+
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
         curl_setopt($ch, CURLOPT_HEADER, false);  
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
-        
-
 
         if ($data){
           session(['usuario' => $data]);

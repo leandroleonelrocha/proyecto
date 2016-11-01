@@ -7,6 +7,7 @@ return [
     'preinforme'    => 'Pre-Informe',
     'matricula'     => 'Matrículas',
     'recibo'        => 'Recibos',
+    'pago'          => 'Pagos',
     'curso'         => 'Cursos',
     'carrera'       => 'Carreras',
     'materia'       => 'Materias',

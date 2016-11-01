@@ -132,6 +132,10 @@
                   <a href="{{ route('grupos.index')}}">
                     <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span>
                   </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    </ul>
                   </li>
 
                   <li>

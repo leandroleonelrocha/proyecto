@@ -5,7 +5,8 @@ class Grupo extends Entity {
 
     protected  $table= 'grupo';
 
-    protected $fillable   = ['curso_id', 'carrera_id', 'materia_id', 'descripcion', 'docente_id', 'turno_manana', 'turno_tarde', 'turno_noche', 'sabados', 'fecha_inicio', 'fecha_fin' , 'filial_id', 'activo', 'terminado', 'cancelado'];
+   protected $fillable   = ['curso_id', 'carrera_id', 'materia_id', 'descripcion', 'docente_id', 'turno_manana', 'turno_tarde', 'turno_noche', 'sabados', 'fecha_inicio', 'fecha_fin' , 'filial_id', 'activo', 'terminado', 'cancelado'];
+    
 
     //Relaciones
     public function Matricula(){
@@ -32,11 +33,22 @@ class Grupo extends Entity {
         return $this->belongsTo(Docente::getClass());
     }
     
-    public function CLaseMatricula(){
-        return $this->belongsTo(CLaseMatricula::getClass());
+    public function Clase(){
+        return $this->belongsToMany(CLase::getClass());
     }  
 
     public function GrupoMatricula(){
         return $this->belongsTo(GrupoMatricula::getClass());
     }
+
+    public function getFullDateAttribute()
+    {
+        //10/26/2016 - 10/26/2016
+
+        $inicio = date("d/m/Y", strtotime($this->fecha_inicio));
+        $fin =date("d/m/Y", strtotime($this->fecha_fin));
+        
+        return $inicio .' - '. $fin;
+    }
+
 }

@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="{{asset('plugins/datatables/dataTables.bootstrap.css')}}">
 
 <!-- Our Style -->
-<link rel="stylesheet" href="{{asset('css/style.css')}}">
+<link rel="stylesheet" href="{{asset('css/geco-styles.css')}}">
 
 <!-- Full calendar -->
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.min.css')}}">

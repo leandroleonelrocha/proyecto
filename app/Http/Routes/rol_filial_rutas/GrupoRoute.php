@@ -2,7 +2,7 @@
 
 Route::group(['prefix' => 'grupos'], function(){
 
-	Route::get('/',[
+	Route::get('',[
 		'as' => 'grupos.index',
 		'uses' => 'GrupoController@index'
 	 ]);
@@ -25,7 +25,7 @@ Route::group(['prefix' => 'grupos'], function(){
 	]);
 
 	
-	Route::post('postEditar',[
+	Route::post('postEditar/{id}',[
 	'as'	=> 'grupos.postEdit',
 	'uses'	=>	'GrupoController@postEdit'
 	]);
@@ -49,16 +49,31 @@ Route::group(['prefix' => 'grupos'], function(){
 	]);
 
 	Route::post('cargar_clase',[
-
 		'as' => 'grupos.cargar_clase',
 		'uses' => 'GrupoController@cargar_clase'
 	]);
 
+	
 
-
-	Route::post('process', [
-
-		'as' => 'grupos.process',
-		'uses' => 'GrupoController@process'
+	Route::post('nueva_clase', [
+		'as' => 'grupos.nueva_clase',
+		'uses' => 'GrupoController@nueva_clase'
 	]);
+
+	Route::post('editar_clase', [
+		'as' => 'grupos.editar_clase',
+		'uses' => 'GrupoController@editar_clase'
+	]);
+
+	Route::get('clases/borrar_clase/{id}', [
+		'as' => 'grupos.borrar_clase',
+		'uses' => 'GrupoController@borrar_clase'
+	]);
+
+	Route::post('editar_clase_arrastrando',[
+		'as' => 'grupos.editar_clase_arrastrando',
+		'uses' => 'GrupoController@editar_clase_arrastrando'
+	]);	
+
+	
 });
