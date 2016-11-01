@@ -116,7 +116,6 @@ class GrupoController extends Controller
 
 	public function nueva_clase(Request $request)
 	{
-		//dd($request->all());
 		$data = $request->all();
 		//$fecha = explode(" ", $request->get('hora_desde'));
 		//$data['hora_desde'] = $fecha[0];

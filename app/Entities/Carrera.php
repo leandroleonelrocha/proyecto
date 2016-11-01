@@ -23,4 +23,9 @@ class Carrera extends Entity {
 
     }
 
+    public function getFullNameAttribute()
+    {
+    	return $this->nombre .', '. $this->descripcion;
+    }
+
 }
