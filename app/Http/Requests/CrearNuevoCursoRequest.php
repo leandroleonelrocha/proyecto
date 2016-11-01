@@ -24,11 +24,14 @@ class CrearNuevoCursoRequest extends Request
     {
         return [
 
-             'id' => 'required',
+            'id' => 'required',
+            'id' => 'required|unique:curso,id',
             'nombre' => 'required',
             'duracion' => 'required',
-            'descripcion' => 'required',
             'taller' => 'required',
+            'nombre' => 'required|unique:curso,nombre'
+
+
 
         ];
     }
@@ -37,10 +40,11 @@ class CrearNuevoCursoRequest extends Request
     {
         return [
             'id.required' => 'Escriba un número de curso',
+            'id.unique'=> 'El número de curso ya está en uso',
             'nombre.required' => 'Escriba un nombre',
             'duracion.required' => 'Escriba la duración',
-            'descripcion.required' => 'Escriba la descripción',
-            'taller.required' => 'Escriba el taller',  
+            'taller.required' => 'Seleccione si asiste a un taller',
+            'nombre.unique'=> 'El nombre del curso ya está en uso' 
         ];
     }
 

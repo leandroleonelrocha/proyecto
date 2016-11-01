@@ -6,6 +6,7 @@ use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevoDocenteRequest;
+use App\Http\Requests\EditarDocenteRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -105,7 +106,7 @@ class DocenteController extends Controller {
     }
 
     //Modificación del Docente
-    public function editar_post(Request $request){
+    public function editar_post(EditarDocenteRequest $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $data = $request->all();

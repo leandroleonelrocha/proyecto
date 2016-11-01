@@ -29,9 +29,12 @@
                             </div>
 
                            <div class="col-md-6 form-group">
-                                <label>@lang('curso.taller')</label>
-                                {!! Form::text('taller',null,array('class'=>'form-control')) !!}
+                                <div class="col-xs-1"><label>@lang('curso.taller')</label></div>
+                                    <div class="col-xs-11">
+                                    {!! Form::checkbox('taller','1')!!}
+                                </div>
                             </div>
+
 
                             <div class="box-footer col-xs-12">
                             {!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}

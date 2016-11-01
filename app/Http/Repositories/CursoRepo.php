@@ -11,5 +11,4 @@ class CursoRepo extends BaseRepo {
     {
         return new Curso();
     }
-
 }

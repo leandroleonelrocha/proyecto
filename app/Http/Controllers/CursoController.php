@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevoCursoRequest;
+use App\Http\Requests\EditarCursoRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
@@ -73,7 +74,7 @@ class CursoController extends Controller
 		    return redirect('login');
     }
 
-    public function editar_post(Request $request){
+    public function editar_post(EditarCursoRequest $request){
     	if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 		        $data = $request->all();

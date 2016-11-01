@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevaCarreraRequest;
+use App\Http\Requests\EditarCarreraRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
@@ -22,7 +23,6 @@ class CarreraController extends Controller
 	{
 		$this->carreraRepo = $carreraRepo;
 	}
-
 
 	public function lista(){
 		if (null !== session('usuario')){
@@ -75,7 +75,7 @@ class CarreraController extends Controller
 		    return redirect('login');
     }
 
-    public function editar_post(Request $request){
+    public function editar_post(EditarCarreraRequest $request){
     	if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
 		        $data = $request->all();

@@ -43,7 +43,9 @@ Route::group(['prefix' => 'filial'], function(){
 
 	// Rutas Operaciones ---------- Docentes
 	require_once('DocentesRoute.php');
-	
+	require_once('AsesoresRoute.php');
+	require_once('AsignacionAsesoresRoute.php');
+	require_once('PersonasRoute.php');
 	// Rutas Operaciones ---------- Estadísticas
 	// require_once('Route.php');
 });

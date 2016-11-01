@@ -41,8 +41,9 @@ class GrupoController extends Controller
 
 	public function index()
 	{
+
+		$grupos = $this->grupoRepo->allEnable();
 		
-		$grupos = $this->grupoRepo->allEnable();	
 		return view('rol_filial.grupos.index', compact('grupos'));
 	}
 
@@ -107,21 +108,14 @@ class GrupoController extends Controller
 	{
 		$grupos = $this->grupoRepo->lists('descripcion', 'id');
 		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
-		return view('rol_filial.grupos.clases', compact('grupos', 'docentes'));
-	}
-
-	public function test()
-	{
-		$grupos = $this->grupoRepo->lists('descripcion', 'id');
-		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
 		$events = $this->claseRepo->all();
-		return view('rol_filial.grupos.test', compact('grupos', 'docentes', 'events'));
-
+		return view('rol_filial.grupos.clases', compact('grupos', 'docentes', 'events'));
 	}
+
+
 
 	public function nueva_clase(Request $request)
 	{
-		//dd($request->all());
 		$data = $request->all();
 		//$fecha = explode(" ", $request->get('hora_desde'));
 		//$data['hora_desde'] = $fecha[0];
@@ -202,91 +196,5 @@ class GrupoController extends Controller
 
 
 
-
-	public function process(Request $request)
-	{
-		
-		$type = $request->get('type');
-
-		if($type == 'new')
-		{
-			$data = $request->all();
-			$fecha = explode(" ", $request->get('hora_desde'));
-			$data['hora_desde'] = $fecha[0];
-
-			$update =$this->claseRepo->create($data);
-			if($update)
-				echo json_encode(array('status'=>'success'));
-			else
-				echo json_encode(array('status'=>'failed'));
-			
-		}
-
-		if($type == 'changetitle')
-		{
-			$eventid = $request->get('eventid');
-			return redirect()->route('rol_filial.grupos.clase_matricula');
-		
-		}
-
-		if($type == 'resetdate')
-		{
-			//$title = $_POST['title'];
-			//$startdate = $_POST['start'];
-			//$enddate = $_POST['end'];
-			//$eventid = $_POST['eventid'];
-			//$data = $request->get('eventid');
-			$eventid=$request->get('eventid');
-			$data['fecha'] = $request->get('start');
-
-			$clase=$this->claseRepo->find($eventid);
-			$update=$this->claseRepo->edit($clase,$data);
-
-			if($update)
-				echo json_encode(array('status'=>'success'));
-			else
-				echo json_encode(array('status'=>'failed'));
-		}
-
-		if($type == 'remove')
-		{
-			$clase_id = $request->get('eventid');
-
-
-			$delete = $this->claseRepo->find($clase_id)->delete();
-			if($delete)
-				echo json_encode(array('status'=>'success'));
-			else
-				echo json_encode(array('status'=>'failed'));
-		}
-
-		if($type == 'fetch')
-		{
-
-
-			$events = array();
-			$query = $this->claseRepo->all();
-	
-
-			foreach ($query as $fetch) {
-			  // Do work here
-				$e = array();
-			    $e['id'] = $fetch['id'];
-			    $e['title'] = $fetch['descripcion'];
-			    $e['start'] = $fetch['fecha'];
-				//$e['time'] = $fetch['fecha'];
-			  
-			    //$allday = ($fetch['allDay'] == "true") ? true : false;
-			    //$e['allDay'] = $allday;
-
-
-			    array_push($events, $e);
-			}	
-
-			echo json_encode($events);
-			
-		}
-
-	}
 
 }

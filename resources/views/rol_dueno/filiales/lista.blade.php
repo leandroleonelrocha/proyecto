@@ -16,8 +16,9 @@
 						<th>Direcci&oacuten</th>
 						<th>Localidad</th>
 						<th>CP</th>
+						<th>Tel&eacutefono</th>
+						<th>E-Mail</th>
 						<th>Director</th>
-						<th>Mail</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
@@ -28,8 +29,12 @@
 							        <td>{{ $f->direccion }}</td>
 							        <td>{{ $f->localidad }}</td>
 					                <td>{{ $f->codigo_postal }}</td>
+					                <td>
+			                     	@foreach($f->FilialTelefono as $telefono)
+						            		{{$telefono->telefono}}
+					            	@endforeach</td>
+					            	<td>{{ $f->mail}}</td>
 						            <td>{{ $f->Director->fullname}}</td>
-							        <td>{{ $f->mail}}</td>
 						           	<td>
 					           		<a href="{{route('dueño.filiales_editar',$f->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
 				           	   		<a href="{{route('dueño.filiales_borrar',$f->id)}}" title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar la filial?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>

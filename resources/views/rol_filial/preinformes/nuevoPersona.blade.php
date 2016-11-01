@@ -1,3 +1,5 @@
+<<<<<<< HEAD:resources/views/preinformes/nuevoPersona.blade.php
+=======
 @extends('template')
 
 @section('content')
@@ -147,3 +149,4 @@
     <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
 	<script src="{{asset('js/functions/functions.js')}}"></script>
 @endsection
+>>>>>>> 9510f1bf21e60fac04ca81ac97b4fa93239b7ffc:resources/views/rol_filial/preinformes/nuevoPersona.blade.php

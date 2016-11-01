@@ -10,11 +10,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevaFilialRequest;
+use App\Http\Requests\EditarFilialRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialTelefonoRepo;
 use Mail;
-
 
 class FilialesController extends Controller
 {
@@ -22,6 +22,7 @@ class FilialesController extends Controller
 	protected $directorRepo;
 
 	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo ){
+
 		$this->directorRepo = $directorRepo;
 		$this->filialesRepo = $filialesRepo;
         $this->filialTelefonoRepo = $filialTelefonoRepo;
@@ -37,7 +38,7 @@ class FilialesController extends Controller
 	}
 
 	public function  nuevo(){
-		$directores = $this->directorRepo->lists('nombres','id');
+		$directores = $this->directorRepo->all()->lists('fullname','id');
 		return view('rol_dueno.filiales.nuevo', compact('directores'));
 	}
 
@@ -78,16 +79,20 @@ class FilialesController extends Controller
     }
 
     public function editar($id){
-    	$directores = $this->directorRepo->lists('nombres','id');
+    	$directores = $this->directorRepo->all()->lists('fullname','id');
     	$filial = $this->filialesRepo->find($id);
-    	return view('rol_dueno.filiales.editar',compact('filial','directores'));
+        $telefono=$this->filialTelefonoRepo->findTelefono($id);
+    	return view('rol_dueno.filiales.editar',compact('filial','directores','telefono'));
     }
 
-    public function editar_post(Request $request){
+    public function editar_post(EditarFilialRequest $request){
+
         $data = $request->all();
         $model = $this->filialesRepo->find($data['id']);
-        if($this->filialesRepo->edit($model,$data))
-            return redirect()->route('dueño.filiales')->with('msg_ok','La filial ha sido modificada con éxito');
+        if($this->filialesRepo->edit($model,$data)){
+          //editar telefono
+            $this->filialTelefonoRepo->editTelefono($data['id'],$data['telefono']); 
+            return redirect()->route('dueño.filiales')->with('msg_ok','La filial ha sido modificada con éxito.');}
         else
             return redirect()->route('dueño.filiales')->with('msg_error','La filial no ha podido ser modificada.');
     }

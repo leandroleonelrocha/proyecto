@@ -17,6 +17,7 @@ class LoginController extends Controller {
 
     public function postLogin(Request $request)
     {
+
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
         curl_setopt($ch, CURLOPT_HEADER, false);  
@@ -54,5 +55,26 @@ class LoginController extends Controller {
         // Auth::logout();
         session()->flush(); // Elimina todos los datos de la session
         return redirect('login');
+    }
+
+    public function nueva()
+    {
+        return view('cambio_contrasena');
+    }
+
+    public function post_Nueva(Request $request)
+    {
+        $ch = curl_init();  
+        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$request->mail}/{$request->password}/{$request->passwordActual}");  
+        curl_setopt($ch, CURLOPT_HEADER, false);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = json_decode(curl_exec($ch),true);
+        curl_close($ch);
+
+        if ($data) 
+          return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
+        else
+
+          return redirect()->route('contrasena.nueva')->with('msg_error', 'La combinación de E-Mail Y Contraseña son incorrectos.');
     }
 }

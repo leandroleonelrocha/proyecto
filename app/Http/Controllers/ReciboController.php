@@ -16,7 +16,7 @@ use App\Http\Repositories\ReciboRepo;
 use App\Http\Repositories\ReciboTipoRepo;
 use App\Http\Repositories\ReciboConceptoPagoRepo;
 use App\Http\Repositories\PagoRepo;
-use Dompdf\Dompdf;
+//use PDF;
 
 class ReciboController extends Controller
 {
@@ -58,4 +58,6 @@ class ReciboController extends Controller
 		$pdf->download('recibos.pdf');
 		return redirect()->back();
 	}
+
+	
 }

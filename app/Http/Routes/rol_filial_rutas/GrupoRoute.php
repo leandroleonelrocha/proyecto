@@ -53,10 +53,7 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@cargar_clase'
 	]);
 
-	Route::get('test', [
-		'as' => 'grupos.test',
-		'uses' => 'GrupoController@test'
-	]);
+	
 
 	Route::post('nueva_clase', [
 		'as' => 'grupos.nueva_clase',
@@ -78,8 +75,5 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@editar_clase_arrastrando'
 	]);	
 
-	Route::post('process', [
-		'as' => 'grupos.process',
-		'uses' => 'GrupoController@process'
-	]);
+	
 });

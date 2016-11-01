@@ -19,11 +19,20 @@
 							
 							<div class="col-md-6 form-group">
 								<label>N&uacute;mero de Acta</label>
+								@if(empty($model))
 								{!! Form::text('nro_acta',null,array('class'=>'form-control')) !!}
+								@else
+								{!! Form::text('nro_acta',null,array('class'=>'form-control', 'disabled')) !!}
+								@endif		
 							</div>
 							<div class="col-md-6 form-group">
+							
 								<label>N&uacute;mero de Recuperatorio</label>
+								@if(empty($model))
 								{!! Form::text('recuperatorio_nro_acta',null,array('class'=>'form-control')) !!}
+								@else
+								{!! Form::text('recuperatorio_nro_acta',null,array('class'=>'form-control', 'disabled')) !!}
+								@endif
 							</div>
 							
 							<div class="col-md-6 form-group">
@@ -33,29 +42,43 @@
 
 							<div class="col-md-6 form-group">
 								<label>Grupo</label>
+								@if(empty($model))
 								{!! Form::select('grupo_id',$grupos->toArray(),null,array('class' => 'form-control')) !!}
+								@else
+								{!! Form::select('grupo_id',$grupos->toArray(),$model->Grupo->id,array('class' => 'form-control')) !!}
+								@endif
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>Nota</label>
-							
-								<input type="number" name="nota" min="1" max="10" class="form-control">
+
+							{!! Form::number('nota',null,array( 'class' => 'form-control')) !!}
 							</div>
 
 
 							<div class="col-md-6 form-group">
 								<label>Carrera</label>
 								{!! Form::select('carrera_id',$carreras->toArray(),null,array('class' => 'form-control')) !!}
+							
 							</div>
 							
 							<div class="col-md-6 form-group">
 								<label>Materia</label>
+								@if($model)
 								{!! Form::select('materia_id',$materias->toArray(),null,array('class' => 'form-control')) !!}
+								@else
+								{!! Form::select('materia_id', $materias->toArray(),$model->Materia->id,array('class'=>'form-control') )!!}
+								@endif
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>Docente</label>
+								@if(empty($model))
 								{!! Form::select('docente_id',$docentes->toArray(),null,array('class' => 'form-control')) !!}
+								@else
+								{!! Form::select('docente_id',$docentes->toArray(),$model->Docente->id,array('class' => 'form-control')) !!}
+								
+								@endif
 							</div>
 
 							
