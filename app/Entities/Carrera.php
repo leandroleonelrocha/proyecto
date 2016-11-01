@@ -13,11 +13,6 @@ class Carrera extends Entity {
     }
 
 
-    public function getFullNameAttribute(){
-
-        return  $this->nombre;
-    }
-
     public function Matricula(){
         return $this->hasMany(Matricula::getClass());
 

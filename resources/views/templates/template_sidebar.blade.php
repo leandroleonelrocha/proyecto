@@ -130,7 +130,7 @@
 
                   <li>
                   <a href="{{ route('grupos.index')}}">
-                    <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span>
+                    <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span><i class="fa fa-angle-left pull-right"></i>
                   </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
@@ -140,8 +140,12 @@
 
                   <li>
                   <a href="#">
-                    <i class="fa fa-file-text-o"></i> <span>@lang('menu.examen')</span>
+                    <i class="fa fa-file-text-o"></i> <span>@lang('menu.examen')</span><i class="fa fa-angle-left pull-right"></i>
                   </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.examenes')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                        <li class="active"><a href="{{route('filial.examenes_nuevo')}}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    </ul>
                   </li>
 
  
