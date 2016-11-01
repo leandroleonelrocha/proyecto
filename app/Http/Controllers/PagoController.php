@@ -35,116 +35,75 @@ class PagoController extends Controller
     }
 
 	public function nuevo($id){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$matricula = $this->matriculaRepo->find($id);
-				return view('rol_filial.matriculas.pagos.nuevo',compact('matricula'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		$matricula = $this->matriculaRepo->find($id);
+		$url = redirect()->back()->getTargetUrl(); session(['urlBack' => $url]);
+		return view('rol_filial.matriculas.pagos.nuevo',compact('matricula'));
 	}
 
 	public function nuevo_post(Request $request){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-                $pago['matricula_id']   	=   $request->matricula;
-                $pago['nro_pago']       	=   $request->nro_pago;
-                $pago['pago_individual'] 	=  	1;
-                $pago['descripcion']    	=   $request->descripcion;
-                $pago['vencimiento']    	=   $request->vencimiento;
-                $pago['monto_original'] 	=   $request->monto_original;
-                $pago['monto_actual'] 		=   $pago['monto_original'];
-                $pago['recargo']        	=   $request->recargo;
-                $pago['filial_id']      	=   session('usuario')['entidad_id'];
+		$url 						= 	session('urlBack'); session()->forget('urlBack');
+        $pago['matricula_id']   	=   $request->matricula;
+        $pago['nro_pago']       	=   $request->nro_pago;
+        $pago['pago_individual'] 	=  	1;
+        $pago['descripcion']    	=   $request->descripcion;
+        $pago['vencimiento']    	=   $request->vencimiento;
+        $pago['monto_original'] 	=   $request->monto_original;
+        $pago['monto_actual'] 		=   $pago['monto_original'];
+        $pago['recargo']        	=   $request->recargo;
+        $pago['filial_id']      	=   session('usuario')['entidad_id'];
 
-                if ($this->pagoRepo->create($pago))
-                	return redirect()->route('filial.matriculas_vista',$request->matricula)->with('msg_ok','El pago ha sido agregado con éxito.');
-                else
-                	return redirect()->route('filial.matriculas_vista',$request->matricula)->with('msg_error','El pago no ha podido ser agregado.');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+        if ($this->pagoRepo->create($pago))
+        	return redirect()->to($url)->with('msg_ok','El pago ha sido agregado con éxito.');
+        else
+        	return redirect()->to($url)->with('msg_error','El pago no ha podido ser agregado.');
 	}
 
   	public function editar($id){
-  		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$pago = $this->pagoRepo->find($id);
-				return view('rol_filial.matriculas.pagos.editar',compact('pago'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+  		$url = redirect()->back()->getTargetUrl(); session(['urlBack' => $url]);
+		$pago = $this->pagoRepo->find($id);
+		return view('rol_filial.matriculas.pagos.editar',compact('pago'));
     }
 
     public function editar_post(Request $request){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$modelP = $this->pagoRepo->find($request->pago);
-				// Venció y cambió el vencimiento
-				if ( ($modelP->vencimiento < date('Y-m-d')) && ($request->vencimiento > $modelP->vencimiento) ){
-					$modelP->monto_actual = $request->monto_original - $modelP->monto_pago;
-					$modelP->save();
-				}
-				$modelP->monto_actual += $request->monto_original - $modelP->monto_original;
-				$modelP->save();
+    	$url 	= 	session('urlBack'); session()->forget('urlBack');
+		$modelP = 	$this->pagoRepo->find($request->pago);
+		// Venció y cambió el vencimiento
+		if ( ($modelP->vencimiento < date('Y-m-d')) && ($request->vencimiento > $modelP->vencimiento) ){
+			$modelP->monto_actual = $request->monto_original - $modelP->monto_pago;
+			$modelP->save();
+		}
+		$modelP->monto_actual += $request->monto_original - $modelP->monto_original;
+		$modelP->save();
 
-				if( $this->pagoRepo->edit($modelP,$request->all()) )
-					return redirect()->back()->with('msg_ok','El pago ha sido modificado con éxito');
-					// return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_ok','El pago ha sido modificado con éxito');
-				else
-					return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_error','El pago no ha podido ser modificado');
-			}
-		    else
-		        return redirect()->back();
-		    }
+		if( $this->pagoRepo->edit($modelP,$request->all()) )
+			return redirect()->to($url);
 		else
-		    return redirect('login');
+			return redirect()->to($url)->with('msg_error','El pago no ha podido ser modificado');
     }
 
     public function actualizar($id){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$pago = $this->pagoRepo->find($id);
-				return view('rol_filial.matriculas.pagos.actualizar',compact('pago'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+    	$url 	= redirect()->back()->getTargetUrl(); session(['urlBack' => $url]);
+		$pago 	= $this->pagoRepo->find($id);
+		return view('rol_filial.matriculas.pagos.actualizar',compact('pago'));
     }
 
     public function actualizar_post(Request $request){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$modelP = $this->pagoRepo->find($request->pago);
-				if ($request->monto_a_pagar <= $modelP['monto_actual']){
-					$pago['monto_actual'] 	= $modelP['monto_actual'] - $request->monto_a_pagar;
-					$pago['monto_pago'] 	= $modelP['monto_pago'] + $request->monto_a_pagar;
-					if ( $pago['monto_actual'] == 0 )
-						$pago['terminado'] = 1;
+    	$url 	= 	session('urlBack');
+		$modelP = 	$this->pagoRepo->find($request->pago);
+		if ($request->monto_a_pagar <= $modelP['monto_actual']){
+			$pago['monto_actual'] 	= $modelP['monto_actual'] - $request->monto_a_pagar;
+			$pago['monto_pago'] 	= $modelP['monto_pago'] + $request->monto_a_pagar;
+			if ( $pago['monto_actual'] == 0 )
+				$pago['terminado'] = 1;
 
-					if( $this->pagoRepo->edit($modelP,$pago) )
-						return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
-					else
-						return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_error','El pago no ha podido ser actualizado');
-				}
-				else
-					return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
+			if( $this->pagoRepo->edit($modelP,$pago) )
+				return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
+			else{
+				session()->forget('urlBack');
+				return redirect()->to($url)->with('msg_error','El pago no ha podido ser actualizado');
 			}
-		    else
-		        return redirect()->back();
-		    }
+		}
 		else
-		    return redirect('login');
+			return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
     }
 }
