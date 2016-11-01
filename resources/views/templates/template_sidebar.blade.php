@@ -67,11 +67,6 @@
                     </ul>
                 </li>
 
-
-
-
-        
-
                 <li class="treeview">
                     <a href="{{route('filial.preinformes')}}">
                       <i class="fa fa-list-alt"></i> <span>@lang('menu.preinforme')</span><i class="fa fa-angle-left pull-right"></i>
@@ -92,11 +87,17 @@
                     </ul>
                   </li>
 
-                  <li>
-                  <a href="#">
-                    <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.recibo')</span>
-                  </a>
+                  <li class="treeview">
+                    <a href="{{route('filial.recibos')}}">
+                      <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.recibo')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.recibos')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.recibo_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>"treeview-menu"
+                    </ul>
                   </li>
+
+
 
                   <li class="treeview">
                     <a href="{{route('filial.cursos') }}">
@@ -104,7 +105,7 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.cursos')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
-                      <li> <a href="{{route('filial.cursos_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                      <li> <a href="{{route('filial.cursos_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>"treeview-menu"
                     </ul>
                   </li>
 
@@ -112,6 +113,7 @@
                     <a href="{{route('filial.carreras')}}">
                       <i class="fa fa-user"></i> <span>@lang('menu.carrera')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
+
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.carreras')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
                       <li> <a href="{{route('filial.carreras_nuevo') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
@@ -128,20 +130,20 @@
                     </ul>
                   </li>
 
-                  <li>
-                  <a href="{{ route('grupos.index')}}">
-                    <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span><i class="fa fa-angle-left pull-right"></i>
-                  </a>
+                  <li class="treeview">
+                    <a href="{{ route('grupos.index')}}">
+                      <i class="fa  fa-users"></i> <span>@lang('menu.grupo')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
                     <ul class="treeview-menu">
-                      <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
-                      <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                        <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                        <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
                     </ul>
                   </li>
 
-                  <li>
-                  <a href="#">
+                  <li class="treeview">
+                    <a href="{{route('filial.examenes')}}">
                     <i class="fa fa-file-text-o"></i> <span>@lang('menu.examen')</span><i class="fa fa-angle-left pull-right"></i>
-                  </a>
+                    </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.examenes')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
                         <li class="active"><a href="{{route('filial.examenes_nuevo')}}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
