@@ -120,19 +120,35 @@ class AsesorController extends Controller {
     }
 
     //Modificación del Acesor
-    public function editar_post(EditarAsesorRequest $request){
+    public function editar_post(Request $request){
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
+
                 $data = $request->all();
+               
                 $model = $this->asesorRepo->find($data['asesor']);
 
                 if($this->asesorRepo->edit($model,$data)) // Modificación de los datos
                 {
                     //editar mail
-                    $this->asesorMailRepo->editMail($data['asesor'],$data['mail']); 
+                    //$this->asesorMailRepo->editMail($data['asesor'],$data['mail']); 
+                    //$model->AsesorTelefono()->save($data['telefono']);
                      //editar telefono
-                    $this->asesorTelefonoRepo->editTelefono($data['asesor'],$data['telefono']); 
-             
+                    //$this->asesorTelefonoRepo->editTelefono($data['asesor'],$data['telefono']); 
+                    
+
+                    foreach ($data['mail'] as $key ) {
+                       
+                        $comments = [
+                            new AsesorMail(['mail' => $key])
+                        ];  
+                        
+                        $model->AsesorMail()->update($comments);
+
+                    }
+
+
+                   
                     return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido modificado con éxito.');
                 }
                 else

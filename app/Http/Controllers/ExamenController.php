@@ -49,7 +49,7 @@ class ExamenController extends Controller
 		//Docentes
 		
 		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'id');
-
+		
 		$grupos = $this->grupoRepo->all()->lists('descripcion', 'id');
 		$carreras = $this->carreraRepo->all()->lists('nombre', 'id');
 		$materias = $this->materiaRepo->all()->lists('nombre', 'id');

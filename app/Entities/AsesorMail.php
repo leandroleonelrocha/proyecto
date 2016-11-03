@@ -5,7 +5,7 @@ namespace App\Entities;
 class AsesorMail extends Entity
 {
     protected $table = 'asesor_mail';
-
+    
 
     /**
      * The attributes that are mass assignable.

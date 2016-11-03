@@ -48,7 +48,7 @@
 							<div class="col-md-6 form-group">
 								<label>E-Mail</label>
 								@foreach ($mail as $m)
-									{!! Form::email('mail',$m->mail , array('class'=>'form-control')) !!}
+									{!! Form::email('mail[]',$m->mail , array('class'=>'form-control')) !!}
 								@endforeach
 
 							</div>

@@ -68,10 +68,6 @@
                 </li>
 
 
-
-
-        
-
                 <li class="treeview">
                     <a href="{{route('filial.preinformes')}}">
                       <i class="fa fa-list-alt"></i> <span>@lang('menu.preinforme')</span><i class="fa fa-angle-left pull-right"></i>
@@ -135,6 +131,8 @@
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
                       <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                      <li> <a href="{{route('grupos.clases') }}"><i class="fa fa-circle-o"></i> Clases</a></li>
+                      
                     </ul>
                   </li>
 
