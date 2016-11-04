@@ -25,10 +25,7 @@
 								</div>
 								<div class="col-md-6 form-group">
 									<label>Concepto del Pago</label>
-									<div class="input-group">
-		  								<span class="input-group-addon">$</span>
-										{!! Form::select('recibo_concepto_pago_id', $conceptos->toArray(), null, array('class'=>'form-control')) !!}
-		  							</div>
+									{!! Form::select('recibo_concepto_pago_id', $conceptos->toArray(), null, array('class'=>'form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
 									<label>Descripci&oacute;n</label>
