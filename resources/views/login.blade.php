@@ -34,11 +34,11 @@
         
             {!! Form::open(['route'=>'auth.postLogin','method' => 'post']) !!}
               <div class="form-group has-feedback">
-                {!! Form::text('usuario', null, array('id'=>'email', 'class'=>'form-control', 'placeholder'=>'E-mail' ))!!}
+                {!! Form::text('usuario', null, array('id'=>'email', 'class'=>'form-control', 'placeholder'=>'Ingrese el E-mail' ))!!}
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
               </div>
               <div class="form-group has-feedback">
-                {!! Form::password('password', array('id'=>'password', 'class'=>'form-control', 'placeholder'=>'Contraseña' ))!!}
+                {!! Form::password('password', array('id'=>'password', 'class'=>'form-control', 'placeholder'=>'Ingrese la contraseña' ))!!}
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
               <div class="row">
@@ -55,10 +55,7 @@
               </div>
             {!! Form::close() !!}
 
-        
 
-       
-        <a href="{{ route('contrasena.nueva')}}" class="text-center">Cambio de contraseña del usuario</a> <br/>
         <a href="{{ route('restaurarCuenta.nueva')}}" class="text-center">Olvidó la contraseña</a>
         <div class ="row">
             <div class="col-xs-12">

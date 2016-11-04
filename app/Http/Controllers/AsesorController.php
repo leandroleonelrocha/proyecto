@@ -67,7 +67,7 @@ class AsesorController extends Controller {
                 
                 // Corroboro que el asesor exista, si exite lo activa
                 if ( $asesor = $this->asesorRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
-                        return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito');
+                        return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');
                 }
                 else{
                     // Si no existe lo crea
@@ -89,7 +89,7 @@ class AsesorController extends Controller {
                         $telefono['telefono']=$request->telefono;
                         $this->asesorTelefonoRepo->create($telefono);
                     
-            	       return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito');}
+            	       return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');}
                    else
                     return redirect()->route('filial.asesores')->with('msg_error','No se ha podido agregar al asesor, intente nuevamente.');
                 }

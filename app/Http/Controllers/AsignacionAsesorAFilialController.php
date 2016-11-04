@@ -25,8 +25,8 @@ class AsignacionAsesorAFilialController extends Controller {
 
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
-                $asesor = $this->asesorFilialRepo->all(); // Obtención de todos los Acesores activos de la filial
-
+                $asesor = $this->asesorFilialRepo->allAsesorFilial(); // Obtención de todos los Acesores activos de la filial 
+             
                 return view('rol_filial.asesores.asignacion.lista',compact('asesor'));
             }
             else
@@ -40,7 +40,7 @@ class AsignacionAsesorAFilialController extends Controller {
 
     if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
-                $asesor = $this->asesorRepo->allEneable(); // Obtención de todos los Acesores activos
+                $asesor = $this->asesorRepo->allEneable(); // Obtención de todos los Acesores activos no importa de la filial qeu sean
                 return view('rol_filial.asesores.asignacion.nuevo',compact('asesor'));
             }
             else

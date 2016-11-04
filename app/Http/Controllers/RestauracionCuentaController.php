@@ -42,11 +42,11 @@ class RestauracionCuentaController extends Controller {
 	        	$msj->to($user);
 	        });
 
-	    	return redirect()->route('restaurarCuenta.nueva')->with('msg_ok', 'Cuenta restablecida correctamente.');
+	    	return redirect()->route('restaurarCuenta.nueva')->with('msg_ok', 'Cuenta restablecida correctamente !!!.');
 	    }
 	    else{
 
-    		return redirect()->route('restaurarCuenta.nueva')->with('msg_error', 'El E-mail no existe, escriba otro');
+    		return redirect()->route('restaurarCuenta.nueva')->with('msg_error', 'El E-mail no existe, escriba otro !!!');
 
 	    }
     }

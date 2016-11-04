@@ -37,7 +37,11 @@
                     <li> <a href="{{route('dueño.directores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
                   </ul>
                 </li>
+                 <?php
+                break;
+                case 3:
 
+              ?>
                 <li class="treeview">
                   <a href="{{route('dueño.filiales')}}">
                     <i class="fa fa-child"></i> <span>@lang('menu.filiales')</span><i class="fa fa-angle-left pull-right"></i>
@@ -57,6 +61,19 @@
                 break;
                 case 4:
             ?>
+
+                <li class="treeview">
+                    <a href="{{route('filial.asignacionAsesores')}}">
+                      <i class="fa fa-user"></i> <span>Asignar Asesores</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i>Lista</a></li>
+                      <li> <a href="{{route('filial.asignacionAsesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                    </ul>
+                </li>
+
+                   
+
                 <li class="treeview">
                     <a href="{{route('filial.personas')}}">
                       <i class="fa fa-user"></i> <span>@lang('menu.persona')</span><i class="fa fa-angle-left pull-right"></i>
@@ -159,7 +176,7 @@
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
                       <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
-                       <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i> Asignaci&oacute;n a filial</a></li>
+
                     </ul>
                   </li>
 

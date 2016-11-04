@@ -30,7 +30,7 @@ class LoginController extends Controller {
           if($data['rol_id'] == 2) // Rol de Dueño
             return redirect()->route('dueño.inicio');
           elseif ($data['rol_id'] == 3) // Rol de Director
-            return redirect()->route('director.index'); //Pagina de estadisticas
+            return redirect()->route('director.inicio'); //Pagina de estadisticas
           elseif ($data['rol_id'] == 4) // Rol de Filial
             return redirect()->route('filial.inicio');
         }
@@ -59,7 +59,8 @@ class LoginController extends Controller {
 
     public function nueva()
     {
-        return view('cambio_contrasena');
+        
+        return view('cambio_contrasena',compact('data'));
     }
 
     public function post_Nueva(Request $request)
@@ -71,10 +72,17 @@ class LoginController extends Controller {
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
 
-        if ($data) 
-          return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
-        else
+        $ds=session('usuario');
+        $user=$request->all();
 
-          return redirect()->route('contrasena.nueva')->with('msg_error', 'La combinación de E-Mail Y Contraseña son incorrectos.');
+        if ($ds['usuario']==$user['mail']){
+
+          if ($data) 
+            return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
+          else
+
+            return redirect()->route('contrasena.nueva')->with('msg_error', 'La combinación de E-Mail Y Contraseña son incorrectos.');}
+        else
+          return redirect()->route('contrasena.nueva')->with('msg_error', 'Usuario de sesión no corresponde al mail ingresado');
     }
 }
