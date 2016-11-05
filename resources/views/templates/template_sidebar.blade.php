@@ -25,8 +25,8 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <?php
-              switch (session('usuario')['rol_id']) {
-                case 2: 
+              // switch (session('usuario')['rol_id']) {
+                // case 2: 
             ?>
                 <li class="treeview">
                   <a href="{{route('dueño.directores')}}">
@@ -52,10 +52,10 @@
                   <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                 </li>
             <?php
-                break;
-                case 3:
-                break;
-                case 4:
+                // break;
+                // case 3:
+                // break;
+                // case 4:
             ?>
                 <li class="treeview">
                     <a href="{{route('filial.personas')}}">
@@ -86,19 +86,7 @@
                       <li> <a href="{{route('filial.matriculas_seleccion') }}"><i class="fa fa-circle-o"></i> Nueva</a></li>
                     </ul>
                   </li>
-
-                  <li class="treeview">
-                    <a href="{{route('filial.recibos')}}">
-                      <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.recibo')</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li class="active"><a href="{{route('filial.recibos')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
-                      <li> <a href="{{route('filial.recibo_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>"treeview-menu"
-                    </ul>
-                  </li>
-
-
-
+                  
                   <li class="treeview">
                     <a href="{{route('filial.cursos') }}">
                       <i class="fa fa-user"></i> <span>@lang('menu.curso')</span><i class="fa fa-angle-left pull-right"></i>
@@ -182,8 +170,8 @@
                   </a>
                   </li>
             <?php
-                break;
-              }
+                // break;
+              // }
             ?>
                 <li>
                   <a href="#">

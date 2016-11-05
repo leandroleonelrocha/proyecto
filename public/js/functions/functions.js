@@ -41,7 +41,7 @@ $(document).ready(function(){
    	// Duplicar los campos de Pagos -- Plan de Pagos ~~ Alta Matrículas
    	$('#mas').click(function(){
    		// Clonación - Búsqueda de cada campo - Reseteo del value
-    	$( '.pagos:last' ).clone().appendTo( '#planDePagos' ).find(".pago-item").val("");
+    	$('.pagos:last').clone().appendTo('#planDePagos').find(".pago-item").val("");
     });
 
     // Bloquear Grupos según la carrera/curso elegido -- Datos de la Matrícula ~~ Alta Matrículas
@@ -51,4 +51,15 @@ $(document).ready(function(){
     	
     }
     // bloquearGrupos();
+
+    /* ------------------------- Agregar más E-mail y Teléfono ------------------------- */
+    $('.agregar').click(function(){
+    	var clase = "."+$(this).data('info');
+    	$(this).next().clone().appendTo(clase).find('.item').val("");
+    });
+
+    $('.quitar').click(function(){
+    	var clase = "."+$(this).data('info');
+    	$(this).prev().remove();
+    });
 });
