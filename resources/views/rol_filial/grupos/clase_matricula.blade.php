@@ -23,7 +23,7 @@
                   <br>
                   <b>Grupo:</b>{{ $clase->Grupo->descripcion }}<br>
                   <b>Docente:{{ $clase->Docente->fullname}}</b><br>
-                  <b>Account:</b> 968-34567
+                 
                 </div>
 
 
@@ -41,14 +41,14 @@
 
                              <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
                              @if( !empty($search->buscarClasePorMatricula($gm->matricula_id, $clase->id)))
-                              <td>
-                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="1"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'true' ? 'checked' : ''  }}    >
+                              <td>Si
+                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="1"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'true' ? 'checked' : ''  }}    >NO
                                 <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="0"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'false' ? 'checked' : ''  }}  >
                               </td>
                              @else
                               <td> 
-                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="1">
-                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="0">
+                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="1">SI
+                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="0">NO
                               </td>
                              @endif
                                <td>{{$gm->Matricula->Persona->fullname}}</td>    

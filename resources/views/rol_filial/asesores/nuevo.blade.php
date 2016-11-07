@@ -39,12 +39,23 @@
 
 							<div class="col-md-6 form-group">
 								<label>Tel&eacute;fono</label>
-								{!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+
+								<button class="add_input_telefono">Add More Fields</button>	
+								{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}
+								<div class="input_fields_telefono">
+								</div>
 							</div>
 
+
 							<div class="col-md-6 form-group">
+								
 								<label>E-Mail</label>
-								{!! Form::email('mail',null,array('class'=>'form-control')) !!}
+								<button class="add_input_mail">Add More Fields</button>	
+								
+								<div class="input_fields_wrap">
+							   	{!! Form::text('mail[]',null,array('class'=>'form-control')) !!}
+								</div>	
+
 							</div>
 
 		
@@ -58,4 +69,39 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+@section('js')
+<script type="text/javascript">
+	$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var wrapper2 = $(".input_fields_telefono");
+    var add_button_mail      = $(".add_input_mail"); //Add button ID
+    var add_button_telefono = $(".add_input_telefono");
+
+
+    
+    var x = 1; //initlal text box count
+    $(add_button_mail).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div><input type="text" name="mail[]" class="form-control"/><a href="#" class="remove_field " >Remove</a></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+
+
+    $(add_button_telefono).click(function(e){
+    	e.preventDefault();
+    	$(wrapper2).append('<div><input type="text" name="telefono[]" class="form-control"/><a href="#" class="remove_field " >Remove</a></div>'); //add input box
+
+    });
+
+});
+</script>
 @endsection
