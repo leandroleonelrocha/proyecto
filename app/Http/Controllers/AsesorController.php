@@ -73,9 +73,6 @@ class AsesorController extends Controller {
                     // Si no existe lo crea
                     if($this->asesorRepo->create($data)){
 
-
-
-
                         $asesor=$this->asesorRepo->all()->last();
                         
                         foreach ($data['mail'] as $key) {
@@ -135,32 +132,21 @@ class AsesorController extends Controller {
 
                 if($this->asesorRepo->edit($model,$data)) // Modificación de los datos
                 {
-                    //editar mail
-                    //$this->asesorMailRepo->editMail($data['asesor'],$data['mail']); 
-                    //$model->AsesorTelefono()->save($data['telefono']);
-                     //editar telefono
-                    //$this->asesorTelefonoRepo->editTelefono($data['asesor'],$data['telefono']); 
+                   
                     $model->AsesorMail()->delete();
                     $model->AsesorTelefono()->delete();
-                      foreach ($data['mail'] as $key) {
-                            
-                            $mail['asesor_id'] = $model->id;
-                            $mail['mail'] = $key;
-                            $this->asesorMailRepo->create($mail);
-                            
-                        }
-                         foreach ($data['telefono'] as $key) {
-                            
-                            $telefono['asesor_id'] = $model->id;
-                            $telefono['telefono'] = $key;
-                            $this->asesorTelefonoRepo->create($telefono);
-                            
-                        }
+                    foreach ($data['mail'] as $key) {
+                        $mail['asesor_id'] = $model->id;
+                        $mail['mail'] = $key;
+                        $this->asesorMailRepo->create($mail);
+                    }
 
+                    foreach ($data['telefono'] as $key) {
+                        $telefono['asesor_id'] = $model->id;
+                        $telefono['telefono'] = $key;
+                        $this->asesorTelefonoRepo->create($telefono);
+                    }
 
-            
-
-                   
                     return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido modificado con éxito.');
                 }
                 else

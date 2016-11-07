@@ -34,7 +34,7 @@ class PersonaController extends Controller {
 
     // Página principal de Acesor
     public function lista(){
-
+        
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $persona = $this->personaRepo->allEneable(); // Obtención de todos las personas activos

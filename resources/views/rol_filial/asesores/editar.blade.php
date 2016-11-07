@@ -41,7 +41,7 @@
 							<div class="col-md-6 form-group">
 								<label>Tel&eacute;fono</label>
 								@foreach ($telefono as $t)
-									{!! Form::text('telefono', $t->telefono, array('class'=>'form-control')) !!}		
+									{!! Form::text('telefono[]', $t->telefono, array('class'=>'form-control')) !!}		
 								@endforeach
 							</div>
 
