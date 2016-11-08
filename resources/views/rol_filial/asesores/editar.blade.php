@@ -41,14 +41,14 @@
 							<div class="col-md-6 form-group">
 								<label>Tel&eacute;fono</label>
 								@foreach ($telefono as $t)
-									{!! Form::text('telefono', $t->telefono, array('class'=>'form-control')) !!}		
+									{!! Form::text('telefono[]', $t->telefono, array('class'=>'form-control')) !!}		
 								@endforeach
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>E-Mail</label>
 								@foreach ($mail as $m)
-									{!! Form::email('mail',$m->mail , array('class'=>'form-control')) !!}
+									{!! Form::email('mail[]',$m->mail , array('class'=>'form-control')) !!}
 								@endforeach
 
 							</div>

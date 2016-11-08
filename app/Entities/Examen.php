@@ -28,6 +28,11 @@ class Examen extends Entity
     public function Docente(){
         return $this->belongsTo(Docente::getClass());
     }
-
+     public function Carrera(){
+        return $this->belongsTo(Carrera::getClass());
+    }
+     public function Materia(){
+        return $this->belongsTo(Materia::getClass());
+    }
 }
 

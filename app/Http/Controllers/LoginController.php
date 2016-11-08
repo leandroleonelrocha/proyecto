@@ -24,9 +24,10 @@ class LoginController extends Controller {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
-      
+        
 
-       /*$data =[ 
+        /*
+       $data =[ 
        'id'=>'1',
        'usuario'=>'rochaleandroleonel@gmail.com',
        'password'=>'$2y$10$NrpTswB.eH9ucUQfiBAB.09FyjQLyylbfwaNNDkpe4m0ncRRePDm',

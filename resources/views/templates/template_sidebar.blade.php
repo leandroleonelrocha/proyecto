@@ -63,16 +63,24 @@
             ?>
 
                 <li class="treeview">
+                  <a href="{{route('filial.asesores')}}">
+                    <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span><i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                    <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                  </ul>
+                </li>
+
+                <li class="treeview">
                     <a href="{{route('filial.asignacionAsesores')}}">
-                      <i class="fa fa-user"></i> <span>Asignar Asesores</span><i class="fa fa-angle-left pull-right"></i>
+                      <i class="fa fa-user"></i> <span>Asignación Asesores</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                       <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i>Lista</a></li>
                       <li> <a href="{{route('filial.asignacionAsesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
                     </ul>
-                </li>
-
-                   
+                </li>  
 
                 <li class="treeview">
                     <a href="{{route('filial.personas')}}">
@@ -169,16 +177,6 @@
 
  
 
-                  <li class="treeview">
-                    <a href="{{route('filial.asesores')}}">
-                      <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
-                      <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
-
-                    </ul>
-                  </li>
 
 
 

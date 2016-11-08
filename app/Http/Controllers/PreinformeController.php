@@ -266,16 +266,20 @@ class PreinformeController extends Controller {
                     $this->personaInteresRepo->create($interes);
                 }
                 else{
-                    for ($i=0; $i < count($data['curso']); $i++) {
-                        $interes['curso_id'] = $data['curso'][0];
-                        $this->personaInteresRepo->create($interes);
+                    if ( isset($data['curso']) ){
+                        for ($i=0; $i < count($data['curso']); $i++) {
+                            $interes['curso_id'] = $data['curso'][0];
+                            $this->personaInteresRepo->create($interes);
+                        }
+                        $interes['curso_id']     =   null;
                     }
-                    $interes['curso_id']     =   null;
-                    for ($i=0; $i < count($data['carrera']); $i++) {
-                        $interes['carrera_id'] = $data['carrera'][0];
-                        $this->personaInteresRepo->create($interes);
+                    if ( isset($data['carrera']) ){
+                        for ($i=0; $i < count($data['carrera']); $i++) {
+                            $interes['carrera_id'] = $data['carrera'][0];
+                            $this->personaInteresRepo->create($interes);
+                        }
+                        $interes['carrera_id']     =   null;
                     }
-                    $interes['carrera_id']     =   null;
                 }
                 return redirect()->route('filial.preinformes');
             }

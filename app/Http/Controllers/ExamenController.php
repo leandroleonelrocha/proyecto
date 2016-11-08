@@ -49,7 +49,7 @@ class ExamenController extends Controller
 		//Docentes
 		
 		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'id');
-
+		
 		$grupos = $this->grupoRepo->all()->lists('descripcion', 'id');
 		$carreras = $this->carreraRepo->all()->lists('nombre', 'id');
 		$materias = $this->materiaRepo->all()->lists('nombre', 'id');
@@ -76,6 +76,7 @@ class ExamenController extends Controller
 		
 		$model = $this->examenRepo->find($id);
 
+
 		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'persona_id');
 		$grupos = $this->grupoRepo->all()->lists('descripcion', 'id');
 		$carreras = $this->carreraRepo->all()->lists('nombre', 'id');
@@ -88,7 +89,7 @@ class ExamenController extends Controller
 
 	public function editar_post(Request $request ,$id = null)
 	{
-		$id = $request->get('nro_acta');;
+		
 		$model = $this->examenRepo->find($id);
 		$data = $request->all();
 		$this->examenRepo->edit($model, $data);

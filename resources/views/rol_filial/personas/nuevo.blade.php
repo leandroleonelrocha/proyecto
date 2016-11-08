@@ -58,14 +58,7 @@
 								<label>Localidad</label>
 								{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 							</div>
-							<div class="col-md-6 form-group">
-								<label>Tel&eacute;fono</label>
-								{!! Form::text('telefono',null,array('class'=>'form-control')) !!}
-							</div>
-							<div class="col-md-6 form-group">
-								<label>E-mail</label>
-								{!! Form::email('mail',null,array('class'=>'form-control')) !!}
-							</div>
+
 							<div class="col-md-6 form-group">
 								<label>Estado Civil</label>
 								{!! Form::text('estado_civil',null,array('class'=>'form-control')) !!}
@@ -102,6 +95,19 @@
 								{!! Form::textarea('aclaraciones',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 
+							<div class="col-md-6 form-group telefono">
+								<label>Tel&eacute;fono</label>
+								<div class="btn btn-default agregar" data-info="telefono">+</div>
+								{!! Form::text('telefono[]',null,array('class'=>'form-control item')) !!}
+								<div class="btn btn-default quitar" data-info="telefono">-</div>
+							</div>
+							<div class="col-md-6 form-group mail">
+								<label>E-mail</label>
+								<div class="btn btn-default agregar" data-info="mail">+</div>
+								{!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
+								<div class="btn btn-default quitar" data-info="mail">-</div>
+							</div>
+
 							<div class="box-footer col-xs-12">
 								{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
 				          	</div>
@@ -113,4 +119,6 @@
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
 	<!-- jQuery 2.1.4 -->
+	<script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <script src="{{asset('js/functions/functions.js')}}"></script>
 @endsection

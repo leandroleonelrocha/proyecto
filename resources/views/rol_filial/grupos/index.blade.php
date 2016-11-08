@@ -31,9 +31,9 @@
 						<tbody>
 						@foreach($grupos as $grupo)
 						<tr>
-						<td>{{ $grupo->Curso->descripcion }}</td>
-						<td>{{ $grupo->Carrera->nombre }}</td>
-						<td>{{ $grupo->Materia->nombre }}</td>
+						<td> <?php if(isset($grupo->Curso->nombre)) echo $grupo->Curso->nombre; ?></td>
+						<td><?php if(isset($grupo->Carrera->nombre)) echo $grupo->Carrera->nombre ?></td>
+						<td><?php if(isset($grupo->Materia->nombre)) echo $grupo->Materia->nombre ?></td>
 						<td>{{ $grupo->descripcion }}</td>
 						<td>{{ $grupo->Docente->fullname }}</td>	
 						   	<td class="text-center">

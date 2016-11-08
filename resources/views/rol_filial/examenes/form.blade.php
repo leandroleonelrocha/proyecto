@@ -64,7 +64,7 @@
 							
 							<div class="col-md-6 form-group">
 								<label>Materia</label>
-								@if($model)
+								@if(empty($model))
 								{!! Form::select('materia_id',$materias->toArray(),null,array('class' => 'form-control')) !!}
 								@else
 								{!! Form::select('materia_id', $materias->toArray(),$model->Materia->id,array('class'=>'form-control') )!!}
