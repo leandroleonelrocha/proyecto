@@ -34,13 +34,14 @@
 						          	<td>{{ $a->direccion }}</td>
 						            <td>{{ $a->localidad }}</td>
 						           	<td>
+
 					            	@foreach($a->AsesorTelefono as $telefono)
-						            		{{$telefono->telefono}}
+						            		{{$telefono->telefono}} <br>
 					            	@endforeach
 						            </td>
 						            <td>
 						            	@foreach($a->AsesorMail as $mail)
-						            		{{$mail->mail}}
+						            		{{$mail->mail}}<br>
 						            	@endforeach
 						            </td>
 					

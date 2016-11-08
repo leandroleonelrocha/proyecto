@@ -18,6 +18,5 @@ class ClaseMatricula extends Entity {
     {
     	return $this->belongsTo(Matricula::getClass());
     }
-
-	
+    	
 }

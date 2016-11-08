@@ -12,7 +12,6 @@ class PersonaRepo extends BaseRepo {
         return new Persona();
     }
 
-
     public function allEneable(){
 
         return Persona::where('activo', 1)->get();
@@ -26,7 +25,6 @@ class PersonaRepo extends BaseRepo {
         $asesor->activo = 0;
         return $asesor->save();
     }
-
 
     public function getPersonasFilial(){
     	$filial = session('usuario')['entidad_id'];

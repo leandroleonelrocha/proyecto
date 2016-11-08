@@ -22,18 +22,18 @@
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
-					
-					 		@foreach($asesor as $a)
 
-							    <tr role="row" class="odd">
-						    		<td>{{ $a->asesor_id}}</td>
-						    		<td>{{ $a->nro_documento}}</td>
-						    		<td>{{ $a->apellidos}}</td>
-									<td>{{ $a->nombres}}</td>
-					    		   	<td>
-						           		<a href="{{route('filial.asignacionAsesores_borrar',$a->asesor_id)}}" class="btn btn-danger text-white">BORRAR</a></td>
-							    </tr>
-						    @endforeach
+			 		 	@foreach($asesor as $a)
+
+						    <tr role="row" class="odd">
+					    		<td>{{ $a->asesor_id}}</td>
+					    		<td>{{ $a->Asesor->nro_documento}}</td>
+					    		<td>{{ $a->Asesor->apellidos}}</td>
+								<td>{{ $a->Asesor->nombres}}</td>
+				    		   	<td>
+					           		<a href="{{route('filial.asignacionAsesores_borrar',$a->asesor_id)}}" class="btn btn-danger text-white">BORRAR</a></td>
+						    </tr>
+					    @endforeach
 						    	         
 					   	</tbody>
 				    </table>

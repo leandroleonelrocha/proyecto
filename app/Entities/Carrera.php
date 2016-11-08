@@ -12,7 +12,6 @@ class Carrera extends Entity {
         return $this->belongsTo(PersonaInteres::getClass());
     }
 
-
     public function Matricula(){
         return $this->hasMany(Matricula::getClass());
 

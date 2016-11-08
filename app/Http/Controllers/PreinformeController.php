@@ -20,6 +20,7 @@ use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
+use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\CursoRepo;
 use Auth;
 use Illuminate\Routing\Controller;
@@ -29,11 +30,12 @@ class PreinformeController extends Controller {
 
 	protected $preinformeRepo;
 
-	public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo)
+	public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo)
 	{
 		$this->preinformeRepo       = $preinformeRepo;
 		$this->personaRepo          = $personaRepo;
         $this->asesorRepo           = $asesorRepo;
+        $this->asesorFilialRepo     = $asesorFilialRepo;
         $this->tipoDocumentoRepo    = $tipoDocumentoRepo;
         $this->personaEmailRepo     = $personaMailRepo;
         $this->personaTelefonoRepo  = $personaTelefonoRepo;
@@ -75,7 +77,7 @@ class PreinformeController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $persona    = $this->personaRepo->find($id);
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
                 $carreras   = $this->carreraRepo->all()->lists('nombre','id');
                 $cursos     = $this->cursoRepo->all()->lists('nombre','id');
                 return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos'));
@@ -228,7 +230,7 @@ class PreinformeController extends Controller {
             if (session('usuario')['rol_id'] == 4){
                 $preinforme = $this->preinformeRepo->find($id);
                 $intereses  = $this->personaInteresRepo->findPreinforme($preinforme->id);
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
                 $carreras   = $this->carreraRepo->all();
                 $cursos     = $this->cursoRepo->all();
                 return view('rol_filial.preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos'));

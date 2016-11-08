@@ -52,16 +52,17 @@ class AsignacionAsesorAFilialController extends Controller {
 
     public function nuevo_post($id){
 
-     if (null !== session('usuario')){
+        if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
               
-                $f = session('usuario')['entidad_id'];
-                $filial['asesor_id']=$id;
-                $filial['filial_id']=$f;
-                
-                if($this->asesorFilialRepo->create($filial)){
 
-                    return redirect()->route('filial.asignacionAsesores')->with('msg_ok','Se ha asignado el asesor a la filial.');}
+                $f = session('usuario')['entidad_id'];
+                $asesorFilial['asesor_id']=$id;
+                $asesorFilial['filial_id']=$f;
+
+                if($this->asesorFilialRepo->create($asesorFilial))
+
+                    return redirect()->route('filial.asignacionAsesores')->with('msg_ok','Se ha asignado el asesor a la filial.');
                 else
                     return redirect()->route('filial.asignacionAsesores')->with('msg_error','No se ha podido asignar e asesor a la flial.');
                 

@@ -14,24 +14,14 @@ class AsesorFilialRepo extends BaseRepo {
 
     public function allAsesorFilial(){
         $filial = session('usuario')['entidad_id'];
-        return AsesorFilial::where('filial_id', $filial)->get();
+        return AsesorFilial::where('filial_id', $filial)->get(); //consultar estado activo
     }
-
-    public function findAsesorFilial($id){
-        return AsesorFilial::where('asesor_id', $id)->get();
-    }
-
 
     public function deleteAsesor($id){
 
-        return AsesorFilial::where('asesor_id', '=', $id)->delete();
+        $filial = session('usuario')['entidad_id'];
+        return AsesorFilial::where('asesor_id', '=', $id)->where('filial_id', '=', $filial)->delete();
     }
-
-
-
-
-    
-
 }
 
          

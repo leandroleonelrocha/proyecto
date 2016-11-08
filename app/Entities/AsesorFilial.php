@@ -15,8 +15,13 @@ class AsesorFilial extends Entity
 
     // Relaciones
 
-
      public function Asesor(){
          return $this->belongsTo(Asesor::getClass());
      }
+
+
+    public function getFullNameAttribute()
+    {
+        return  $this->Asesor->apellidos . ', ' . $this->Asesor->nombres ;
+    }
 }

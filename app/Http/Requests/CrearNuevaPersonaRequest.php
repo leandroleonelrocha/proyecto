@@ -37,7 +37,6 @@ class CrearNuevaPersonaRequest extends Request
             'mail' => 'required',
             'estado_civil' => 'required',
             'nivel_estudios' => 'required',
-            'aclaraciones' => 'required',
             'mail' => 'required|unique:persona_mail,mail',
 
         ];
@@ -62,7 +61,6 @@ class CrearNuevaPersonaRequest extends Request
             'localidad.required' => 'Escriba la localidad',
             'estado_civil.required' => 'Escriba el estado civil',
             'nivel_estudios.required' => 'Escriba el nivel de estudios',
-            'aclaraciones.required' => 'Escriba una aclaración',
             'mail.unique'=> 'El mail ya está en uso', 
         ];
     }

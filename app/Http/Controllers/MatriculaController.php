@@ -10,6 +10,7 @@ use App\Entities\Matricula;
 use App\Entities\Persona;
 use App\Entities\Carrera;
 use App\Entities\Asesor;
+use App\Entities\AsesorFilial;
 use App\Entities\Grupo;
 use App\Entities\Curso;
 use App\Entities\Pago;
@@ -22,6 +23,7 @@ use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
+use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PagoRepo;
@@ -33,11 +35,12 @@ class MatriculaController extends Controller {
 
 	protected $matriculaRepo;
 
-	public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo)
+	public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo)
 	{
 		$this->matriculaRepo            = $matriculaRepo;
 		$this->personaRepo              = $personaRepo;
         $this->asesorRepo               = $asesorRepo;
+        $this->asesorFilialRepo         = $asesorFilialRepo;
         $this->tipoDocumentoRepo        = $tipoDocumentoRepo;
         $this->personaEmailRepo         = $personaMailRepo;
         $this->personaTelefonoRepo      = $personaTelefonoRepo;
@@ -81,7 +84,7 @@ class MatriculaController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $persona    = $this->personaRepo->find($id);
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
                 $carreras   = $this->carreraRepo->all();
                 $cursos     = $this->cursoRepo->all();
                 $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
@@ -99,7 +102,7 @@ class MatriculaController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
                 $carreras   = $this->carreraRepo->all();
                 $cursos     = $this->cursoRepo->all();
                 $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
@@ -239,7 +242,7 @@ class MatriculaController extends Controller {
             if (session('usuario')['rol_id'] == 4){
                 $matricula  = $this->matriculaRepo->find($id);
                 $pagos      = $this->pagoRepo->allMatricula($id);
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
                 $carreras   = $this->carreraRepo->all();
                 $cursos     = $this->cursoRepo->all();
                 $grupos     = $this->grupoRepo->allEnable()->lists('id','id');

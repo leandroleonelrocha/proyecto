@@ -22,13 +22,14 @@ class PersonaController extends Controller {
 
 	protected $personaRepo;
 	
-    public function __construct(PersonaRepo $personaRepo, TipoDocumento $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, AsesorRepo $asesorRepo)
+    public function __construct(PersonaRepo $personaRepo, TipoDocumento $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo  )
 	{
 		$this->personaRepo         =   $personaRepo;
 		$this->tipoDocumentoRepo   =   $tipoDocumentoRepo;
         $this->personaMailRepo     =   $personaMailRepo;
         $this->personaTelefonoRepo =   $personaTelefonoRepo;
         $this->asesorRepo          =   $asesorRepo;
+        $this->asesorFilialRepo    =   $asesorFilialRepo;
 
 	}
 
@@ -52,7 +53,8 @@ class PersonaController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-                $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+ 
             	return view('rol_filial.personas.nuevo',compact('tipos','asesores'));
             }
             else
@@ -125,7 +127,7 @@ class PersonaController extends Controller {
             if (session('usuario')['rol_id'] == 4){
             	$persona = $this->personaRepo->find($id); // Obtengo a la persona
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-                $asesores = $this->asesorRepo->all()->lists('full_name','id');
+                $asesores = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
                 $mail=$this->personaMailRepo->findMail($id);// Obtengo al mail
                 $telefono=$this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
             	return view('rol_filial.personas.editar',compact('persona','tipos','asesores','mail','telefono'));
